@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113339.png">
 <meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220325165554.png">
 <meta property="article:published_time" content="2023-03-02T07:58:30.769Z">
-<meta property="article:modified_time" content="2023-03-02T08:20:54.271Z">
+<meta property="article:modified_time" content="2023-03-03T05:23:15.544Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220322214549.png">
@@ -437,7 +437,9 @@
 </ul>
 </li>
 </ul>
-<h4 id="损失函数-1"><a href="#损失函数-1" class="headerlink" title="损失函数"></a>损失函数</h4><p>单个时间步的损失函数：<br>$$<br>L^{<t>}(\hat{y}^{<t>},y^{<t>})&#x3D;-y^{<t>}log y^{<t>}-(1-y^{<t>})log(1-y^{<t>})<br>$$<br>整个序列的损失函数：所有时间步的损失求和<br>$$<br>L(\hat{y},y)&#x3D;\sum^T_{t&#x3D;1}L^{<t>}(\hat{y}^{<t>},y^{<t>})<br>$$</p>
+<h4 id="损失函数-1"><a href="#损失函数-1" class="headerlink" title="损失函数"></a>损失函数</h4><p>单个时间步的损失函数：<br>$$<br>L^{<t>}(\hat{y}^{<t>},y^{<t>})&#x3D;-y^{<t>}log y^{<t>}-(1-y^{<t>})log(1-y^{<t>})<br>$$</p>
+<p>整个序列的损失函数：所有时间步的损失求和</p>
+<p>$$<br>L(\hat{y},y)&#x3D;\sum^T_{t&#x3D;1}L^{<t>}(\hat{y}^{<t>},y^{<t>})<br>$$</p>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><h5 id="梯度消失"><a href="#梯度消失" class="headerlink" title="梯度消失"></a>梯度消失</h5><p>当序列太长时，连乘过多，容易导致梯度消失，无法将信息传递过去，参数更新只能捕捉到局部依赖关系，没法再捕捉序列之间的长期关联或依赖关系。这会导致渐变在向后传播时呈指数级收缩。由于梯度极小，内部权重几乎没有调整，因此较早的层无法进行任何学习。<br>$$<br>\frac{\partial L_t}{\partial W_x}&#x3D;\sum^t_{k&#x3D;1}[\frac{\partial L_t}{\partial O_t}\frac{\partial O_t}{\partial S_t}(\prod^t_{j&#x3D;t+1-k}\frac{\partial tanh(\theta_j)}{\partial \theta_j})X_{t+1-k}W_s^{k-1}]<br>$$<br>由于$W_s^{k-1}$很小的时候连乘会趋于0，因此会梯度消失</p>
 <p>梯度消失解决办法：</p>
 <ul>
