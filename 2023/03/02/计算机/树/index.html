@@ -16,19 +16,21 @@
   <meta name="author" content="冰柠果儿">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="My New Post">
-<meta property="og:url" content="http://example.com/2022/09/15/My-New-Post/index.html">
+    <meta name="description" content="决策树，回归树，XGBoost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树">
+<meta property="og:url" content="http://example.com/2023/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%A0%91/index.html">
 <meta property="og:site_name" content="冰柠果儿">
+<meta property="og:description" content="决策树，回归树，XGBoost">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-15T00:43:57.000Z">
-<meta property="article:modified_time" content="2022-09-16T04:02:29.959Z">
+<meta property="article:published_time" content="2023-03-02T07:46:10.110Z">
+<meta property="article:modified_time" content="2023-03-02T07:48:41.491Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>My New Post - 冰柠果儿</title>
+  <title>树 - 冰柠果儿</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="My New Post"></span>
+            <span id="subtitle" data-typed-text="树"></span>
           
         </div>
 
@@ -221,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-15 08:43" pubdate>
-          2022年9月15日 早上
+        <time datetime="2023-03-02 15:46" pubdate>
+          2023年3月2日 下午
         </time>
       </span>
     
@@ -233,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          359 字
         
       </span>
     
@@ -244,7 +246,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -282,12 +284,33 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">My New Post</h1>
+            <h1 style="display: none">树</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>优点：</p>
+<ul>
+<li>因为是非参数模型，不需要对样本进行预先假设，可以处理复杂样本。</li>
+<li>计算速度快，结果可解释性强。</li>
+<li>可以同时处理分类和预测问题，对缺失值不敏感。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>容易过拟合</li>
+<li>特征之间存在相互关联时，数据结果表现较差。</li>
+</ul>
+<p>优化方法：</p>
+<ul>
+<li><p>进行剪枝防止过拟合。</p>
+<p>剪枝包括**预剪枝(Prepruning)<strong>和</strong>后剪枝(Postpruning),**前者通过对连续型变量设置阈值，来控制树的深度，或者控制节点的个数，在节点开始划分之前就进行操作，进而防止过拟合现象。后者是自底向上对非叶节点进行考察，如果这个内部节点换成叶节点能提升决策树的泛化能力，那就把它换掉。</p>
+</li>
+<li><p>运用交叉验证的方法选择合适的参数。</p>
+</li>
+<li><p>通过模型集成的方法（Bagging-parallel&#x2F;Boosting-serial），基于决策树构建更复杂的模型</p>
+</li>
+</ul>
+<h2 id="回归树"><a href="#回归树" class="headerlink" title="回归树"></a>回归树</h2><h3 id="CART"><a href="#CART" class="headerlink" title="CART"></a>CART</h3><h2 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h2>
                 
               </div>
             
@@ -305,12 +328,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Diary/" class="category-chain-item">Diary</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
   
   
     <span>></span>
     
-  <a href="/categories/Diary/Life/" class="category-chain-item">Life</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
   
   
 
@@ -332,8 +355,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>My New Post</div>
-      <div>http://example.com/2022/09/15/My-New-Post/</div>
+      <div>树</div>
+      <div>http://example.com/2023/03/02/计算机/树/</div>
     </div>
     <div class="license-meta">
       
@@ -345,7 +368,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月15日</div>
+          <div>2023年3月2日</div>
         </div>
       
       
@@ -377,9 +400,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%81%9A%E7%B1%BB/" title="聚类">
+                      <a href="/2023/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">聚类</span>
+                        <span class="hidden-mobile">机器学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -387,8 +410,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/14/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2023/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%81%9A%E7%B1%BB/" title="聚类">
+                        <span class="hidden-mobile">聚类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
