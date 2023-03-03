@@ -16,21 +16,21 @@
   <meta name="author" content="冰柠果儿">
   <meta name="keywords" content="">
   
-    <meta name="description" content="分为基于划分、基于层次、基于密度、基于网格、基于模型的聚类">
+    <meta name="description" content="Brain Teasers">
 <meta property="og:type" content="article">
-<meta property="og:title" content="聚类">
-<meta property="og:url" content="http://example.com/2023/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%81%9A%E7%B1%BB/index.html">
+<meta property="og:title" content="Brain Teasers">
+<meta property="og:url" content="http://example.com/2023/03/03/%E6%95%B0%E5%AD%A6/Brain%20Teasers/index.html">
 <meta property="og:site_name" content="冰柠果儿">
-<meta property="og:description" content="分为基于划分、基于层次、基于密度、基于网格、基于模型的聚类">
+<meta property="og:description" content="Brain Teasers">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-02T07:01:03.295Z">
-<meta property="article:modified_time" content="2023-03-02T07:49:12.135Z">
+<meta property="article:published_time" content="2023-03-03T06:38:55.827Z">
+<meta property="article:modified_time" content="2023-03-03T06:44:29.979Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>聚类 - 冰柠果儿</title>
+  <title>Brain Teasers - 冰柠果儿</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="聚类"></span>
+            <span id="subtitle" data-typed-text="Brain Teasers"></span>
           
         </div>
 
@@ -223,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-02 15:01" pubdate>
-          2023年3月2日 下午
+        <time datetime="2023-03-03 14:38" pubdate>
+          2023年3月3日 下午
         </time>
       </span>
     
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.4k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          17 分钟
+          20 分钟
         
       </span>
     
@@ -284,81 +284,25 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">聚类</h1>
+            <h1 style="display: none">Brain Teasers</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
-<li>基于划分</li>
-<li>基于层次</li>
-<li>基于密度</li>
-<li>基于网格</li>
-<li>基于模型</li>
-</ul>
-<h3 id="基于划分"><a href="#基于划分" class="headerlink" title="基于划分"></a>基于划分</h3><ul>
-<li><p>代表算法：K-means</p>
-</li>
-<li><p>优点：收敛速度快</p>
-</li>
-<li><p>缺点：要求类别数目 k 可以合理地估计，并且初始中心的选择和噪声会对聚类结果产生很大影响</p>
-</li>
-</ul>
-<h4 id="K-means-vs-KNN"><a href="#K-means-vs-KNN" class="headerlink" title="K-means vs KNN"></a>K-means vs KNN</h4><ul>
-<li><p>K-means：聚类，无监督</p>
-<ol>
-<li>随机选择k个样本作为初始聚类中心 a&#x3D;a1,a2,…ak ；</li>
-<li>针对数据集中每个样本$x_i$ 计算它到 k 个聚类中心的距离并将其分到距离最小的聚类中心所对应的类中；</li>
-<li>针对每个类别$a_j$ ，重新计算它的聚类中心$a_j&#x3D;\frac{1}{|ci|}\sum \limits_{x∈c_i}x$（即属于该类的所有样本的质心）；</li>
-<li>重复上面2、3两步，直到达到某个中止条件（迭代次数、最小误差变化等）</li>
-</ol>
-<p>优点：</p>
-<ul>
-<li>容易理解，聚类效果不错，虽然是局部最优， 但往往局部最优就够了；</li>
-<li>处理大数据集的时候，该算法可以保证较好的伸缩性；</li>
-<li>当簇近似高斯分布的时候，效果非常不错；</li>
-<li>算法复杂度低。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>K 值需要人为设定，不同 K 值得到的结果不一样；</li>
-<li>对初始的簇中心敏感，不同选取方式会得到不同结果；</li>
-<li>对异常值敏感；</li>
-<li>不适合太离散的分类、样本类别不平衡的分类、非凸形状的分类。</li>
-</ul>
-</li>
-<li><p>KNN：分类&#x2F;回归，有监督</p>
-<p>将预测点与所有点距离进行计算，然后保存并排序，选出前面K个值看看哪些类别比较多，则预测的点属于哪类</p>
-<p>优点：</p>
-<ul>
-<li>简单易用，相比其他算法，KNN算是比较简洁明了的算法。即使没有很高的数学基础也能搞清楚它的原理。</li>
-<li>模型训练时间快，上面说到KNN算法是惰性的，这里也就不再过多讲述。<br>预测效果好。</li>
-<li>对异常值不敏感</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>对内存要求较高，因为该算法存储了所有训练数据</li>
-<li>对不相关的功能和数据规模敏感</li>
-</ul>
-</li>
-</ul>
-<h4 id="KNN-K值选取"><a href="#KNN-K值选取" class="headerlink" title="KNN-K值选取"></a>KNN-K值选取</h4><p>从选取一个较小的K值开始，不断增加K的值，然后计算验证集合的方差，最终找到一个比较合适的K值</p>
-<h3 id="基于层次"><a href="#基于层次" class="headerlink" title="基于层次"></a>基于层次</h3><p>对给定的数据进行层次分解，直到满足某种条件为止。分为自底向上法（AGNES）和自顶向下法（DIANA）</p>
-<ul>
-<li>优点：距离和规则的相似度容易定义，限制少，不需要预先制定簇的个数，可以发现簇的层次关系</li>
-<li>缺点：计算复杂度太高，奇异值也能产生很大影响，算法很可能聚类成链状</li>
-</ul>
-<h3 id="基于密度"><a href="#基于密度" class="headerlink" title="基于密度"></a>基于密度</h3><p>寻找被低密度区域分离的高密度区域。与基于距离的聚类算法不同的是，基于距离的聚类算法的聚类结果是球状（凸）的簇，而基于密度的聚类算法可以发现任意形状的簇。基于密度的聚类方法是从数据对象分布区域的密度着手的。如果给定类中的数据对象在给定的范围区域中，则数据对象的密度超过某一阈值就继续聚类。这种方法通过连接密度较大的区域，能够形成不同形状的簇，而且可以消除孤立点和噪声对聚类质量的影响，以及发现任意形状的簇</p>
-<h4 id="OPTICS"><a href="#OPTICS" class="headerlink" title="OPTICS"></a>OPTICS</h4><p>OPTICS（Ordering Points To Identify the Clustering Structure）是一种密度聚类算法，用于发现任意形状和任意密度的聚类结构。它可以处理高维数据和噪声数据，同时不需要预先指定簇的数量。</p>
-<p>OPTICS算法的主要思想是，对于每个数据点，通过计算其与周围点的距离来评估其密度，并根据密度大小将其分类为核心点、边界点或噪声点。接着，从核心点开始构建聚类簇，通过对距离和密度进行扫描，将相邻的核心点分配到同一个簇中。最终，OPTICS算法可以得到一个聚类结构图，其中每个簇对应一个局部密度较高的区域。</p>
-<p>OPTICS算法有一些优点。首先，它可以自适应地发现不同形状和密度的聚类结构，而不需要事先知道簇的数量。其次，它可以处理噪声数据和高维数据。此外，它不需要预先设置距离阈值，因此可以灵活地处理不同密度的数据。</p>
-<p>然而，OPTICS算法也存在一些缺点。首先，它的计算复杂度较高，因此对于大规模数据集，其性能可能较差。其次，其结果可能受到参数设置的影响，例如邻域大小等。因此，在使用OPTICS算法时，需要根据具体情况进行参数调整和结果评估。</p>
-<h3 id="基于网格"><a href="#基于网格" class="headerlink" title="基于网格"></a>基于网格</h3><p>将空间量化为有限数目的单元，可以形成一个网格结构，所有聚类都在网格上进行。基本思想就是将每个属性的可能值分割成许多相邻的区间，并创建网格单元的集合。每个对象落入一个网格单元，网格单元对应的属性空间包含该对象的值</p>
-<ul>
-<li>优点：处理速度快，其处理时间独立于数据对象数，而仅依赖于量化空间中的每一维的单元数</li>
-<li>缺点：只能发现边界是水平或垂直的簇，而不能检测到斜边界。另外，在处理高维数据时，网格单元的数目会随着属性维数的增长而成指数级增长</li>
-</ul>
-<h3 id="基于模型"><a href="#基于模型" class="headerlink" title="基于模型"></a>基于模型</h3><p>试图优化给定的数据和某些数学模型之间的适应性的。该方法给每一个簇假定了一个模型，然后寻找数据对给定模型的最佳拟合。假定的模型可能是代表数据对象在空间分布情况的密度函数或者其他函数。这种方法的基本原理就是假定目标数据集是由一系列潜在的概率分布所决定的。簇的数目是基于标准的统计数字自动决定的，噪声或孤立点也是通过统计数字来分析的。基于模型的聚类方法试图优化给定的数据和某些数据模型之间的适应性</p>
+                <h1 id="Brain-Teasers"><a href="#Brain-Teasers" class="headerlink" title="Brain Teasers"></a>Brain Teasers</h1><h2 id="你在一个战场上看守着-100个凶手，而你的枪只有一颗子弹。如果任何一个凶手的生还几率不是零，他就会试图逃跑。如果凶手确已死亡，他就不会企图逃跑。你如何阻止他们逃跑"><a href="#你在一个战场上看守着-100个凶手，而你的枪只有一颗子弹。如果任何一个凶手的生还几率不是零，他就会试图逃跑。如果凶手确已死亡，他就不会企图逃跑。你如何阻止他们逃跑" class="headerlink" title="你在一个战场上看守着 100个凶手，而你的枪只有一颗子弹。如果任何一个凶手的生还几率不是零，他就会试图逃跑。如果凶手确已死亡，他就不会企图逃跑。你如何阻止他们逃跑?"></a>你在一个战场上看守着 100个凶手，而你的枪只有一颗子弹。如果任何一个凶手的生还几率不是零，他就会试图逃跑。如果凶手确已死亡，他就不会企图逃跑。你如何阻止他们逃跑?</h2><h2 id="100-人排队登上一架正好有-100-个座位的飞机。每位乘客都有一张分配到特定座位的机票。第一个上车的人喝醉了，随便找了个座位坐下。其余的旅客如果发现分配给他们的座位是空的，就会坐进去。如果他们发现自己的座位有人坐，他们会随机选择一个座位。大家都上了车，都坐好了。最后一个登机人坐在指定座位上的概率是多少"><a href="#100-人排队登上一架正好有-100-个座位的飞机。每位乘客都有一张分配到特定座位的机票。第一个上车的人喝醉了，随便找了个座位坐下。其余的旅客如果发现分配给他们的座位是空的，就会坐进去。如果他们发现自己的座位有人坐，他们会随机选择一个座位。大家都上了车，都坐好了。最后一个登机人坐在指定座位上的概率是多少" class="headerlink" title="100 人排队登上一架正好有 100 个座位的飞机。每位乘客都有一张分配到特定座位的机票。第一个上车的人喝醉了，随便找了个座位坐下。其余的旅客如果发现分配给他们的座位是空的，就会坐进去。如果他们发现自己的座位有人坐，他们会随机选择一个座位。大家都上了车，都坐好了。最后一个登机人坐在指定座位上的概率是多少?"></a>100 人排队登上一架正好有 100 个座位的飞机。每位乘客都有一张分配到特定座位的机票。第一个上车的人喝醉了，随便找了个座位坐下。其余的旅客如果发现分配给他们的座位是空的，就会坐进去。如果他们发现自己的座位有人坐，他们会随机选择一个座位。大家都上了车，都坐好了。最后一个登机人坐在指定座位上的概率是多少?</h2><p>令$p_n$为n个人坐在指定座位上的概率。要确定$p_{100}$。设A为最后一个人坐在自己座位上的事件，$B_i$为当还有i个座位时上车的人选择的座位号。遵循1到i的离散均匀分布，因此$P(B_i &#x3D; k) &#x3D; \frac{1}{i}$，因为有i个座位，人们随机选择一个。从n&#x3D;1的情况开始</p>
+<h2 id="100-的阶乘（100-）后面有多少个零？"><a href="#100-的阶乘（100-）后面有多少个零？" class="headerlink" title="100 的阶乘（100!）后面有多少个零？"></a>100 的阶乘（100!）后面有多少个零？</h2><p>因为10&#x3D;2$\times$5，所以0的个数就是100!因式分解后2$\times$5（必须配对）的个数。显然因式分解中2的个数比5多，因此问题划归为5的个数决定了后面0的数量。先来数5因子有几个：在100 内，5作为因子的数有5, 10, 15, 20, 25… 总共有20个。但是注意到25, 50, 75, 100都包含了2个5作为因子（25&#x3D;1$\times$5$\times$5, 50&#x3D;2$\times$5$\times$5等）。因此对于这些数要多数一次。所以总共就是有24个5因子，100!后面有24个0。</p>
+<h2 id="来自不同银行的-8-位宽客聚在一起喝酒。他们都想知道在坐-8-个人的平均工资。然而，每个人都不愿意向其他人透露自己的薪水。你能想出一个策略让这-8-个人在不知道别人薪水的情况下计算出在座各位稍微平均工资吗？"><a href="#来自不同银行的-8-位宽客聚在一起喝酒。他们都想知道在坐-8-个人的平均工资。然而，每个人都不愿意向其他人透露自己的薪水。你能想出一个策略让这-8-个人在不知道别人薪水的情况下计算出在座各位稍微平均工资吗？" class="headerlink" title="来自不同银行的 8 位宽客聚在一起喝酒。他们都想知道在坐 8 个人的平均工资。然而，每个人都不愿意向其他人透露自己的薪水。你能想出一个策略让这 8 个人在不知道别人薪水的情况下计算出在座各位稍微平均工资吗？"></a>来自不同银行的 8 位宽客聚在一起喝酒。他们都想知道在坐 8 个人的平均工资。然而，每个人都不愿意向其他人透露自己的薪水。你能想出一个策略让这 8 个人在不知道别人薪水的情况下计算出在座各位稍微平均工资吗？</h2><p>让第1个宽客选择一个随机数a，把这个随机数加到他的工资中，假设这个数是b。第2个宽客把他自己的工资加到b中，按照这个方法，依次到第8个宽客，假设最后结果是c，同时第八个宽客把结果c再给到第一个宽客手中。然后第一个宽客从c中减去a得到d，最后将d除以8，就得到了大家的平均工资。</p>
+<h2 id="一栋大楼有三部电梯，你怎么安排这三部电梯是这个大楼各楼层的人都能最快的按到自己想要的电梯"><a href="#一栋大楼有三部电梯，你怎么安排这三部电梯是这个大楼各楼层的人都能最快的按到自己想要的电梯" class="headerlink" title="一栋大楼有三部电梯，你怎么安排这三部电梯是这个大楼各楼层的人都能最快的按到自己想要的电梯"></a>一栋大楼有三部电梯，你怎么安排这三部电梯是这个大楼各楼层的人都能最快的按到自己想要的电梯</h2><h2 id="e-pi-和-pi-e-哪个大"><a href="#e-pi-和-pi-e-哪个大" class="headerlink" title="$e^\pi$和$\pi^e$哪个大"></a>$e^\pi$和$\pi^e$哪个大</h2><p>两边取对数<br>$$<br>a&#x3D;lne^\pi&#x3D;\pi\<br>b&#x3D;ln\pi ^e&#x3D;eln\pi<br>$$<br>构造函数<br>$$<br>f(x)&#x3D;x-elnx<br>$$<br>令<br>$$<br>f’(x)&#x3D;1-\frac{e}{x}&#x3D;0<br>$$<br>则<br>$$<br>x&#x3D;e为极小值点<br>$$<br>而$\pi&gt;e$，所以$e^\pi&gt;\pi^e$</p>
+<h2 id="你在一个木板的x位置，5是末端，0是起点，每次你有一半概率向左走或向右走，问最终走到末端的概率"><a href="#你在一个木板的x位置，5是末端，0是起点，每次你有一半概率向左走或向右走，问最终走到末端的概率" class="headerlink" title="你在一个木板的x位置，5是末端，0是起点，每次你有一半概率向左走或向右走，问最终走到末端的概率"></a>你在一个木板的x位置，5是末端，0是起点，每次你有一半概率向左走或向右走，问最终走到末端的概率</h2><h2 id="如果-x-land-x-land-x-land-…-x3D-2-，求-x"><a href="#如果-x-land-x-land-x-land-…-x3D-2-，求-x" class="headerlink" title="如果$x\land x\land x\land …&#x3D;2$，求$x$"></a>如果$x\land x\land x\land …&#x3D;2$，求$x$</h2><p>$$<br>\underset{n\rightarrow \infty}{\lim}\frac{x\land x\land x\land …}{n}&#x3D;2 \Leftrightarrow \underset{n\rightarrow \infty}{\lim}\frac{x\land x\land x\land …}{n-1}&#x3D;2<br>$$</p>
+<p>则当n 趋近于无穷大时，加上或减去一个$x\land$应该会得到相同的结果：<br>$$<br>x\land x\land x\land …&#x3D;x\land(x\land x\land  …)&#x3D;x\land 2\Rightarrow x&#x3D;\sqrt{2}<br>$$</p>
+<h2 id="一个钟表（按顺时针方向编号1-12）从墙上掉了下来，摔成三块。你会发现每一块上的数字之和是相等的。那么，每一块上的数字是多少呢？"><a href="#一个钟表（按顺时针方向编号1-12）从墙上掉了下来，摔成三块。你会发现每一块上的数字之和是相等的。那么，每一块上的数字是多少呢？" class="headerlink" title="一个钟表（按顺时针方向编号1-12）从墙上掉了下来，摔成三块。你会发现每一块上的数字之和是相等的。那么，每一块上的数字是多少呢？"></a>一个钟表（按顺时针方向编号1-12）从墙上掉了下来，摔成三块。你会发现每一块上的数字之和是相等的。那么，每一块上的数字是多少呢？</h2><p>使用求和方程，(1+12)*12&#x2F;2&#x3D;78，所以每一块的数字和必须是26，每一块上的数字必须是连续的，因为题目已经说明不允许有奇形怪状的碎块，我们很容易知道：5+6+7+8&#x3D;26，但是为什么再找不到更多的连续数字加起来是26呢？</p>
+<p>这样的假设从12点到1点在钟表上就不正确了。一旦这个错误的假设被消除，那我们的思路就变得很明朗：12+1&#x3D;13，11+2&#x3D;13。因此第二个碎块应该是11，12，1，2。那最后一块自然而然就是3，4，9，10。</p>
+<h2 id="假设有98个不同的整数从1到100。有什么好的方法找出两个缺失的整数在-1-100-内？"><a href="#假设有98个不同的整数从1到100。有什么好的方法找出两个缺失的整数在-1-100-内？" class="headerlink" title="假设有98个不同的整数从1到100。有什么好的方法找出两个缺失的整数在[1,100]内？"></a>假设有98个不同的整数从1到100。有什么好的方法找出两个缺失的整数在[1,100]内？</h2><p>将缺失的整数表示为$x$和$y$。现有的整数表示为$z_1$到$z_{98}$。应用求和方程：</p>
+<p>$$<br>\sum_{n&#x3D;1}^{100} n&#x3D;x+y+\sum_{i&#x3D;1}^{98} z_i \Rightarrow x+y&#x3D;\frac{102\times 101}{2}-\sum_{i&#x3D;1}^{98}z_i<br>$$<br>$$<br>\sum_{n&#x3D;1}^{100}n^2&#x3D;x^2+y^2+\sum_{i&#x3D;1}^{98}z_i^2\Rightarrow x^2+y^2&#x3D;\frac{100\times 101 \times 201}{6}-\sum_{i&#x3D;1}^{98}z_i^2<br>$$<br>【$\sum^n_{i&#x3D;1}\limits i^2&#x3D;\frac{n(n+1)(2n+1)}{6}$】</p>
+<p>通过上面两个方程可以解出x和y。</p>
+<h2 id="BO3-tennis-game，bet-on-two-games-or-three-games"><a href="#BO3-tennis-game，bet-on-two-games-or-three-games" class="headerlink" title="BO3 tennis game，bet on two games or three games?"></a>BO3 tennis game，bet on two games or three games?</h2><p>设A、B赢的概率分别是p，q</p>
+<p>两场结束的概率：$p^2+q^2$</p>
+<p>三场结束的概率：$2pq$</p>
 
                 
               </div>
@@ -377,15 +321,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
+  <a href="/categories/%E6%95%B0%E5%AD%A6/" class="category-chain-item">数学</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
-  
-  
-
   
 
       </span>
@@ -404,8 +341,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>聚类</div>
-      <div>http://example.com/2023/03/02/计算机/聚类/</div>
+      <div>Brain Teasers</div>
+      <div>http://example.com/2023/03/03/数学/Brain Teasers/</div>
     </div>
     <div class="license-meta">
       
@@ -417,7 +354,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月2日</div>
+          <div>2023年3月3日</div>
         </div>
       
       
@@ -449,15 +386,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%A0%91/" title="树">
+                      <a href="/2023/03/03/%E9%87%91%E8%9E%8D/%E9%87%91%E8%9E%8D%E7%BB%8F%E6%B5%8E/" title="金融经济">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">树</span>
+                        <span class="hidden-mobile">金融经济</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/03/03/%E6%95%B0%E5%AD%A6/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/" title="随机过程">
+                        <span class="hidden-mobile">随机过程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
