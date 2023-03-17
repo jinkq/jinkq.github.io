@@ -24,7 +24,7 @@
 <meta property="og:description" content="决策树，回归树，XGBoost">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-02T07:46:10.110Z">
-<meta property="article:modified_time" content="2023-03-03T09:03:04.180Z">
+<meta property="article:modified_time" content="2023-03-17T01:56:57.144Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.4k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          9 分钟
+          12 分钟
         
       </span>
     
@@ -314,13 +314,22 @@
 </li>
 <li><p>根据选取的$(d_i,s)$将样本划分成两个区域，计算两个区域的平方误差</p>
 </li>
-<li><p>选取使得式（1）最小的 （）（��,�） 将样本划分成两个区域，每个区域的预测值是所有样本y值的均值（根据平方误差的导数为0可得）。</p>
+<li><p>选取使得式（1）最小的$(d_i,s)$将样本划分成两个区域，每个区域的预测值是所有样本$y$值的均值（根据平方误差的导数为0可得）。</p>
+</li>
+<li><p>对于两个子区域继续调用1），2），3），直到满足停止条件。</p>
+</li>
+<li><p>最后划分为M个区域$R_1,R_2,…,R_m$，生成决策树<br>$$<br>f(x)&#x3D;\sum^M_{i&#x3D;1} c_iI(x\in R_i)<br>$$</p>
 </li>
 </ol>
-<p>4）对于两个子区域继续调用1），2），3），直到满足停止条件。</p>
-<p>5）最后划分为M区域 �1,�2……�� ，生成决策树</p>
-<p>(4)�(�)&#x3D;∑�&#x3D;1����(����)</p>
-<h2 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h2>
+<h2 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h2><h3 id="XGBoost特征重要性"><a href="#XGBoost特征重要性" class="headerlink" title="XGBoost特征重要性"></a>XGBoost特征重要性</h3><ol>
+<li><p>基于覆盖次数的特征重要性</p>
+<p> 在 XGBoost 中，每个决策树都会选择最佳特征进行划分，因此可以根据每个特征在决策树中被使用的次数来计算特征重要性。具体来说，特征的覆盖次数可以通过计算所有决策树中该特征被使用的次数之和来获得。XGBoost 将所有特征的覆盖次数标准化并转换为百分比，以便比较它们的重要性。</p>
+</li>
+<li><p>基于特征分裂次数的特征重要性</p>
+<p> 除了覆盖次数之外，XGBoost 还可以基于特征分裂的平均增益来计算特征重要性。对于每个决策树，XGBoost 都会计算每个特征的分裂增益，即将特征用作分裂点后目标变量的下降量。然后，XGBoost 将每个特征的分裂增益加权平均，以获得该特征的平均分裂增益。最后，XGBoost 将所有特征的平均分裂增益标准化并转换为百分比，以便比较它们的重要性。</p>
+</li>
+</ol>
+
                 
               </div>
             
