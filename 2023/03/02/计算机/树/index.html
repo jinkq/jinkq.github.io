@@ -23,10 +23,13 @@
 <meta property="og:site_name" content="冰柠果儿">
 <meta property="og:description" content="决策树，回归树，XGBoost">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111102456.png">
+<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111103059.png">
 <meta property="article:published_time" content="2023-03-02T07:46:10.110Z">
-<meta property="article:modified_time" content="2023-03-17T01:56:57.144Z">
+<meta property="article:modified_time" content="2023-03-30T16:08:48.107Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111102456.png">
   
   
   
@@ -235,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          4.7k 字
         
       </span>
     
@@ -246,7 +249,7 @@
         
         
         
-          12 分钟
+          39 分钟
         
       </span>
     
@@ -289,7 +292,79 @@
             
               <div class="markdown-body">
                 
-                <h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+                <h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h3 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h3><ol>
+<li>选择特征：选择最优特征作为当前节点的分裂特征。通常使用信息增益、基尼指数或卡方检验等方法来选择特征。</li>
+<li>划分数据集：将数据集根据选定的特征值进行划分，生成子集。</li>
+<li>递归构建子树：对于每个子集，重复步骤1和2，直到当前节点为叶子节点（即数据集中的所有实例属于同一类别），或满足预设的终止条件（例如达到树的最大深度、样本数量不足等）。</li>
+<li>剪枝：通过剪枝来避免过拟合。通常有预剪枝和后剪枝两种方法。预剪枝是在构建过程中，设置一个阈值，若划分当前节点不能增加决策树的泛化能力，则停止划分。后剪枝是在构建完整个树之后，对树进行剪枝。具体做法是从下往上遍历树中的节点，对每个节点进行剪枝，计算剪枝后的准确率，选择准确率最高的方式进行剪枝。</li>
+<li>测试决策树：用测试数据集来测试决策树的分类性能。通常采用交叉验证等方法来评估决策树的泛化能力。</li>
+<li>使用决策树进行预测：用新数据样本来预测目标变量的值，通过遍历决策树的各个节点来决定样本的类别。</li>
+</ol>
+<h3 id="递归停止条件"><a href="#递归停止条件" class="headerlink" title="递归停止条件"></a>递归停止条件</h3><ul>
+<li>当前结点包含的<strong>样本全部属于同一类别</strong></li>
+<li>当前<strong>属性集为空</strong>， 或所有样本在<strong>所有属性上取值相同</strong></li>
+<li>当前结点包含的<strong>样本集合为空</strong></li>
+</ul>
+<h3 id="决策树的分裂节点标准"><a href="#决策树的分裂节点标准" class="headerlink" title="决策树的分裂节点标准"></a>决策树的分裂节点标准</h3><h4 id="信息增益ID3"><a href="#信息增益ID3" class="headerlink" title="信息增益ID3"></a>信息增益ID3</h4><p>$$<br>Gain\left( D,a \right) &#x3D;Ent\left( D \right) -\sum_{v&#x3D;1}^V{\frac{\left| D^v \right|}{\left| D \right|}Ent\left( D^v \right)}<br>$$</p>
+<p>不足：偏好<strong>取值数目较多</strong>的属性</p>
+<h4 id="增益率"><a href="#增益率" class="headerlink" title="增益率"></a>增益率</h4><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111102456.png" srcset="/img/loading.gif" lazyload></p>
+<p>不足：偏好<strong>取值数目较少</strong>的属性</p>
+<h5 id="C4-5"><a href="#C4-5" class="headerlink" title="C4.5"></a>C4.5</h5><ol>
+<li>先找出<strong>信息增益高于平均水平</strong>的属性</li>
+<li>从中选<strong>增益率最高</strong>的属性</li>
+</ol>
+<h4 id="基尼指数（min最优）"><a href="#基尼指数（min最优）" class="headerlink" title="基尼指数（min最优）"></a>基尼指数（min最优）</h4><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111103059.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>反映了从数据集中随机抽取两个样本，其类别标记不一致的概率</li>
+</ul>
+<ol>
+<li><p>信息增益（Information Gain）</p>
+<p> 信息增益是指根据特征属性将数据集分成若干子集后，得到的子集的信息不确定性减少的程度。在决策树中，信息增益越大的特征属性越优先被选择作为分裂节点。</p>
+<p> 信息增益的计算公式为：$Gain(S, A) &#x3D; Entropy(S) - \sum_{v\in Values(A)}\frac{|S_v|}{|S|}Entropy(S_v)$</p>
+<p> 其中，$S$表示原始数据集，$A$表示待分裂的特征属性，$Values(A)$表示特征属性$A$的可能取值，$S_v$表示取值为$v$的子集，$|S|$和$|S_v|$分别表示数据集$S$和$S_v$的样本数，$Entropy(S)$和$Entropy(S_v)$分别表示数据集$S$和$S_v$的信息熵。</p>
+</li>
+<li><p>基尼不纯度（Gini Impurity）</p>
+<p> 基尼不纯度是指从数据集中随机选择两个样本，这两个样本在分类上的误差率。在决策树中，基尼不纯度越小的特征属性越优先被选择作为分裂节点。</p>
+<p> 基尼不纯度的计算公式为：$Gini(S) &#x3D; \sum_{k&#x3D;1}^{K}\sum_{k’\neq k}p_kp_{k’} &#x3D; 1 - \sum_{k&#x3D;1}^{K}p_k^2$</p>
+<p> 其中，$S$表示数据集，$K$表示类别数，$p_k$表示样本属于第$k$个类别的概率。</p>
+<p> 需要注意的是，不同的分裂节点标准可能会得到不同的决策树结构，而选择合适的分裂节点标准取决于具体的问题和数据集。</p>
+</li>
+</ol>
+<h3 id="ID3，C4-5，CART区别"><a href="#ID3，C4-5，CART区别" class="headerlink" title="ID3，C4.5，CART区别"></a>ID3，C4.5，CART区别</h3><p>D3、C4.5和CART都是决策树算法，它们的共同点是都可以用于分类和回归问题，都可以生成二叉决策树，并且都采用贪心的策略进行特征选择，即选择当前最优的特征作为分裂节点。</p>
+<p>下面是它们的不同点：</p>
+<ol>
+<li><p>算法基础</p>
+<p> ID3和C4.5基于信息论，采用信息增益和信息增益比来选择特征属性。而CART则是基于基尼不纯度，采用基尼指数来选择特征属性。</p>
+</li>
+<li><p>分类和回归</p>
+<p> ID3和C4.5只能用于分类问题，而CART既可以用于分类也可以用于回归问题。</p>
+</li>
+<li><p>多叉树和二叉树</p>
+<p> ID3和C4.5生成的决策树是多叉树，即一个节点可以有多个子节点。而CART生成的决策树是二叉树，即每个节点只有两个子节点。</p>
+</li>
+<li><p>连续特征处理</p>
+<p> ID3和C4.5不支持处理连续特征，需要对连续特征进行离散化。而CART可以直接处理连续特征，通过选择一个阈值将连续特征转化为二元特征进行处理。</p>
+</li>
+<li><p>树的剪枝</p>
+<p> C4.5和CART都支持对生成的决策树进行剪枝，以避免过拟合。而ID3没有剪枝过程。</p>
+</li>
+<li><p>Algorithm foundation</p>
+<p> ID3 and C4.5 are based on information theory, using information gain and gain ratio to select feature attributes. CART, on the other hand, is based on Gini impurity and uses the Gini index to select feature attributes.</p>
+</li>
+<li><p>Classification and Regression</p>
+<p> ID3 and C4.5 can only be used for classification problems, while CART can be used for both classification and regression problems.</p>
+</li>
+<li><p>Multi-way tree and binary tree</p>
+<p> The decision tree generated by ID3 and C4.5 is a multi-way tree, meaning that a node can have multiple child nodes. In contrast, the decision tree generated by CART is a binary tree, meaning that each node has only two child nodes.</p>
+</li>
+<li><p>Continuous feature processing</p>
+<p> ID3 and C4.5 do not support processing continuous features and require discretization of continuous features. CART can directly process continuous features by selecting a threshold to convert continuous features into binary features.</p>
+</li>
+<li><p>Tree pruning</p>
+<p> C4.5 and CART both support pruning the generated decision tree to avoid overfitting, while ID3 does not have a pruning process.</p>
+</li>
+</ol>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
 <li>因为是非参数模型，不需要对样本进行预先假设，可以处理复杂样本。</li>
 <li>计算速度快，结果可解释性强。</li>
 <li>可以同时处理分类和预测问题，对缺失值不敏感。</li>
@@ -321,6 +396,37 @@
 <li><p>最后划分为M个区域$R_1,R_2,…,R_m$，生成决策树<br>$$<br>f(x)&#x3D;\sum^M_{i&#x3D;1} c_iI(x\in R_i)<br>$$</p>
 </li>
 </ol>
+<h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><h4 id="预剪枝（边建树，边剪枝）"><a href="#预剪枝（边建树，边剪枝）" class="headerlink" title="预剪枝（边建树，边剪枝）"></a>预剪枝（边建树，边剪枝）</h4><p>决策树生成过程中，对每个结点在划分前先进行估计，若当前结点的划分不能带来决策树泛化性能提升，则停止划分并将当前结点记为叶结点，其类别标记为训练样例数最多的类别</p>
+<ol>
+<li>针对上述数据集，基于信息增益准则，选取属性v划分训练集。</li>
+<li>分别计算划分前（即直接将该结点作为叶结点）及划分后的验证集精度，判断是否需要划分。</li>
+<li>若划分后能提高验证集精度，则划分，对划分后的属性，执行同样判断；否则，不划分</li>
+</ol>
+<p>优点：</p>
+<ul>
+<li>降低过拟合风险</li>
+<li>显著减少训练时间和测试时间开销</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><strong>欠拟合</strong>风险：有些分支的当前划分虽然不能提升泛化性能，但在其基础上进行的后续划分却有可能导致性能显著提高。</li>
+<li>预剪枝基于“贪心”本质禁止这些分支展开，带来了欠拟合风险</li>
+</ul>
+<h4 id="后剪枝（先建树，后剪枝）"><a href="#后剪枝（先建树，后剪枝）" class="headerlink" title="后剪枝（先建树，后剪枝）"></a>后剪枝（先建树，后剪枝）</h4><p>优点：</p>
+<ul>
+<li>后剪枝比预剪枝保留了更多的分支，欠拟合风险小 ，<strong>泛化性能</strong>往往优于预剪枝决策树</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><strong>训练时间开销大</strong>：后剪枝过程是在生成完全决策树之后进行的，需要自底向上对所有非叶结点逐一考察；其训练时间要远大于预剪枝决策树</li>
+</ul>
+<h2 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h2><h4 id="缺失值处理-1"><a href="#缺失值处理-1" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><h5 id="在属性缺失的情况下，选择划分属性"><a href="#在属性缺失的情况下，选择划分属性" class="headerlink" title="在属性缺失的情况下，选择划分属性"></a>在属性缺失的情况下，选择划分属性</h5><ul>
+<li>跟传统决策树⼀致，只不过仅在有属性值的子集上计算信息增益，不考虑无属性值的样本</li>
+</ul>
+<p>$$<br>Gain\left( D,a \right) &#x3D;\rho \times Gain\left( \tilde{D},a \right)<br>$$</p>
+<h5 id="给定划分属性，若样本在该属性上的值缺失，如何对该样本进行划分？"><a href="#给定划分属性，若样本在该属性上的值缺失，如何对该样本进行划分？" class="headerlink" title="给定划分属性，若样本在该属性上的值缺失，如何对该样本进行划分？"></a>给定划分属性，若样本在该属性上的值缺失，如何对该样本进行划分？</h5><ul>
+<li>让同⼀个样本以不同的概率划入到不同的子节点中去</li>
+</ul>
 <h2 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h2><h3 id="XGBoost特征重要性"><a href="#XGBoost特征重要性" class="headerlink" title="XGBoost特征重要性"></a>XGBoost特征重要性</h3><ol>
 <li><p>基于覆盖次数的特征重要性</p>
 <p> 在 XGBoost 中，每个决策树都会选择最佳特征进行划分，因此可以根据每个特征在决策树中被使用的次数来计算特征重要性。具体来说，特征的覆盖次数可以通过计算所有决策树中该特征被使用的次数之和来获得。XGBoost 将所有特征的覆盖次数标准化并转换为百分比，以便比较它们的重要性。</p>

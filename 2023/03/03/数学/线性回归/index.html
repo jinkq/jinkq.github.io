@@ -23,10 +23,16 @@
 <meta property="og:site_name" content="冰柠果儿">
 <meta property="og:description" content="基本假设，BLUE，评价指标">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153310.png">
+<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153537.png">
+<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210622231304.png">
+<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111003.png">
+<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111522.png">
 <meta property="article:published_time" content="2023-03-03T06:28:36.465Z">
-<meta property="article:modified_time" content="2023-03-30T02:33:34.684Z">
+<meta property="article:modified_time" content="2023-03-30T03:43:20.216Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153310.png">
   
   
   
@@ -235,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9k 字
+          14k 字
         
       </span>
     
@@ -246,7 +252,7 @@
         
         
         
-          76 分钟
+          115 分钟
         
       </span>
     
@@ -317,7 +323,7 @@
 </ul>
 </li>
 <li>影响：<ul>
-<li>high correlated: variance of estimate be larger</li>
+<li>high correlated: variance of estimate be larger，矩阵$(X^TX)$几乎不可逆，$(X^TX)^{-1}$变得很大，使得方差$Var(\hat{\beta}|X)&#x3D;\sigma^2(X^TX)^{-1}$增大，系数估计不准确；X中元素轻微变化就会引起$(X^TX)^{-1}$很大变化，导致OLS估计值$\hat{\beta}$发生很大变化</li>
 <li>strict correlated: The rank of the X will be smaller than the number of independent variables, making (XTX) irreversible, the estimate has no solution</li>
 </ul>
 </li>
@@ -325,30 +331,107 @@
 <li>For highly correlated independent variables, only reserve one of them</li>
 <li>PCA</li>
 <li>Ridge&#x2F;LASSO</li>
+<li>如不关心具体的回归系数，只关心整个方程的预测能力，可不必理会多重共线性。多重共线性的主要后果是使得对单个变量的贡献估计不准，但所有变量的整体效应仍可较准确地估计</li>
+<li>如关心具体的回归系数，但多重共线性并不影响所关心变量的显著性，也可不必理会。在方差膨胀的情况下，系数依然显著；如没有多重共线性，只会更显著</li>
+<li>如多重共线性影响所关心变量的显著性，应设法进行处理。如增大样本容量，剔除导致严重共线性的变量，将变量标准化，或对模型设定进行修改</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><p>There Should be No <strong>Autocorrelation</strong> in the Data自相关性</p>
 <ul>
-<li>The residuals should be independent of each other.</li>
-<li>检验方法：DW Statistics</li>
-<li>影响：【自相关不影响无偏性、一致性、渐进正态】Reduce the accuracy of the model</li>
-<li>解决：<ul>
-<li>GLS</li>
-<li>ARIMA</li>
+<li><p>The residuals should be independent of each other.扰动项方差矩阵非主对角线（main diagonal）元素不为0</p>
+</li>
+<li><p>检验方法：DW Statistics</p>
+<ul>
+<li>BG检验：<ul>
+<li>思路：扰动项存在阶自相关→p阶自回归方程系数不全为零→$\varepsilon_i$不可观测，用$e_i$替代进行辅助回归→因为残差是解释变量的函数，还需要在辅助回归中引入解释变量</li>
+<li>原假设：$H_0:\gamma_1&#x3D;…&#x3D;\gamma_p&#x3D;0$</li>
+<li>辅助回归：$e_t&#x3D;\gamma_1e_{t-1}+…+\gamma_pe_{t-p}+\delta_2x_{t2}+…+\delta_Kx_{tK}+v_t(t&#x3D;p+1,…,n)$</li>
+<li>LM检验：$LM&#x3D;(n-p)R^2\xrightarrow{d}\mathcal{X}^2(p)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>影响：【自相关不影响无偏性、一致性、渐进正态】Reduce the accuracy of the model，普通标准误的t检验、F检验失效，不是BLUE</p>
+</li>
+<li><p>解决：</p>
+<ul>
+<li><p>GLS</p>
+</li>
+<li><p>ARIMA</p>
+</li>
+<li><p>CO估计法：</p>
+<ol>
+<li><p>假设扰动项$\varepsilon_t$存在自相关，为一阶自回归形式$\varepsilon_t&#x3D;\rho\varepsilon_{t-1}+u_t$，$u_t$为白噪声</p>
+</li>
+<li><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153310.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>新扰动项$(\varepsilon_t-\rho\varepsilon_{t-1})&#x3D;u_t$为白噪声</p>
+</li>
+<li><p>对方程（8.14）进行OLS估计，但损失一个样本容量，仍不是BLUE</p>
+</li>
+<li><p>补上一个方程</p>
+<img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153537.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></li>
+</ol>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><p>There Should be <strong>Homoscedasticity</strong> Among the Data同方差性</p>
 <ul>
-<li>The variance of the residuals should be constant</li>
-<li>检验方法：White Test</li>
-<li>影响：【异方差不影响无偏性、渐进正态】，估计不有效，误差较大</li>
-<li>解决：<ul>
-<li>使用稳健回归。即，不实用最小二乘法的平方和形式的目标函数，从而降低了残差方差较大的数据点对参数估计的影响。</li>
-<li>使用加权回归。即，根据每个数据点的拟合值的方差为每个数据点分配一个权重，给予较高方差的数据点较小的权重，从而缩小残差和</li>
+<li><p>The variance of the residuals should be constant，扰动项方差矩阵主对角线元素不相等</p>
+</li>
+<li><p>检验方法：White Test</p>
+<ul>
+<li>BP检验：<ul>
+<li>思路：存在异方差→$\varepsilon_i$对$x_i$的回归系数不全为0→扰动项$\varepsilon_i^2$不可观测，用残差平方$e^2_i$代替进行辅助回归</li>
+<li>原假设：$H_0:\delta_2&#x3D;…&#x3D;\delta_K&#x3D;0$</li>
+<li>辅助回归：$e_i^2&#x3D;\delta_1+\delta_2x_{i2}+…+\delta_Kx_{iK}+error_i$</li>
+<li>LM检验：$LM&#x3D;nR^2\xrightarrow{d}\mathcal{X}^2(K-1)$</li>
+</ul>
+</li>
+<li>White检验：<ul>
+<li>思路：BP检验假设条件方差函数为线性函数，可能忽略了高次项。在BP检验的辅助回归中加入所有二次项（平方项和交叉项）</li>
+<li>辅助回归：$e_i^2&#x3D;\delta_1+\delta_2x_{i2}+\delta_3x_{i3}+\delta_4x_{i2}^2+\delta_5x_{i3}^2+\delta_6x_{i2}x_{i3}+error_i$</li>
+<li>优点：可检验任何形式的异方差；因为根据泰勒展开式，二次函数可很好地逼近任何光滑函数</li>
+<li>缺点：如果解释变量较多，则解释变量的二次项将更多，在辅助回归中将损失较多样本容量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>影响：【异方差不影响无偏性、渐进正态】，估计不有效，误差较大，普通标准误的t检验、F检验失效，不是BLUE</p>
+</li>
+<li><p>解决：</p>
+<ul>
+<li><p>使用稳健回归。即，不实用最小二乘法的平方和形式的目标函数，从而降低了残差方差较大的数据点对参数估计的影响。</p>
+</li>
+<li><p>使用加权回归。即，根据每个数据点的拟合值的方差为每个数据点分配一个权重，给予较高方差的数据点较小的权重，从而缩小残差和</p>
+</li>
+<li><p>WLS：方差较小的观测值包含的信息量较大，给予方差较小的观测值较大的权重，然后进行加权最小二乘法估计。通过变量转换，使得变换后的模型满足球形扰动项的假定(变为同方差)，然后进行OLS 估计</p>
+<p>步骤：</p>
+<ol>
+<li>假设异方差形式为$Var(\varepsilon_i|x_i)&#x3D;\sigma_i^2&#x3D;\sigma^2v_i$</li>
+<li>回归模型两边同时乘权重$\frac{1}{\sqrt{v_i}}$，新扰动项$\frac{\varepsilon_i}{\sqrt{v_i}}$不再有异方差</li>
+<li>对回归模型进行OLS回归，最小化加权残差平方和$min\sum^n_{i&#x3D;1}\limits(\frac{e_i}{\sqrt{v_i}})^2&#x3D;\sum^n_{i&#x3D;1}\limits\frac{e_i^2}{v_i}$，权重为方差的倒数$\frac{1}{v_i}$</li>
+</ol>
+</li>
+<li><p>FWLS：</p>
+<ul>
+<li>why FWLS：使用WLS虽可得到BLUE估计，但须知道每位个体的方差，但${\sigma^2_i}^n_{i&#x3D;1}$在实践中通常不知</li>
+<li>思路：先用样本数据估计${\sigma^2_i}^n_{i&#x3D;1}$，再使用WLS</li>
+<li>步骤：<ol>
+<li>BP检验时进行辅助回归$e_i^2&#x3D;\delta_1+\delta_2x_{i2}+…+\delta_Kx_{iK}+error_i$</li>
+<li>得到$\sigma^2_i$的估计值$\hat{\sigma^2_i}&#x3D;\hat{\delta_1}+\hat{\delta_2}x_{i2}+…+\hat{\delta_K}x_{iK}$</li>
+<li>为保证$\hat{\sigma^2_i}$始终为正，假设条件方差函数为对数形式：$ln(e_i^2)&#x3D;\delta_1+\delta_2x_{i2}+…+\delta_Kx_{iK}+error_i$，对此方程进行OLS回归，得到$lne^2_i$的预测值$ln(\hat{\sigma_i^2})$，则$\hat{\sigma_i^2}&#x3D;e^{ln\hat{\sigma^2_i}}$一定为正</li>
+<li>以$\frac{1}{\hat{\sigma^2_i}}$为权重对原方程进行WLS估计</li>
+</ol>
+</li>
+<li>优点：在大样本下比OLS更有效率</li>
+<li>缺点：由于$\hat{\beta_{FWLS}}$是y的非线性函数，一般有偏，所以不是BLUE</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -363,6 +446,7 @@
 </li>
 </ol>
 <h2 id="OLS优良性质"><a href="#OLS优良性质" class="headerlink" title="OLS优良性质"></a>OLS优良性质</h2><h3 id="BLUE"><a href="#BLUE" class="headerlink" title="BLUE"></a>BLUE</h3><p>在经典假设下，OLS估计量估计量具有，线性、无偏性和有效性三个优良性质，称为最佳线性无偏估计量（best linear unbiased estimator,BLUE）</p>
+<p>球形扰动项下的估计量是最佳线性无偏估计量（BLUE），这个结论叫<strong>高斯马尔科夫定理</strong></p>
 <h3 id="大样本"><a href="#大样本" class="headerlink" title="大样本"></a>大样本</h3><ul>
 <li>一致：$\underset{n\rightarrow \infty}{plim}\hat{\beta_n}&#x3D;\beta$</li>
 <li>渐进正态Asymptotic normal distribution：$\hat{\beta_n}\xrightarrow{d} N(\beta, \frac{\sigma^2}{n})$</li>
@@ -384,12 +468,14 @@
 <p>$$<br>\begin{aligned}<br>Var(\hat{\beta})&amp;&#x3D;E[(\hat{\beta}-E[\hat{\beta}])(\hat{\beta}-E[\hat{\beta}])]\<br>&amp;&#x3D;E[(\hat{\beta} -\beta)(\hat{\beta}-\beta)^\top]\<br>                &amp;&#x3D;E[\hat{\beta}\hat{\beta}^\top-\hat{\beta} \beta^\top -\beta \hat{\beta}^\top +\beta \beta^\top]\<br>                &amp;&#x3D;E[\hat{\beta}\hat{\beta}^\top]-E[\hat{\beta}]\beta^\top-\beta E[\hat{\beta}^\top]+\beta \beta^\top\<br>                &amp;&#x3D;E[(X^\top X)^{-1}X^\top YY^\top X((X^\top X)^{-1})^\top]-\beta\beta^\top-\beta \beta^\top+\beta \beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[YY^\top]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[(X\beta + \varepsilon)(X\beta + \varepsilon)^\top]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[(X\beta + \varepsilon)(\beta^\top X^\top + \varepsilon^\top)]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[X\beta \beta^\top X^\top + X\beta\varepsilon^\top+\varepsilon\beta^\top X^\top +\varepsilon \varepsilon^\top]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top (X\beta \beta^\top X^\top + \sigma^2 I_n )X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;\beta\beta^\top +\sigma^2 (X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;\sigma^2 (X^\top X)^{-1}<br>\end{aligned}<br>$$</p>
 <h3 id="遗漏变量、冗余变量与扰动项"><a href="#遗漏变量、冗余变量与扰动项" class="headerlink" title="遗漏变量、冗余变量与扰动项"></a>遗漏变量、冗余变量与扰动项</h3><h4 id="遗漏变量"><a href="#遗漏变量" class="headerlink" title="遗漏变量"></a>遗漏变量</h4><p>$$<br>\beta&#x3D;<br>\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)\<br>X&#x3D;(1,x_{1t},x_{2t})\<br>r&#x3D;X\beta+\varepsilon\<br>\beta&#x3D;(X^\top X)^{-1}X^\top r\<br>$$</p>
 <p>Denote<br>$$<br>X’&#x3D;(1,x_{1t})\<br>\begin{aligned}<br>\beta’&#x3D;\left( \begin{array}{c}<br>    \hat{\alpha}\<br>    \hat{\beta}\<br>\end{array} \right)&amp;&#x3D;(X’^\top X’)^{-1}X’^\top r\<br>&amp;&#x3D;(X’^\top X’)^{-1}X’^\top (X\beta+\varepsilon)\<br>&amp;&#x3D;(X’^\top X’)^{-1}X’^\top X\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>\end{aligned}<br>$$<br>Then<br>$$<br>E[\beta’]&#x3D;(X’^\top X’)^{-1}X’^\top X\beta\<br>\begin{aligned}<br>\left( \begin{array}{c}<br>    \hat{\alpha}\<br>    E[\hat{\beta}]\<br>\end{array} \right)&amp;&#x3D;\left( \begin{array}{c}<br>    1&amp;x_{1t}\<br>    x_{1t}&amp; x_{1t}x_{1t}^\top\<br>\end{array} \right)^{-1}\left( \begin{array}{c}<br>    1&amp;x_{1t}&amp;x_{2t}\<br>    x_{1t}&amp;x_{1t}x_{1t}^\top &amp;x_{1t}x_{2t}^\top<br>\end{array} \right)\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)\<br>&amp;&#x3D;\left( \begin{array}{c}<br>    1&amp;0&amp;k_1\<br>    0&amp;1&amp;k_2\<br>\end{array} \right)\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)<br>\end{aligned}<br>$$<br>$$<br>E[\hat{\beta}]&#x3D;\beta_1+\frac{Cov(x_1, x_2)}{Var(x_1)}\beta_2<br>$$<br>If $k_2\ne0$, $\hat{\beta}$ is not an unbiased estimator of $\beta_1$ in (1), and it’s not consistent. The bias direction is based on $k_2\propto Cov(x_{1t},x_{2t})$.</p>
+<p>由于遗漏变量$x_2$被归入扰动项中，可能增大扰动项的方差，影响OLS估计的精确度</p>
 <h4 id="冗余变量"><a href="#冗余变量" class="headerlink" title="冗余变量"></a>冗余变量</h4><p>Denote<br>$$<br>\begin{aligned}<br>X’&amp;&#x3D;(1,x_{1t},x_{2t},x_{3t})\<br>&amp;&#x3D;\left( \begin{matrix}<br>    1&amp;		x_{11}&amp;		x_{21}&amp;		x_{31}\<br>    1&amp;		x_{12}&amp;		x_{22}&amp;		x_{32}\<br>    …&amp;		…&amp;		…&amp;		…\<br>    1&amp;		x_{1T}&amp;		x_{2T}&amp;		x_{3T}\<br>\end{matrix} \right)<br>\end{aligned}<br>$$</p>
 <p>$$<br>A&#x3D;\left( \begin{matrix}<br>    1&amp;		0&amp;		0\<br>    0&amp;		1&amp;		0\<br>    0&amp;		0&amp;		1\<br>    0&amp;		0&amp;		0\<br>\end{matrix} \right)<br>$$</p>
 <p>Then<br>$$<br>X&#x3D;X’A\<br>\beta’&#x3D;\left( \begin{array}{c}<br>    \hat{\gamma}_0\<br>    \hat{\gamma}_1\<br>    \hat{\gamma}_2\<br>    \hat{\gamma}_3<br>\end{array} \right)&#x3D;(X’^\top X’)^{-1}X’^\top X’A\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>E[\beta’]&#x3D;(X’^\top X’)^{-1}X’^\top X’A\beta&#x3D;A\beta\<br>\left( \begin{array}{c}<br>    E[\hat{\gamma}_0]\<br>    E[\hat{\gamma}_1]\<br>    E[\hat{\gamma}_2]\<br>    E[\hat{\gamma}_3]<br>\end{array} \right)&#x3D;\left( \begin{matrix}<br>    1&amp;		0&amp;		0\<br>    0&amp;		1&amp;		0\<br>    0&amp;		0&amp;		1\<br>    0&amp;		0&amp;		0\<br>\end{matrix} \right)\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)&#x3D;\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>    0<br>\end{array} \right)<br>$$<br>That is<br>$$<br>E[\hat{\gamma}_1]&#x3D;\beta_1\<br>E[\hat{\gamma}_2]&#x3D;\beta_2<br>$$<br>$\hat{\gamma}_1$ and $\hat{\gamma}_2$ are unbiased estimators of $\beta_1$ and $\beta_2$ in (1). So they are consistent.</p>
+<p>影响：引入无关变量后，受到无关变量的干扰，估计量$\hat{\beta}$的方差一般会增大</p>
 <h4 id="X有扰动项"><a href="#X有扰动项" class="headerlink" title="X有扰动项"></a>X有扰动项</h4><p>Denote<br>$$<br>\varDelta&#x3D;\left( \begin{matrix}<br>    0&amp;		\delta_{11}&amp;		\delta_{21}\<br>    0&amp;		\delta_{12}&amp;		\delta_{22}\<br>    …&amp;		…&amp;		…\<br>    0&amp;		\delta_{1T}&amp;		\delta_{2T}\<br>\end{matrix} \right)\<br>E[\varDelta]&#x3D;0\<br>X’&#x3D;X+\varDelta\<br>\begin{aligned}<br>\beta’&#x3D;\left( \begin{array}{c}<br>    \hat{\beta}_0\<br>    \hat{\beta}_1\<br>    \hat{\beta}_2\<br>\end{array} \right)&amp;&#x3D;(X’^\top X’)^{-1}X’^\top (X’-\varDelta)\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>&amp;&#x3D;(I-(X’^\top X’)^{-1}X’^\top\varDelta)\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>&amp;&#x3D;(I-([(X+\varDelta)^\top (X+\varDelta)]^{-1}(X+\varDelta)^\top\varDelta)\beta\<br>&amp;\quad+(X’^\top X’)^{-1}X’^\top \varepsilon\</p>
 <p>\end{aligned}\<br>$$<br>Then<br>$$<br>\begin{aligned}<br>E[\beta’]&amp;&#x3D;[I-E[X^\top X+X^\top\varDelta+\varDelta^\top X+\varDelta^\top \varDelta)^{-1}(X^\top \varDelta+\varDelta^\top \varDelta)]]\beta\<br>&amp;\ne\beta<br>\end{aligned}<br>$$<br>Ms. Noisy cannot get unbiased estimators of $\beta_1$ and $\beta_2$ in (1). Since<br>$$<br>\underset{T\rightarrow \infty}{\lim}E[X^\top X+X^\top\varDelta+\varDelta^\top X+\varDelta^\top \varDelta)^{-1}(X^\top \varDelta+\varDelta^\top \varDelta)]\ne0<br>$$<br>She cannot get consistent estimators.</p>
-<h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><h3 id="R-2"><a href="#R-2" class="headerlink" title="$R^2$"></a>$R^2$</h3><h4 id="平方和分解公式"><a href="#平方和分解公式" class="headerlink" title="平方和分解公式"></a>平方和分解公式</h4><p>成立条件：</p>
+<h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><h3 id="R-2"><a href="#R-2" class="headerlink" title="$R^2$"></a>$R^2$</h3><h4 id="平方和分解公式-Sum-of-squares-decomposition"><a href="#平方和分解公式-Sum-of-squares-decomposition" class="headerlink" title="平方和分解公式 Sum of squares decomposition"></a>平方和分解公式 Sum of squares decomposition</h4><p>成立条件：</p>
 <p>$\hat{y}$和$e$正交<br>$$<br>\hat{y}^\top e&#x3D;(X\hat{\beta})^\top e&#x3D;\hat{\beta}^\top X^\top e&#x3D;0<br>$$</p>
 <p>$$<br>y&#x3D;\hat{y}+e<br>$$</p>
 <p>回归平方和：ESS (explained sum of squares)</p>
@@ -406,12 +492,69 @@
 <li>对异常值敏感（平方项）</li>
 <li>对自变量个数敏感（增加个数会增大$R^2$）</li>
 <li>无法区分线性与非线性关系</li>
+<li>无常数项时不用R²度量拟合优度（平方和分解公式不成立）</li>
 </ul>
 <h4 id="样本外-R-2-为负数"><a href="#样本外-R-2-为负数" class="headerlink" title="样本外$R^2$为负数"></a>样本外$R^2$为负数</h4><p>RSS&gt;TSS</p>
 <h4 id="调整-R-2-（很多变量）"><a href="#调整-R-2-（很多变量）" class="headerlink" title="调整$R^2$（很多变量）"></a>调整$R^2$（很多变量）</h4><p>The adjusted R square takes into account the influence of sample size and the number of independent variables in the regression.</p>
 <p>$R^2$问题：增加自变量的个数会使$R^2$增大</p>
 <p>解决方法：调整$R^2$<br>$$<br>R_{adj}&#x3D;1-\frac{\frac{RSS}{n-p-1}}{\frac{TSS}{n-1}}<br>$$<br>$p$是自变量个数，$n$是样本数量</p>
 <p>问题：可能为负</p>
+<h4 id="uncentered-R-2"><a href="#uncentered-R-2" class="headerlink" title="uncentered $R^2$"></a>uncentered $R^2$</h4><p>$$<br>R^2_{uc}&#x3D;\frac{\sum \hat{y_i}^2}{\sum y_i^2}<br>$$</p>
+<p>来使$R^2$在0到1之间</p>
+<h3 id="t检验和F检验"><a href="#t检验和F检验" class="headerlink" title="t检验和F检验"></a>t检验和F检验</h3><p>t检验和F检验的关系：单个变量的t检验平方就是自由度为1的F检验（第一自由度为1，第二自由度为样本量）</p>
+<p>F检验和R²的关系：R²是去掉所有解释变量，只保留常数项的F检验</p>
+<img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210622231304.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<ul>
+<li>R²并非决定F统计量的唯一因素，还取决于样本容量n与解释变量个数K</li>
+</ul>
+<h2 id="X、Y数量变化的影响"><a href="#X、Y数量变化的影响" class="headerlink" title="X、Y数量变化的影响"></a>X、Y数量变化的影响</h2><h3 id="hat-beta"><a href="#hat-beta" class="headerlink" title="$\hat{\beta}$"></a>$\hat{\beta}$</h3><p>$$<br>\hat{\beta}&#x3D;(X^\top X)^{-1}X^\top Y<br>$$</p>
+<p>Y→a倍：$\hat{\beta}$→a倍</p>
+<p>X→a倍：$\hat{\beta}$→1&#x2F;a倍</p>
+<p>样本复制一倍：</p>
+<img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111003.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111522.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h3 id="t检验值"><a href="#t检验值" class="headerlink" title="t检验值"></a>t检验值</h3><p>$$<br>t&#x3D;\frac{\hat{\beta}-\beta}{SE(\hat{\beta})}<br>$$</p>
+<p>Y→a倍：t→不变</p>
+<p>X→a倍：t→不变</p>
+<p>样本复制一倍：t→$\sqrt{2}$t</p>
+<h3 id="R-2-2"><a href="#R-2-2" class="headerlink" title="$R^2$"></a>$R^2$</h3><p>Y→a倍：$R^2$→不变</p>
+<p>X→a倍：$R^2$→不变</p>
+<p>样本复制一倍：$R^2$→不变【$\hat{\beta}$不变，预测值不变】</p>
+<h2 id="线性回归准备"><a href="#线性回归准备" class="headerlink" title="线性回归准备"></a>线性回归准备</h2><ol>
+<li><p>数据清洗和预处理：这涉及将数据从原始数据中提取出来，检查和处理数据中的缺失值、异常值和重复值。确保数据符合线性回归的前提假设。</p>
+</li>
+<li><p>可视化和描述性统计分析：通过图表和统计指标来理解数据的分布情况、变量之间的关系和异常值的存在。这些信息可以帮助确定应该使用哪种线性回归模型，以及哪些变量需要包含在模型中。</p>
+</li>
+<li><p>数据划分：将数据集划分为训练集和测试集，以便评估模型的性能并防止过度拟合。</p>
+</li>
+<li><p>特征工程：根据问题的要求，对数据进行特征工程，例如特征选择、特征变换和特征提取等，以便更好地表示数据和提高模型的性能。相关性分析</p>
+</li>
+<li><p>模型选择和训练：选择合适的线性回归模型，并对模型进行训练和调整参数，以便使模型在训练集上的性能最优。</p>
+</li>
+<li><p>Data cleaning and preprocessing: This involves extracting data from raw data, checking and handling missing values, outliers, and duplicates in the data. Ensure that the data meets the assumptions of linear regression.</p>
+</li>
+<li><p>Visualization and descriptive statistical analysis: Understand the distribution of data, the relationship between variables, and the presence of outliers through charts and statistical indicators. This information can help determine which linear regression model to use and which variables to include in the model.</p>
+</li>
+<li><p>Data partitioning: Divide the data set into training and test sets to evaluate model performance and prevent overfitting.</p>
+</li>
+<li><p>Feature engineering: Perform feature engineering on the data according to the requirements of the problem, such as feature selection, feature transformation, and feature extraction, to better represent the data and improve the performance of the model. Analyze correlation.</p>
+</li>
+<li><p>Model selection and training: Choose the appropriate linear regression model and train and adjust the parameters of the model to achieve optimal performance on the training set.</p>
+</li>
+</ol>
+<p>数据分布对线性回归模型的影响主要表现在以下两个方面：</p>
+<h2 id="线性回归数据分布的影响"><a href="#线性回归数据分布的影响" class="headerlink" title="线性回归数据分布的影响"></a>线性回归数据分布的影响</h2><ol>
+<li><p>数据分布是否符合线性回归的基本假设</p>
+<p> 线性回归模型的基本假设是，自变量与因变量之间存在线性关系，且残差（实际值与预测值之间的差异）是独立同分布且服从正态分布的。如果数据分布不符合这些假设，那么线性回归模型的预测结果可能会受到影响。</p>
+<p> 例如，如果因变量的分布是偏态分布，那么线性回归模型可能会出现预测偏差，因为线性回归模型假设残差服从正态分布，而偏态分布的数据可能导致残差的非正态分布。同样，如果因变量与自变量之间的关系是非线性的，那么线性回归模型可能无法捕捉到这种关系，导致预测结果不准确。</p>
+</li>
+<li><p>数据分布的离群值和异常值</p>
+<p> 离群值和异常值可以对线性回归模型的预测结果产生很大的影响。因为线性回归模型是基于最小二乘法来求解的，它对离群值非常敏感，如果数据集中存在离群值，那么它们可能会对模型的系数估计和预测结果产生很大的影响。</p>
+</li>
+</ol>
 
                 
               </div>
