@@ -24,7 +24,7 @@
 <meta property="og:description" content="基本假设，BLUE，评价指标">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-03T06:28:36.465Z">
-<meta property="article:modified_time" content="2023-03-30T02:07:25.393Z">
+<meta property="article:modified_time" content="2023-03-30T02:33:34.684Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.5k 字
+          9k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          46 分钟
+          76 分钟
         
       </span>
     
@@ -382,6 +382,13 @@
 <p>综上所述，使用MSE作为损失函数可以更好地应对不同大小的数据集，并且可以使梯度下降算法更加高效</p>
 <h3 id="期望和方差"><a href="#期望和方差" class="headerlink" title="期望和方差"></a>期望和方差</h3><p>$$<br>\begin{aligned}<br>E[\hat{\beta}]&amp;&#x3D;E[(X^\top X)^{-1}X^\top (X\beta+\varepsilon)]\<br>&amp;&#x3D;(X^\top X)^{-1}X^\top X\beta + (X^\top X)^{-1}X^\top E[\varepsilon]\<br>&amp;&#x3D;\beta<br>\end{aligned}<br>$$</p>
 <p>$$<br>\begin{aligned}<br>Var(\hat{\beta})&amp;&#x3D;E[(\hat{\beta}-E[\hat{\beta}])(\hat{\beta}-E[\hat{\beta}])]\<br>&amp;&#x3D;E[(\hat{\beta} -\beta)(\hat{\beta}-\beta)^\top]\<br>                &amp;&#x3D;E[\hat{\beta}\hat{\beta}^\top-\hat{\beta} \beta^\top -\beta \hat{\beta}^\top +\beta \beta^\top]\<br>                &amp;&#x3D;E[\hat{\beta}\hat{\beta}^\top]-E[\hat{\beta}]\beta^\top-\beta E[\hat{\beta}^\top]+\beta \beta^\top\<br>                &amp;&#x3D;E[(X^\top X)^{-1}X^\top YY^\top X((X^\top X)^{-1})^\top]-\beta\beta^\top-\beta \beta^\top+\beta \beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[YY^\top]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[(X\beta + \varepsilon)(X\beta + \varepsilon)^\top]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[(X\beta + \varepsilon)(\beta^\top X^\top + \varepsilon^\top)]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top E[X\beta \beta^\top X^\top + X\beta\varepsilon^\top+\varepsilon\beta^\top X^\top +\varepsilon \varepsilon^\top]X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;(X^\top X)^{-1}X^\top (X\beta \beta^\top X^\top + \sigma^2 I_n )X(X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;\beta\beta^\top +\sigma^2 (X^\top X)^{-1}-\beta\beta^\top\<br>                &amp;&#x3D;\sigma^2 (X^\top X)^{-1}<br>\end{aligned}<br>$$</p>
+<h3 id="遗漏变量、冗余变量与扰动项"><a href="#遗漏变量、冗余变量与扰动项" class="headerlink" title="遗漏变量、冗余变量与扰动项"></a>遗漏变量、冗余变量与扰动项</h3><h4 id="遗漏变量"><a href="#遗漏变量" class="headerlink" title="遗漏变量"></a>遗漏变量</h4><p>$$<br>\beta&#x3D;<br>\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)\<br>X&#x3D;(1,x_{1t},x_{2t})\<br>r&#x3D;X\beta+\varepsilon\<br>\beta&#x3D;(X^\top X)^{-1}X^\top r\<br>$$</p>
+<p>Denote<br>$$<br>X’&#x3D;(1,x_{1t})\<br>\begin{aligned}<br>\beta’&#x3D;\left( \begin{array}{c}<br>    \hat{\alpha}\<br>    \hat{\beta}\<br>\end{array} \right)&amp;&#x3D;(X’^\top X’)^{-1}X’^\top r\<br>&amp;&#x3D;(X’^\top X’)^{-1}X’^\top (X\beta+\varepsilon)\<br>&amp;&#x3D;(X’^\top X’)^{-1}X’^\top X\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>\end{aligned}<br>$$<br>Then<br>$$<br>E[\beta’]&#x3D;(X’^\top X’)^{-1}X’^\top X\beta\<br>\begin{aligned}<br>\left( \begin{array}{c}<br>    \hat{\alpha}\<br>    E[\hat{\beta}]\<br>\end{array} \right)&amp;&#x3D;\left( \begin{array}{c}<br>    1&amp;x_{1t}\<br>    x_{1t}&amp; x_{1t}x_{1t}^\top\<br>\end{array} \right)^{-1}\left( \begin{array}{c}<br>    1&amp;x_{1t}&amp;x_{2t}\<br>    x_{1t}&amp;x_{1t}x_{1t}^\top &amp;x_{1t}x_{2t}^\top<br>\end{array} \right)\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)\<br>&amp;&#x3D;\left( \begin{array}{c}<br>    1&amp;0&amp;k_1\<br>    0&amp;1&amp;k_2\<br>\end{array} \right)\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)<br>\end{aligned}<br>$$<br>$$<br>E[\hat{\beta}]&#x3D;\beta_1+\frac{Cov(x_1, x_2)}{Var(x_1)}\beta_2<br>$$<br>If $k_2\ne0$, $\hat{\beta}$ is not an unbiased estimator of $\beta_1$ in (1), and it’s not consistent. The bias direction is based on $k_2\propto Cov(x_{1t},x_{2t})$.</p>
+<h4 id="冗余变量"><a href="#冗余变量" class="headerlink" title="冗余变量"></a>冗余变量</h4><p>Denote<br>$$<br>\begin{aligned}<br>X’&amp;&#x3D;(1,x_{1t},x_{2t},x_{3t})\<br>&amp;&#x3D;\left( \begin{matrix}<br>    1&amp;		x_{11}&amp;		x_{21}&amp;		x_{31}\<br>    1&amp;		x_{12}&amp;		x_{22}&amp;		x_{32}\<br>    …&amp;		…&amp;		…&amp;		…\<br>    1&amp;		x_{1T}&amp;		x_{2T}&amp;		x_{3T}\<br>\end{matrix} \right)<br>\end{aligned}<br>$$</p>
+<p>$$<br>A&#x3D;\left( \begin{matrix}<br>    1&amp;		0&amp;		0\<br>    0&amp;		1&amp;		0\<br>    0&amp;		0&amp;		1\<br>    0&amp;		0&amp;		0\<br>\end{matrix} \right)<br>$$</p>
+<p>Then<br>$$<br>X&#x3D;X’A\<br>\beta’&#x3D;\left( \begin{array}{c}<br>    \hat{\gamma}_0\<br>    \hat{\gamma}_1\<br>    \hat{\gamma}_2\<br>    \hat{\gamma}_3<br>\end{array} \right)&#x3D;(X’^\top X’)^{-1}X’^\top X’A\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>E[\beta’]&#x3D;(X’^\top X’)^{-1}X’^\top X’A\beta&#x3D;A\beta\<br>\left( \begin{array}{c}<br>    E[\hat{\gamma}_0]\<br>    E[\hat{\gamma}_1]\<br>    E[\hat{\gamma}_2]\<br>    E[\hat{\gamma}_3]<br>\end{array} \right)&#x3D;\left( \begin{matrix}<br>    1&amp;		0&amp;		0\<br>    0&amp;		1&amp;		0\<br>    0&amp;		0&amp;		1\<br>    0&amp;		0&amp;		0\<br>\end{matrix} \right)\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>\end{array} \right)&#x3D;\left( \begin{array}{c}<br>    \beta_0\<br>    \beta_1\<br>    \beta_2\<br>    0<br>\end{array} \right)<br>$$<br>That is<br>$$<br>E[\hat{\gamma}_1]&#x3D;\beta_1\<br>E[\hat{\gamma}_2]&#x3D;\beta_2<br>$$<br>$\hat{\gamma}_1$ and $\hat{\gamma}_2$ are unbiased estimators of $\beta_1$ and $\beta_2$ in (1). So they are consistent.</p>
+<h4 id="X有扰动项"><a href="#X有扰动项" class="headerlink" title="X有扰动项"></a>X有扰动项</h4><p>Denote<br>$$<br>\varDelta&#x3D;\left( \begin{matrix}<br>    0&amp;		\delta_{11}&amp;		\delta_{21}\<br>    0&amp;		\delta_{12}&amp;		\delta_{22}\<br>    …&amp;		…&amp;		…\<br>    0&amp;		\delta_{1T}&amp;		\delta_{2T}\<br>\end{matrix} \right)\<br>E[\varDelta]&#x3D;0\<br>X’&#x3D;X+\varDelta\<br>\begin{aligned}<br>\beta’&#x3D;\left( \begin{array}{c}<br>    \hat{\beta}_0\<br>    \hat{\beta}_1\<br>    \hat{\beta}_2\<br>\end{array} \right)&amp;&#x3D;(X’^\top X’)^{-1}X’^\top (X’-\varDelta)\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>&amp;&#x3D;(I-(X’^\top X’)^{-1}X’^\top\varDelta)\beta+(X’^\top X’)^{-1}X’^\top \varepsilon\<br>&amp;&#x3D;(I-([(X+\varDelta)^\top (X+\varDelta)]^{-1}(X+\varDelta)^\top\varDelta)\beta\<br>&amp;\quad+(X’^\top X’)^{-1}X’^\top \varepsilon\</p>
+<p>\end{aligned}\<br>$$<br>Then<br>$$<br>\begin{aligned}<br>E[\beta’]&amp;&#x3D;[I-E[X^\top X+X^\top\varDelta+\varDelta^\top X+\varDelta^\top \varDelta)^{-1}(X^\top \varDelta+\varDelta^\top \varDelta)]]\beta\<br>&amp;\ne\beta<br>\end{aligned}<br>$$<br>Ms. Noisy cannot get unbiased estimators of $\beta_1$ and $\beta_2$ in (1). Since<br>$$<br>\underset{T\rightarrow \infty}{\lim}E[X^\top X+X^\top\varDelta+\varDelta^\top X+\varDelta^\top \varDelta)^{-1}(X^\top \varDelta+\varDelta^\top \varDelta)]\ne0<br>$$<br>She cannot get consistent estimators.</p>
 <h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><h3 id="R-2"><a href="#R-2" class="headerlink" title="$R^2$"></a>$R^2$</h3><h4 id="平方和分解公式"><a href="#平方和分解公式" class="headerlink" title="平方和分解公式"></a>平方和分解公式</h4><p>成立条件：</p>
 <p>$\hat{y}$和$e$正交<br>$$<br>\hat{y}^\top e&#x3D;(X\hat{\beta})^\top e&#x3D;\hat{\beta}^\top X^\top e&#x3D;0<br>$$</p>
 <p>$$<br>y&#x3D;\hat{y}+e<br>$$</p>
@@ -389,7 +396,7 @@
 <p>残差平方和：RSS(residual sum of squares)</p>
 <p>总离差平方和：TSS(total sum of squares)</p>
 <p>RSS+ESS&#x3D;TSS</p>
-<p>$$<br>ESS&#x3D;\sum^n_{i&#x3D;1}(\hat{y_i}-\bar{y})^2\<br>RSS&#x3D;\sum^n_{i&#x3D;1}(\hat{y_i}-y_i)^2\<br>TSS&#x3D;\sum^n_{i&#x3D;1}(y_i-\bar{y})^2<br>$$</p>
+<p>$$<br>ESS&#x3D;\sum^n_{i&#x3D;1}(\hat{y_i}-\bar{y})^2<br>$$<br>$$<br>RSS&#x3D;\sum^n_{i&#x3D;1}(\hat{y_i}-y_i)^2<br>$$<br>$$<br>TSS&#x3D;\sum^n_{i&#x3D;1}(y_i-\bar{y})^2<br>$$</p>
 <p>$$<br>R^2&#x3D;\frac{ESS}{TSS}&#x3D;1-\frac{RSS}{TSS}&#x3D;\frac{Var(\hat{y})}{Var(y)}&#x3D;1-\frac{MSE}{Var(y)}<br>$$</p>
 <p>$$<br>TSS&#x3D;ESS+RSS\<br>\sum(y_i-\bar{y})^2&#x3D;\sum (\hat{y}_i-\bar{y})^2+\sum e_i^2<br>$$</p>
 <h4 id="R-2-1"><a href="#R-2-1" class="headerlink" title="$R^2$"></a>$R^2$</h4><p>R²是指拟合优度，是回归直线对观测值的拟合程度。</p>
