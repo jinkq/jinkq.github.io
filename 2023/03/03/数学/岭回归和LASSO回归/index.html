@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230131092039.png">
 <meta property="article:published_time" content="2023-03-03T06:32:33.914Z">
-<meta property="article:modified_time" content="2023-03-03T06:34:40.987Z">
+<meta property="article:modified_time" content="2023-03-30T01:39:39.277Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230131092039.png">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          6k 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          16 分钟
+          51 分钟
         
       </span>
     
@@ -297,24 +297,37 @@
 <ul>
 <li>有偏估计</li>
 </ul>
-<h3 id="岭回归vs线性回归"><a href="#岭回归vs线性回归" class="headerlink" title="岭回归vs线性回归"></a>岭回归vs线性回归</h3><p>线性回归和岭回归都是线性模型，用于拟合数据之间的线性关系。它们的主要区别在于模型复杂度的控制和正则化项的引入。</p>
+<h4 id="岭回归模型"><a href="#岭回归模型" class="headerlink" title="岭回归模型"></a>岭回归模型</h4><p>$$<br>\begin{aligned}<br>\frac{\partial L}{\partial \beta}&amp;&#x3D;-2X^\top(Y-X\beta)+2\lambda \beta\<br>&amp;&#x3D;2(X^\top X+\lambda I_{pp})\beta-2X^\top Y\<br>&amp;&#x3D;0<br>\end{aligned}<br>$$<br>$$<br>\hat{\beta}<em>{ridge}&#x3D;(X^\top X+\lambda I</em>{pp})^{-1}X^\top Y<br>$$</p>
+<h5 id="期望和方差"><a href="#期望和方差" class="headerlink" title="期望和方差"></a>期望和方差</h5><p>$$<br>\begin{aligned}<br>E[\hat{\beta}<em>{ridge}]&amp;&#x3D;E[(X^\top X+\lambda I</em>{pp})^{-1}X^\top Y]\<br>&amp;&#x3D;(X^\top X+\lambda I_{pp})^{-1}X^\top E[Y]\<br>&amp;&#x3D;(X^\top X+\lambda I_{pp})^{-1}X^\top X \beta\<br>&amp;\ne \beta<br>\end{aligned}<br>$$</p>
+<p>Denote $\hat{\beta}$ as the estimate of ordinary linear regression, and $W_\lambda &#x3D; (X^\top X+\lambda I_{pp})^{-1}X^\top X$.<br>Then<br>$$<br>\begin{aligned}<br>W_\lambda \hat{\beta} &amp;&#x3D; (X^\top X+\lambda I_{pp})^{-1}X^\top X (X^\top X)^{-1}X^\top Y\<br>&amp;&#x3D;(X^\top X+\lambda I_{pp})^{-1}X^\top Y\<br>&amp;&#x3D;\hat{\beta}_{ridge}<br>\end{aligned}<br>$$<br>Since<br>$$<br>((X^\top X)^{-1})^\top&#x3D;((X^\top X)^{\top})^{-1}&#x3D;(X^\top X)^{-1}<br>$$<br>$$<br>Var(\hat{\beta})&#x3D;\sigma^2 (X^\top X)^{-1}<br>$$</p>
+<p>then</p>
+<p>$$<br>\begin{aligned}<br>Var(\hat{\beta}<em>{ridge})&amp;&#x3D;Var(W_\lambda \hat{\beta})\<br>&amp;&#x3D;E[(W_\lambda \hat{\beta}-W_\lambda \beta)(W_\lambda \hat{\beta}-W_\lambda \beta)^\top]\<br>&amp;&#x3D;W_\lambda E[ \hat{\beta}\hat{\beta}^\top] W_\lambda^\top-W_\lambda \beta \beta^\top W_\lambda^\top\<br>&amp;&#x3D;W_\lambda (\beta\beta^\top +\sigma^2(X^\top X)^{-1})W_\lambda^\top-W_\lambda \beta \beta^\top W_\lambda^\top\<br>&amp;&#x3D;\sigma^2 W_\lambda (X^\top X)^{-1} W_\lambda^\top\<br>&amp;&#x3D;\sigma^2 (X^\top X+\lambda I</em>{pp})^{-1}X^\top X [(X^\top X+\lambda I_{pp})^{-1}]^\top<br>\end{aligned}<br>$$</p>
+<h3 id="岭回归vs线性回归"><a href="#岭回归vs线性回归" class="headerlink" title="岭回归vs线性回归"></a>岭回归vs线性回归</h3><h4 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h4><p>$$<br>\begin{aligned}<br>    Var(\hat{\beta})-Var(\hat{\beta}<em>{ridge})&amp;&#x3D;\sigma^2 (X^\top X)^{-1}-\sigma^2 (X^\top X+\lambda I</em>{pp})^{-1}X^\top X [(X^\top X+\lambda I_{pp})^{-1}]^\top\<br>    &amp;&#x3D;\sigma^2 W_\lambda[2\lambda(X^\top X)^{-2}+\lambda^2 (X^\top X)^{-3}]W_\lambda^\top\<br>    &amp;&#x3D;\sigma^2(X^\top X+\lambda I_{pp})^{-1}[2\lambda I_{pp}+\lambda^2(X^\top X)^{-1}][(X^\top X+\lambda I_{pp})^{-1}]^\top<br>\end{aligned}<br>$$<br>The difference is non-negative definite as each component in the matrix product is non-negative definite.<br>$$<br>Var(\hat{\beta})\succcurlyeq  Var(\hat{\beta}_{ridge})<br>$$<br>Hence, he variance of the ridge estimator is less than the variance of the maximum likelihood estimator for the ordinary regression model.</p>
+<h4 id="MSE"><a href="#MSE" class="headerlink" title="MSE"></a>MSE</h4><p>$$<br>MSE[\hat{\beta}<em>{ridge}]&#x3D;Var(\hat{\beta}</em>{ridge})+Bias^2(\hat{\beta}_{ridge})<br>$$<br>$$<br>MSE[\hat{\beta}]&#x3D;Var(\hat{\beta})+Bias^2(\hat{\beta})&#x3D;Var(\hat{\beta})<br>$$</p>
+<p>$$<br>\begin{aligned}<br>Bias^2(\hat{\beta}<em>{ridge})&amp;&#x3D;(E[\hat{\beta}</em>{ridge}-\beta])^2\<br>&amp;&#x3D;[(X^\top X+\lambda I_{pp})^{-1}X^\top X \beta-\beta]^2\<br>&amp;&#x3D;[(X^\top X+\lambda I_{pp})^{-1}(X^\top X+\lambda I_{pp}-\lambda I_{pp}) \beta-\beta]^2\<br>&amp;&#x3D;[-\lambda(X^\top X+\lambda I_{pp})^{-1} \beta]^2\<br>&amp;&#x3D;\lambda^2 (X^\top X+\lambda I_{pp})^{-1} \beta \beta^\top[(X^\top X+\lambda I_{pp})^{-1} ]^\top<br>\end{aligned}<br>$$<br>$$<br>\begin{aligned}<br>    MSE[\hat{\beta}]-MSE[\hat{\beta}<em>{ridge}]&amp;&#x3D;Var(\hat{\beta})-Var(\hat{\beta}</em>{ridge})-Bias^2(\hat{\beta}<em>{ridge})\<br>    &amp;&#x3D;\sigma^2(X^\top X+\lambda I</em>{pp})^{-1}[2\lambda I_{pp}+\lambda^2(X^\top X)^{-1}][(X^\top X+\lambda I_{pp})^{-1}]^\top\<br>    &amp;\quad -\lambda^2 (X^\top X+\lambda I_{pp})^{-1} \beta \beta^\top[(X^\top X+\lambda I_{pp})^{-1} ]^\top\<br>    &amp;&#x3D;\lambda(X^\top X+\lambda I_{pp})^{-1}[2\sigma^2I_{pp}+\lambda\sigma^2(X^\top X)^{-1}-\lambda \beta \beta^\top]\<br>    &amp;\quad [(X^\top X+\lambda I_{pp})^{-1}]^\top<br>\end{aligned}<br>$$<br>$MSE[\hat{\beta}]-MSE[\hat{\beta}<em>{ridge}]\succeq 0$ only when $2\sigma^2I</em>{pp}+\lambda\sigma^2(X^\top X)^{-1}-\lambda \beta \beta^\top\succeq 0$, that is $2\sigma^2I_{pp}-\lambda \beta \beta^\top\succeq 0$, $\lambda \leqslant 2\sigma^2(\beta^\top\beta)^{-1}$.</p>
+<h4 id="优劣势"><a href="#优劣势" class="headerlink" title="优劣势"></a>优劣势</h4><p>线性回归和岭回归都是线性模型，用于拟合数据之间的线性关系。它们的主要区别在于模型复杂度的控制和正则化项的引入。</p>
 <p>通常来说，当训练数据的特征数比样本数大很多，或者特征之间存在多重共线性（即某些特征之间存在较高的相关性），线性回归的表现会比较差，此时可以使用岭回归。</p>
 <p>另外，在存在离群点（outlier）的情况下，线性回归的表现也可能较差，因为离群点会对模型产生较大的影响。此时，可以使用带有正则化项的岭回归来降低离群点的影响。</p>
 <p>总之，当样本数比特征数多，且不存在多重共线性或离群点时，线性回归可能会是更好的选择；而当特征数比样本数大或存在多重共线性或离群点时，岭回归可能会表现更好。当然，最好的方法是尝试不同的模型并进行比较。</p>
 <h2 id="LASSO回归"><a href="#LASSO回归" class="headerlink" title="LASSO回归"></a>LASSO回归</h2><p>$$<br>L(\beta)&#x3D;||Y-X\beta||^2+\lambda ||\beta||^1<br>$$</p>
 <p>LASSO regression penalizes coefficients with L1 regularization. LASSO regression can make some coefficients exactly equal to 0, achieving feature selection. But it has no closed form. Under the condition of only a few variables with medium&#x2F;large effect, using LASSO regression is better</p>
 <h2 id="岭回归-vs-LASSO回归"><a href="#岭回归-vs-LASSO回归" class="headerlink" title="岭回归 vs LASSO回归"></a>岭回归 vs LASSO回归</h2><p>岭回归和Lasso回归是两种经典的正则化线性回归算法，它们都是通过在代价函数中引入正则化项来控制模型复杂度，避免过拟合。两者的主要区别在于使用的正则化项不同，岭回归使用L2正则化，而Lasso回归使用L1正则化。这两种正则化方式对应的参数惩罚项分别是参数平方和和参数绝对值和。</p>
+<p>Ridge regression penalizes coefficents with $L_2$ regularization.Ridge regression can decrease some coefficients, but can not select features. And it has closed form. Under the condition of many small&#x2F;medium sized effects, using ridge regression is better.</p>
+<p>LASSO regression penalizes coefficents with $L_1$ regularization. LASSO regression can make some coefficients exactly equal to 0, achieving feature selection. But it has no closed form. Under the condition of only a few variables with medium&#x2F;large effect, using LASSO regression is better.</p>
 <h3 id="岭回归的优势"><a href="#岭回归的优势" class="headerlink" title="岭回归的优势"></a>岭回归的优势</h3><ol>
 <li>可以处理多重共线性：当数据中存在多个高度相关的自变量时，最小二乘回归会导致过拟合，而岭回归可以通过对参数进行平滑处理，减小多重共线性的影响，提高模型的鲁棒性。</li>
 <li>对异常值不敏感：由于岭回归对参数进行了平滑处理，因此可以有效地降低异常值的影响，提高模型的稳定性。</li>
 <li>可以得到更加稳定的结果：由于岭回归引入的L2正则化项能够控制模型的复杂度，因此可以有效地减小模型的方差，降低模型的波动性，从而得到更加稳定的结果。</li>
+<li>有闭式解</li>
 </ol>
 <h3 id="Lasso回归的优势"><a href="#Lasso回归的优势" class="headerlink" title="Lasso回归的优势"></a>Lasso回归的优势</h3><ol>
 <li>可以进行特征选择：由于L1正则化倾向于将一些参数压缩到0，因此可以用于特征选择，即通过Lasso回归来筛选出对目标变量有重要影响的特征，从而减小模型的复杂度。</li>
 <li>可以用于稀疏数据集：在处理稀疏数据集时，Lasso回归通常比岭回归更为有效，因为L1正则化能够将某些系数压缩为0，从而能够更好地处理稀疏数据。</li>
 </ol>
+<p>LASSO回归无闭式解：L1正则化项对于参数的求导结果不是可解析的，因此无法直接求出最小化目标函数时的回归系数的闭式解。</p>
+<p>为了解决LASSO回归无法直接求解的问题，通常采用迭代算法来逼近最小化目标函数时的回归系数。常用的算法有坐标下降（Coordinate Descent）算法、最小角回归（Least Angle Regression, LAR）算法、以及基于梯度下降（Gradient Descent）的算法等。这些算法都可以在一定程度上逼近最小化目标函数时的回归系数，但无法得到闭式解。</p>
 <p>综上所述，岭回归和Lasso回归都是非常实用的线性回归算法，在不同的应用场景下具有不同的优势。如果数据集中存在多重共线性，或者需要得到更加稳定的结果，岭回归可能更加合适；而如果需要进行特征选择或者处理稀疏数据集，则Lasso回归可能更加适用。</p>
-<h3 id="Ridge-vs-LASSO稀疏解"><a href="#Ridge-vs-LASSO稀疏解" class="headerlink" title="Ridge vs LASSO稀疏解"></a>Ridge vs LASSO稀疏解</h3><p>图中彩色线条即为目标函数的等高线，黑色线条即为约束条件。根据岭回归和套索回归的约束条件，分别得到下图两个图像。</p>
+<h3 id="Ridge-vs-LASSO稀疏解"><a href="#Ridge-vs-LASSO稀疏解" class="headerlink" title="Ridge vs LASSO稀疏解"></a>Ridge vs LASSO稀疏解</h3><p>图中彩色线条即为目标函数的等高线，黑色线条即为约束条件。根据岭回归和LASSO回归的约束条件，分别得到下图两个图像。</p>
 <p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230131092039.png" srcset="/img/loading.gif" lazyload></p>
 <p>右图为LASSO回归图像，目标函数的等高线，大部分时候都会在角的地方相交。例如图中所示，横坐标 $\hat{\beta}_1$即为0，因此就产生了稀疏性【在高纬度情况下，同样道理】；而在岭回归的图像中，约束条件画出来是一个圆，所以相交的地方出现在具有稀疏性的位置的概率就变得非常小了。<strong>这就从直观上来解释了为什么LASSO回归能产生稀疏性，而岭回归不行的原因了。</strong></p>
 
