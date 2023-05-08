@@ -16,21 +16,21 @@
   <meta name="author" content="冰柠果儿">
   <meta name="keywords" content="">
   
-    <meta name="description" content="策略类型">
+    <meta name="description" content="布朗运动，BS模型，BS定价公式，BSM模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="量化">
-<meta property="og:url" content="http://example.com/2023/03/03/%E9%87%91%E8%9E%8D/%E9%87%8F%E5%8C%96/index.html">
+<meta property="og:title" content="BS模型">
+<meta property="og:url" content="http://example.com/2023/05/08/%E9%87%91%E8%9E%8D/%E8%A1%8D%E7%94%9F%E5%93%81/%E6%9C%9F%E6%9D%83/BS%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="冰柠果儿">
-<meta property="og:description" content="策略类型">
+<meta property="og:description" content="布朗运动，BS模型，BS定价公式，BSM模型">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-03T07:03:19.963Z">
-<meta property="article:modified_time" content="2023-03-03T07:05:26.739Z">
+<meta property="article:published_time" content="2023-05-08T02:43:49.580Z">
+<meta property="article:modified_time" content="2023-05-08T07:49:06.685Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>量化 - 冰柠果儿</title>
+  <title>BS模型 - 冰柠果儿</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="量化"></span>
+            <span id="subtitle" data-typed-text="BS模型"></span>
           
         </div>
 
@@ -223,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-03 15:03" pubdate>
-          2023年3月3日 下午
+        <time datetime="2023-05-08 10:43" pubdate>
+          2023年5月8日 上午
         </time>
       </span>
     
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          38 字
+          6.6k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          1 分钟
+          56 分钟
         
       </span>
     
@@ -284,15 +284,319 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">量化</h1>
+            <h1 style="display: none">BS模型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="量化">量化</h1>
-<h2
-id="量化交易都有哪些主要的策略类型">量化交易都有哪些主要的策略类型</h2>
-<p>Alpha 策略，CTA 策略以及高频交易策略</p>
+                <h1 id="bs模型">BS模型</h1>
+<p>布朗运动是一种最简单的<strong>连续随机过程</strong>，它是描述证券价格随机性的基本模型。而对于期权或其他衍生品这些金融工具，它们的价格是相关证券资产价格的函数。因此可以说<strong>证券价格是一个随机过程，而衍生品价格是该随机过程的函数。伊藤引理提供了对随机过程的函数做微分的框架；这对于衍生品的定价意义非凡</strong>（在此之前，人们是不知道如何对随机过程的函数做微分的）。<strong>通过伊藤引理，可以写出金融衍生品价格的随机微分方程，通过对其求解便可以得到衍生品价格的模型。</strong>BS
+公式就是一个最简单的例子。（BS模型是一个偏微分方程，而BS公式是一个解析形式的表达式）</p>
+<h2 id="布朗运动">布朗运动</h2>
+<h3 id="定义">定义</h3>
+<p><span class="math inline">\(\{W_t\}\)</span>满足：</p>
+<ol type="1">
+<li><span class="math inline">\(W_0=0\)</span></li>
+<li>For all <span class="math inline">\(0&lt;s&lt;t\)</span>，<span
+class="math inline">\(W_t-W_s\sim N(0,t-s)\)</span></li>
+<li>对不重叠的区间<span class="math inline">\([s_i,t_i]\)</span>，<span
+class="math inline">\(W_{t_i}-W_{s_i}\)</span>独立</li>
+<li><span class="math inline">\(W_t\)</span>在<span
+class="math inline">\(t\)</span>上连续</li>
+</ol>
+<p>布朗运动是<strong>马尔可夫过程</strong>。<span
+class="math inline">\(t=0\)</span>时位置为0，在任意有限时间区间<span
+class="math inline">\(\varDelta t\)</span>内，布朗运动的变化服从<span
+class="math inline">\(N(0,\varDelta t))\)</span></p>
+<h3 id="性质">性质</h3>
+<ol type="1">
+<li><p>轨迹频繁穿越时间轴<span class="math inline">\(t\)</span></p></li>
+<li><p><span class="math inline">\(\forall t\)</span>，<span
+class="math inline">\(W_t\)</span>不会偏离正负<span
+class="math inline">\(\sigma\)</span>太远</p></li>
+<li><p>令<span class="math inline">\(M_t\)</span>为<span
+class="math inline">\(0\)</span>到<span
+class="math inline">\(t\)</span>内<span
+class="math inline">\(W_t\)</span>所能达到的最大值<span
+class="math inline">\(M_t=\underset{0\leqslant s\leqslant
+t}{\max}W_s\)</span>，则 <span class="math display">\[
+P(M_t\geqslant a)=2P(W_t\geqslant a)=2-2\phi(\frac{a}{\sqrt{t}})\\
+E[M_t]=\sqrt{\frac{2t}{\pi}}
+\]</span></p></li>
+<li><p>布朗运动连续，但处处不可微分</p></li>
+<li><p><span
+class="math inline">\(W_t\)</span>是<strong>均值为0</strong>，<strong>方差为<span
+class="math inline">\(\sigma^2
+t\)</span></strong>的<strong>正态</strong>随机变量</p></li>
+</ol>
+<h3 id="数学性质标准布朗运动sigma21">数学性质（标准布朗运动，<span
+class="math inline">\(\sigma^2=1\)</span>）</h3>
+<ol type="1">
+<li><p>pdf：<span class="math inline">\(f_{W_t}(x)=\frac{1}{\sqrt{2\pi
+t}}e^{\frac{x^2}{2t}}\)</span></p></li>
+<li><p>期望：<span class="math inline">\(E[W_t]=0\)</span></p></li>
+<li><p>方差：<span class="math inline">\(Var(W_t)=t\)</span></p></li>
+<li><p><span class="math inline">\(W_t=W_t-W_0\sim
+N(0,t)\)</span></p></li>
+<li><p>协方差：<span
+class="math inline">\(Cov(W_s,W_t)=s\quad(s\leqslant t)\)</span></p>
+<p>证： <span class="math display">\[
+\begin{aligned}
+Cov(W_s,W_t)&amp;=E[W_sW_t]\\
+&amp;=E[W_s((W_t-W_s)+W_s)]\\
+&amp;=E[W_s(W_t-W_s)]+E[W_s^2]\\
+&amp;=E[W_s]E[W_t-W_s]+E[W_s^2]（W_s-W_0和W_t-W_s独立）\\
+&amp;=E[W_s^2]\\
+&amp;=s
+\end{aligned}
+\]</span></p></li>
+<li><p>相关系数：<span
+class="math inline">\(Corr(W_s,W_t)=\frac{Cov(W_s,W_t)}{\sigma_{W_s}\sigma_{W_t}}=\frac{s}{\sqrt{st}}=\sqrt{\frac{s}{t}}\)</span></p></li>
+</ol>
+<h3 id="二次变分">二次变分</h3>
+<p>古典微积分： <span class="math display">\[
+\begin{aligned}
+\sum_i[f(t_{i+1})-f(t_i)]^2&amp;\leqslant
+\sum_i(t_{i+1}-t_i)^2f&#39;(s_i)^2\\
+&amp;\leqslant \underset{s\in
+[0,T]}{\max}f&#39;(s)^2\cdot\sum_i(t_{i+1}-t_i)^2\\
+&amp;\leqslant \underset{s\in [0,T]}{\max}f&#39;(s)^2\cdot
+\underset{i}{max}\{t_{i+1}-t_i\}\cdot T
+\end{aligned}
+\]</span> 当<span
+class="math inline">\([0,T]\)</span>划分得越来越细，<span
+class="math inline">\(\underset{i}{max}\{t_{i+1}-t_i\}\rightarrow0\)</span>，二次变分=0</p>
+<p>布朗运动：</p>
+<p><span class="math inline">\(W_t\)</span>的二次变分为<span
+class="math inline">\(T\)</span> <span class="math display">\[
+\underset{\underset{i}{max}\{t_{i+1}-t_i\}\rightarrow0}{lim}\sum_i(W_{t_{i+1}}-W_{t_i})^2=T
+\]</span></p>
+<ul>
+<li><strong><span class="math inline">\((dW)^2=dt\)</span></strong></li>
+</ul>
+<h3 id="带漂移的布朗运动">带漂移的布朗运动</h3>
+<p><span class="math display">\[
+X_t=\mu t+\sigma W_t\\
+X_t=\int_0^t \mu ds+\int_0^t \sigma dW\\
+E[X_t]=\int_0^t \mu ds=\mu t（dW均值为0，方差为1）\\
+Var(X_t)=\int_0^t \sigma^2 dW=\sigma^2t
+\]</span></p>
+<h3 id="几何布朗运动">几何布朗运动</h3>
+<p>几何布朗运动： <span class="math display">\[
+X_t=e^{Y_t}
+\]</span> 其中<span
+class="math inline">\(Y_t\)</span>是漂移布朗运动。</p>
+<p>股价<span class="math inline">\(S_t\)</span>服从几何布朗运动： <span
+class="math display">\[
+\frac{dS_t}{S_t}=\mu dt+\sigma dW_t\\
+dS_t=\mu S_tdt+\sigma S_tdW_t
+\]</span></p>
+<p>用几何布朗运动描述股价的原因：</p>
+<ol type="1">
+<li>正态分布（连续复利收益率）</li>
+<li>马尔可夫过程</li>
+<li>时间上处处不可微，二次变分不为0（收益率存在尖点）</li>
+<li>GBM（至少在一定程度上）符合人们对市场的观察。例如，直观的说，股票的价格看起来很像随机游走，再例如，股票价格不会为负，这样起码GBM比普通的布朗运动合适，因为后者是可以为负的。对简单收益率做测试做测试，发现基本服从正态分布。收益率是正态的，股价就是GBM模型</li>
+</ol>
+<h2 id="伊藤引理">伊藤引理</h2>
+<h3 id="泰勒展开">泰勒展开</h3>
+<p><span class="math inline">\(f(W_t)\)</span>是连续平滑函数 <span
+class="math display">\[
+\varDelta f=f(x+\varDelta x)-f(x)=f&#39;(x)\varDelta
+x+\frac{1}{2}f&#39;&#39;(x)(\varDelta x)^2+...
+\]</span> 一般函数： <span class="math display">\[
+df=f&#39;(x)dx（其它是一阶无穷小）
+\]</span> 布朗运动： <span class="math display">\[
+\begin{aligned}
+\varDelta f&amp;=f(W_t+\varDelta W_t)-f(W_t)\\
+&amp;=f&#39;(W_t)\varDelta W_t+\frac{1}{2}f&#39;&#39;(W_t)(\varDelta
+W_t)^2+...
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+df(W_t)=f&#39;(W_t)\varDelta W_t+\frac{1}{2}f&#39;&#39;(W_t)dt
+\]</span></p>
+<p>上式即为<strong>伊藤引理</strong></p>
+<h3 id="偏导数">偏导数</h3>
+<p>古典微积分：<span class="math inline">\(f(x,t)\)</span>，<span
+class="math inline">\(x\)</span>是标量 <span class="math display">\[
+df=\frac{\partial f}{\partial t}dt+\frac{\partial f}{\partial x}dx
+\]</span> 布朗运动：<span class="math inline">\(x=W_t\)</span> <span
+class="math display">\[
+\begin{aligned}
+df(W_t,t)&amp;=\frac{\partial f}{\partial t}dt+\frac{\partial
+f}{\partial W_t}dW_t+\frac{1}{2}\frac{\partial^2f}{\partial
+W_t^2}(dW_t)^2\\
+&amp;=(\frac{\partial f}{\partial
+t}+\frac{1}{2}\frac{\partial^2f}{\partial W_t^2})dt+\frac{\partial
+f}{\partial W_t}dW_t
+\end{aligned}
+\]</span></p>
+<h3 id="伊藤漂移扩散过程伊藤过程">伊藤漂移扩散过程（伊藤过程）</h3>
+<p><span class="math display">\[
+dX_t=a(X_t,t)dt+b(X_t,t)dW_t
+\]</span></p>
+<p>令<span class="math inline">\(f(X_t,t)\)</span>为<span
+class="math inline">\(X_t\)</span>的二阶连续可导函数，由伊藤引理 <span
+class="math display">\[
+df=\frac{\partial f}{\partial t}dt+\frac{\partial f}{\partial
+X_t}dX_t+\frac{1}{2}\frac{\partial^2 f}{\partial X_t^2}(dX_t)^2
+\]</span> 将<span
+class="math inline">\(dX_t=a(X_t,t)dt+b(X_t,t)dW_t\)</span>代入得：
+<span class="math display">\[
+df(X_t,t)=(\frac{\partial f}{\partial t}+\frac{\partial f}{\partial
+X_t}a+\frac{1}{2}\frac{\partial^2 f}{\partial
+X_t^2}b^2)dt+\frac{\partial f}{\partial X_t}bdW_t
+\]</span></p>
+<h3 id="几何布朗运动求解">几何布朗运动求解</h3>
+<p><span class="math display">\[
+dS_t=\mu S_t dt+\sigma S_t dW
+\]</span></p>
+<p>其中<span class="math inline">\(\mu\)</span>是年化收益率，<span
+class="math inline">\(\sigma\)</span>是年化波动率 <span
+class="math display">\[
+a=\mu S_t,b=\sigma S_t,f=lnS_t\\
+\frac{\partial f}{\partial t}=0,\frac{\partial f}{\partial
+S_t}=\frac{1}{S_t},\frac{\partial^2 f}{\partial S_t^2}=-\frac{1}{S_t^2}
+\]</span> 代入得： <span class="math display">\[
+\begin{aligned}
+d(lnS_t)&amp;=(\frac{1}{S_t}\mu S_t-\frac{1}{2}\frac{1}{S_t^2}\sigma^2
+S_t^2)dt+\frac{1}{S_t}\sigma S_tdW_t\\
+&amp;=(\mu -\frac{1}{2}\sigma^2)dt+\sigma dW_t
+\end{aligned}
+\]</span></p>
+<p>则<span class="math inline">\(lnS_t\)</span>是带漂移项的布朗运动</p>
+<p>对上式两边积分，得： <span class="math display">\[
+lnS_t=lnS_0+(\mu -\frac{1}{2}\sigma^2)t+\sigma W_t\\
+lnS_t\sim N(lnS_0+(\mu -\frac{1}{2}\sigma^2)t,\sigma^2t)\\
+\]</span></p>
+<p><span class="math display">\[
+S_t=S_0e^{(\mu -\frac{1}{2}\sigma^2)t+\sigma W_t}
+\]</span></p>
+<h2 id="bs模型-1">BS模型</h2>
+<h3 id="模型假设">模型假设</h3>
+<ol type="1">
+<li>欧式期权，期权不能在到期日（expiration date）之前行使</li>
+<li>期权的标的资产<span
+class="math inline">\(S_t\)</span>的价格服从几何布朗运动，因此标的资产收益率必须服从对数正态分布。The
+price of the underlying asset follows geometric Brownian motion, so the
+return of underlying asset follows the lognormal distribution.</li>
+<li>可以做空，证券可被分割</li>
+<li>市场没有摩擦，没有税收和交易费用，没有卖空限制。There is no friction
+in the market, no tax and transaction costs, and no short position
+restrictions.</li>
+<li>期权期限内，标的资产不支付股息</li>
+<li>期权期限内，标的资产年波动率<span
+class="math inline">\(\sigma\)</span>已知且保持不变</li>
+<li>市场不存在无风险套利机会</li>
+<li>标的资产交易是连续的</li>
+<li>无风险利率<span class="math inline">\(r\)</span>为常数且已知</li>
+</ol>
+<h3 id="bs方程">BS方程</h3>
+<p><span class="math inline">\(C\)</span>为欧式看涨期权价格，<span
+class="math inline">\(C(S,t)\)</span>（其中<span
+class="math inline">\(dS=\mu S dt+\sigma SdW\)</span>），对<span
+class="math inline">\(C\)</span>运用伊藤引理得： <span
+class="math display">\[
+dC=(\frac{\partial C}{\partial t}+\mu S\frac{\partial C}{\partial
+S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial
+S^2})dt+\frac{\partial C}{\partial S}\sigma SdW
+\]</span> 构建组合<span class="math inline">\(P\)</span>：</p>
+<ul>
+<li>-1期权</li>
+<li>+<span class="math inline">\(\frac{\partial C}{\partial
+S}\)</span>标的股票</li>
+</ul>
+<p>则<span class="math inline">\(P=-C+\frac{\partial C}{\partial
+S}S\)</span>（Delta对冲） <span class="math display">\[
+\begin{aligned}
+\varDelta P&amp;=-\varDelta C+\frac{\partial C}{\partial S}\varDelta S\\
+&amp;=-(\frac{\partial C}{\partial t}+\mu S\frac{\partial C}{\partial
+S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial S^2})\varDelta
+t-\frac{\partial C}{\partial S}\sigma S\varDelta W+\frac{\partial
+C}{\partial S}(\mu S\varDelta t+\sigma S\varDelta W)\\
+&amp;=-(\frac{\partial C}{\partial t}+\frac{1}{2}\sigma^2
+S^2\frac{\partial^2 C}{\partial S^2})\varDelta t
+\end{aligned}
+\]</span> <span class="math inline">\(\varDelta P\)</span>不含<span
+class="math inline">\(\varDelta W\)</span>，是无风险组合。</p>
+<p>在无套利市场中，<span class="math inline">\(\varDelta P=Pr\varDelta
+t\)</span>，代入得： <span class="math display">\[
+(-C+\frac{\partial C}{\partial S}S)r\varDelta t=-(\frac{\partial
+C}{\partial t}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial
+S^2})\varDelta t
+\]</span> 即 <span class="math display">\[
+\frac{\partial C}{\partial t}+rS\frac{\partial C}{\partial
+S}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial S^2}=rC
+\]</span> 此为<strong>BS方程</strong></p>
+<h3 id="风险中性定价">风险中性定价</h3>
+<p>风险中性世界里<span
+class="math inline">\(\mu=r\)</span>，切换到风险厌恶世界后，<span
+class="math inline">\(\mu\)</span>的期望和折现率都变化，变化相互抵消。将概率测度<span
+class="math inline">\(P\)</span>转换到<span
+class="math inline">\(Q\)</span>定价，不用考虑风险偏好</p>
+<h4
+id="为什么bs方程中一阶项前面是无风险利率r而不是风险利率或者历史回报率mu">为什么BS方程中一阶项前面是无风险利率<span
+class="math inline">\(r\)</span>，而不是风险利率（或者历史回报率）<span
+class="math inline">\(\mu\)</span>？</h4>
+<ul>
+<li><p>风险中性定价，<span
+class="math inline">\(\mu\)</span>经过测度变换可以得到<span
+class="math inline">\(r\)</span></p></li>
+<li><p>融资成本所对应的回报率是<span
+class="math inline">\(r\)</span>，而不是<span
+class="math inline">\(\mu\)</span></p></li>
+</ul>
+<h2 id="bs期权定价公式">BS期权定价公式</h2>
+<h4 id="风险中性下推导b-s公式">风险中性下推导B-S公式</h4>
+<h4 id="bs公式和bs模型的区别">BS公式和BS模型的区别</h4>
+<p>BS公式和BS模型的公式基本相同，但是BS模型比BS公式更为复杂，包括了更多的变量和参数。</p>
+<p>下面是BS公式和BS模型的公式：</p>
+<p>BS公式：</p>
+<p><span
+class="math display">\[C=S_tN(d_1)-Ke^{-r(T-t)}N(d_2)\]</span></p>
+<p>其中，<span
+class="math inline">\(C\)</span>是欧式看涨期权的价格，<span
+class="math inline">\(S_t\)</span>是标的资产的当前价格，<span
+class="math inline">\(K\)</span>是期权的行权价格，<span
+class="math inline">\(r\)</span>是无风险利率，<span
+class="math inline">\(T-t\)</span>是期权到期时间，<span
+class="math inline">\(N\)</span>是标准正态分布的累积分布函数，<span
+class="math inline">\(d_1\)</span>和<span
+class="math inline">\(d_2\)</span>分别为：</p>
+<p><span
+class="math display">\[d_1=\frac{\ln\left(\frac{S_t}{K}\right)+(r+\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}\]</span></p>
+<p><span class="math display">\[d_2=d_1-\sigma\sqrt{T-t}\]</span></p>
+<p>BS模型：</p>
+<p><span
+class="math display">\[C=S_tN(d_1)-Ke^{-r(T-t)}N(d_2)\]</span></p>
+<p>其中，<span class="math inline">\(C\)</span>、<span
+class="math inline">\(S_t\)</span>、<span
+class="math inline">\(K\)</span>、<span
+class="math inline">\(r\)</span>、<span
+class="math inline">\(T-t\)</span>、<span
+class="math inline">\(N\)</span>、<span
+class="math inline">\(d_1\)</span>和<span
+class="math inline">\(d_2\)</span>的含义与BS公式相同，但是BS模型还考虑了标的资产的随机漂移和股息率等因素，因此<span
+class="math inline">\(d_1\)</span>和<span
+class="math inline">\(d_2\)</span>的计算方式略有不同：</p>
+<p><span
+class="math display">\[d_1=\frac{\ln\left(\frac{S_t}{K}\right)+(r+\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}+
+\frac{b}{\sigma}\sqrt{T-t}\]</span></p>
+<p><span class="math display">\[d_2=d_1-\sigma\sqrt{T-t}\]</span></p>
+<p>其中，<span
+class="math inline">\(b\)</span>是标的资产的随机漂移率，也称为股息率。可以看出，BS模型在计算<span
+class="math inline">\(d_1\)</span>时多了一个<span
+class="math inline">\(\frac{b}{\sigma}\sqrt{T-t}\)</span>的项。</p>
+<h4 id="brownian-motion">Brownian Motion</h4>
+<ul>
+<li>Ito Lemma</li>
+<li>判断组合是不是marting'</li>
+</ul>
+<h4 id="bs-formula公式和基本假设">BS Formula公式和基本假设</h4>
+<h4 id="bs-merton-formula推导">BS Merton Formula推导</h4>
+<p>两种推导，一种是replication，一种是option+stock组合成risk-free
+portfolio（后者更被preferred）</p>
 
                 
               </div>
@@ -314,6 +618,20 @@ id="量化交易都有哪些主要的策略类型">量化交易都有哪些主�
   <a href="/categories/%E9%87%91%E8%9E%8D/" class="category-chain-item">金融</a>
   
   
+    <span>></span>
+    
+  <a href="/categories/%E9%87%91%E8%9E%8D/%E8%A1%8D%E7%94%9F%E5%93%81/" class="category-chain-item">衍生品</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%91%E8%9E%8D/%E8%A1%8D%E7%94%9F%E5%93%81/%E6%9C%9F%E6%9D%83/" class="category-chain-item">期权</a>
+  
+  
+
+  
+
+  
 
       </span>
     
@@ -331,8 +649,8 @@ id="量化交易都有哪些主要的策略类型">量化交易都有哪些主�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>量化</div>
-      <div>http://example.com/2023/03/03/金融/量化/</div>
+      <div>BS模型</div>
+      <div>http://example.com/2023/05/08/金融/衍生品/期权/BS模型/</div>
     </div>
     <div class="license-meta">
       
@@ -344,7 +662,7 @@ id="量化交易都有哪些主要的策略类型">量化交易都有哪些主�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月3日</div>
+          <div>2023年5月8日</div>
         </div>
       
       
@@ -376,18 +694,12 @@ id="量化交易都有哪些主要的策略类型">量化交易都有哪些主�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/03/%E9%87%91%E8%9E%8D/%E5%AE%8F%E8%A7%82/" title="宏观">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">宏观</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/03/%E9%87%91%E8%9E%8D/%E8%A1%8D%E7%94%9F%E5%93%81/%E8%BF%9C%E6%9C%9F%E5%92%8C%E6%9C%9F%E8%B4%A7/" title="远期和期货">
-                        <span class="hidden-mobile">远期和期货</span>
+                      <a href="/2023/05/08/%E9%87%91%E8%9E%8D/%E8%A1%8D%E7%94%9F%E5%93%81/%E4%BA%92%E6%8D%A2/" title="互换">
+                        <span class="hidden-mobile">互换</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

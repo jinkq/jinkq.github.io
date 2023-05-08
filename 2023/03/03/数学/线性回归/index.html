@@ -25,11 +25,8 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153310.png">
 <meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153537.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210622231304.png">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111003.png">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111522.png">
 <meta property="article:published_time" content="2023-03-03T06:28:36.465Z">
-<meta property="article:modified_time" content="2023-03-30T03:43:20.216Z">
+<meta property="article:modified_time" content="2023-05-08T02:36:26.984Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210623153310.png">
@@ -241,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14k 字
+          15k 字
         
       </span>
     
@@ -252,7 +249,7 @@
         
         
         
-          113 分钟
+          123 分钟
         
       </span>
     
@@ -574,6 +571,8 @@ X)^{-1}-\beta\beta^\top\\
                 &amp;=\sigma^2 (X^\top X)^{-1}
 \end{aligned}
 \]</span></p>
+<h3 id="损失函数用残差平方和的原因">损失函数用残差平方和的原因</h3>
+<p>正态分布MLE是二次，所以损失函数不用更高次的和</p>
 <h3 id="遗漏变量冗余变量与扰动项">遗漏变量、冗余变量与扰动项</h3>
 <h4 id="遗漏变量">遗漏变量</h4>
 <p><span class="math display">\[
@@ -747,7 +746,7 @@ y=\hat{y}+e
 <p>回归平方和：ESS (explained sum of squares)</p>
 <p>残差平方和：RSS(residual sum of squares)</p>
 <p>总离差平方和：TSS(total sum of squares)</p>
-<p>RSS+ESS=TSS</p>
+<p>ESS+RSS=TSS</p>
 <p><span class="math display">\[
 ESS=\sum^n_{i=1}(\hat{y_i}-\bar{y})^2
 \]</span> <span class="math display">\[
@@ -800,11 +799,16 @@ R^2_{uc}=\frac{\sum \hat{y_i}^2}{\sum y_i^2}
 \]</span></p>
 <p>来使<span class="math inline">\(R^2\)</span>在0到1之间</p>
 <h3 id="t检验和f检验">t检验和F检验</h3>
-<p>t检验和F检验的关系：单个变量的t检验平方就是自由度为1的F检验（第一自由度为1，第二自由度为样本量）</p>
-<p>F检验和R²的关系：R²是去掉所有解释变量，只保留常数项的F检验</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210622231304.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<ul>
+<li><p>t检验和F检验的关系：单个变量的t检验平方就是自由度为1的F检验（第一自由度为1，第二自由度为样本量）</p></li>
+<li><p>F检验和R²的关系：R²是去掉所有解释变量，只保留常数项的F检验</p>
+<p>对于线性回归方程<span
+class="math inline">\(y_i=\beta_1+\beta_2x_{i2}+...+\beta_{K}x_{iK}+\varepsilon_i\)</span>，检验原假设<span
+class="math inline">\(H_0:\beta_2=...=\beta_{K}=0\)</span>的F统计量等于<span
+class="math inline">\(\frac{R^2/(K-1)}{(1-R^2)/(n-K)}\)</span></p>
 <ul>
 <li>R²并非决定F统计量的唯一因素，还取决于样本容量n与解释变量个数K</li>
+</ul></li>
 </ul>
 <h2 id="xy数量变化的影响">X、Y数量变化的影响</h2>
 <h3 id="hatbeta"><span class="math inline">\(\hat{\beta}\)</span></h3>
@@ -813,9 +817,58 @@ R^2_{uc}=\frac{\sum \hat{y_i}^2}{\sum y_i^2}
 \]</span></p>
 <p>Y→a倍：<span class="math inline">\(\hat{\beta}\)</span>→a倍</p>
 <p>X→a倍：<span class="math inline">\(\hat{\beta}\)</span>→1/a倍</p>
-<p>样本复制一倍：</p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111003.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20230330111522.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>样本复制一倍： <span class="math display">\[
+\left( \begin{matrix}
+    \left( \begin{array}{c}
+    X\\
+    X\\
+\end{array} \right)&amp;        \left( \begin{array}{c}
+    Y\\
+    Y\\
+\end{array} \right)\\
+\end{matrix} \right)
+\]</span> 则 <span class="math display">\[
+\begin{aligned}
+\hat{\beta}&amp;=\left( \begin{matrix}
+    \left( \begin{array}{c}
+    X\\
+    X\\
+\end{array} \right) ^{\top}&amp;        \left( \begin{array}{c}
+    X\\
+    X\\
+\end{array} \right)\\
+\end{matrix} \right) ^{-1}\left( \begin{array}{c}
+    X\\
+    X\\
+\end{array} \right) ^{\top}\left( \begin{array}{c}
+    Y\\
+    Y\\
+\end{array} \right) \\
+&amp;=\left( \begin{matrix}
+    \left( \begin{matrix}
+    X^{\top}&amp;       X^{\top}\\
+\end{matrix} \right)&amp;       \left( \begin{array}{c}
+    X\\
+    X\\
+\end{array} \right)\\
+\end{matrix} \right) ^{-1}\left( \begin{matrix}
+    X^{\top}&amp;       X^{\top}\\
+\end{matrix} \right)\left( \begin{array}{c}
+    Y\\
+    Y\\
+\end{array} \right)\\
+&amp;=(2X^\top Y)^{-1}(2X^\top Y)\\
+&amp;=(X^\top X)^{-1}X^\top Y
+\end{aligned}
+\]</span> 当样本复制一倍的时候，相当于<span
+class="math inline">\(X\)</span>矩阵变为了<span
+class="math inline">\(\left( \begin{array}{c}  X\\  X\\ \end{array}
+\right)\)</span>，相应的<span class="math inline">\(X^\top
+X\)</span>的值就变为原来的2倍。所以，在<span
+class="math inline">\(\sigma^2\)</span>已知的情况下，<span
+class="math inline">\(Var(\hat{\beta})=\sigma^2 (X^\top
+X)^{-1}\)</span>变为原来的<span
+class="math inline">\(\frac{1}{2}\)</span>。</p>
 <h3 id="t检验值">t检验值</h3>
 <p><span class="math display">\[
 t=\frac{\hat{\beta}-\beta}{SE(\hat{\beta})}

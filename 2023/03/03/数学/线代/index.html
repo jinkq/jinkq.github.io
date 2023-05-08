@@ -24,7 +24,7 @@
 <meta property="og:description" content="特征向量和特征值，PCA，Cholesky分解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-03T05:59:38.216Z">
-<meta property="article:modified_time" content="2023-03-30T04:02:00.846Z">
+<meta property="article:modified_time" content="2023-05-08T02:16:08.472Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k 字
+          4k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          32 分钟
+          34 分钟
         
       </span>
     
@@ -408,10 +408,14 @@ class="math inline">\(M\)</span>是正定的，<span
 class="math inline">\(M^\frac{1}{2}\)</span>可逆。矩阵<span
 class="math inline">\(Y=M^{-\frac{1}{2}}X\)</span>有协方差矩阵：</p>
 <p><span class="math display">\[
-Cov(Y)=E[YY^\top]=M^{-\frac{1}{2}}E[XX^\top]
-(M^{-\frac{1}{2}})^\top=M^{-\frac{1}{2}}M(M^{-\frac{1}{2}})^\top\\
-\]</span> <span class="math display">\[
-=M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top=(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top=I
+\begin{aligned}
+Cov(Y)&amp;=E[YY^\top]\\
+&amp;=M^{-\frac{1}{2}}E[XX^\top] (M^{-\frac{1}{2}})^\top\\
+&amp;=M^{-\frac{1}{2}}M(M^{-\frac{1}{2}})^\top\\
+&amp;=M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top\\
+&amp;=(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top\\
+&amp;=I
+\end{aligned}
 \]</span></p>
 <p>其中<span
 class="math inline">\(M^\frac{1}{2}\)</span>可以通过cholesky分解得到<span
@@ -421,11 +425,15 @@ class="math inline">\(M\)</span>是正定的，<span
 class="math inline">\(L\)</span>可逆。矩阵<span
 class="math inline">\(Y=L^{-1}X\)</span>有协方差矩阵： <span
 class="math display">\[
-Cov(Y)=E[YY^\top]=L^{-1}E[XX^\top] (L^{-1})^\top=L^{-1}M(L^{-1})^\top\\
-\]</span> <span class="math display">\[
-=L^{-1}(LL^\top)(L^{-1})^\top=(L^{-1}L)(L^{-1}L)^\top=I
-\]</span></p>
-<p>列：</p>
+\begin{aligned}
+Cov(Y)&amp;=E[YY^\top]\\
+&amp;=L^{-1}E[XX^\top] (L^{-1})^\top\\
+&amp;=L^{-1}M(L^{-1})^\top\\
+&amp;=L^{-1}(LL^\top)(L^{-1})^\top\\
+&amp;=(L^{-1}L)(L^{-1}L)^\top\\
+&amp;=I
+\end{aligned}
+\]</span> 列：</p>
 <p><span
 class="math inline">\(X\)</span>是每一列为一个随机变量的矩阵，协方差矩阵为<span
 class="math inline">\(M\)</span>，均值为0，则 <span
@@ -439,10 +447,14 @@ class="math inline">\(M\)</span>是正定的，<span
 class="math inline">\(M^\frac{1}{2}\)</span>可逆。矩阵<span
 class="math inline">\(Y=X(M^{-\frac{1}{2}})^\top\)</span>有协方差矩阵：
 <span class="math display">\[
-Cov(Y)=E[Y^\top Y]=M^{-\frac{1}{2}} E[X^\top X]
-(M^{-\frac{1}{2}})^\top=M^{-\frac{1}{2}} M(M^{-\frac{1}{2}})^\top\\
-\]</span> <span class="math display">\[
-=M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top=(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top=I
+\begin{aligned}
+Cov(Y)&amp;=E[Y^\top Y]\\
+&amp;=M^{-\frac{1}{2}} E[X^\top X] (M^{-\frac{1}{2}})^\top\\
+&amp;=M^{-\frac{1}{2}} M(M^{-\frac{1}{2}})^\top\\
+&amp;=M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top\\
+&amp;=(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top\\
+&amp;=I
+\end{aligned}
 \]</span></p>
 <p>其中<span
 class="math inline">\(M^\frac{1}{2}\)</span>可以通过cholesky分解得到<span
@@ -452,10 +464,14 @@ class="math inline">\(M\)</span>是正定的，<span
 class="math inline">\(L\)</span>可逆。矩阵<span
 class="math inline">\(Y=X(L^{-1})^\top\)</span>有协方差矩阵：</p>
 <p><span class="math display">\[
-Cov(Y)=E[Y^\top Y]=L^{-1}E[X^\top X]
-(L^{-1})^\top=L^{-1}M(L^{-1})^\top\\
-\]</span> <span class="math display">\[
-=L^{-1}(LL^{\top})(L^{-1})^{\top}=(L^{-1} L)(L^{-1} L)^{\top}=I
+\begin{aligned}
+Cov(Y)&amp;=E[Y^\top Y]\\
+&amp;=L^{-1}E[X^\top X] (L^{-1})^\top\\
+&amp;=L^{-1}M(L^{-1})^\top\\
+&amp;=L^{-1}(LL^{\top})(L^{-1})^{\top}\\
+&amp;=(L^{-1} L)(L^{-1} L)^{\top}\\
+&amp;=I
+\end{aligned}
 \]</span></p>
 
                 
