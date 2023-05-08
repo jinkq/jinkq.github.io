@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.9k 字
+          3.8k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          33 分钟
+          32 分钟
         
       </span>
     
@@ -289,62 +289,174 @@
             
               <div class="markdown-body">
                 
-                <h1 id="线代"><a href="#线代" class="headerlink" title="线代"></a>线代</h1><h2 id="特征向量和特征值"><a href="#特征向量和特征值" class="headerlink" title="特征向量和特征值"></a>特征向量和特征值</h2><p>矩阵$A$，向量$v$，常量$\lambda$<br>$$<br>Av&#x3D;\lambda v<br>$$<br>矩阵乘向量：把向量transform，改变向量的大小和方向</p>
+                <h1 id="线代">线代</h1>
+<h2 id="特征向量和特征值">特征向量和特征值</h2>
+<p>矩阵<span class="math inline">\(A\)</span>，向量<span
+class="math inline">\(v\)</span>，常量<span
+class="math inline">\(\lambda\)</span> <span class="math display">\[
+Av=\lambda v
+\]</span> 矩阵乘向量：把向量transform，改变向量的大小和方向</p>
 <ul>
-<li><p>特征向量：所有transform以后不改变方向，只改变大小的向量的集合</p>
-</li>
-<li><p>特征值：向量改变大小的程度$\lambda$</p>
-</li>
+<li><p>特征向量：所有transform以后不改变方向，只改变大小的向量的集合</p></li>
+<li><p>特征值：向量改变大小的程度<span
+class="math inline">\(\lambda\)</span></p></li>
 </ul>
-<h3 id="求特征值"><a href="#求特征值" class="headerlink" title="求特征值"></a>求特征值</h3><p>$$<br>Av&#x3D;\lambda v\<br>$$<br>$$<br>Av&#x3D;\lambda I v\<br>$$<br>$$<br>(A-\lambda I)v&#x3D;0→两个矩阵都非满秩\<br>$$<br>$$<br>|A-\lambda I|&#x3D;0<br>$$</p>
-<h2 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h2><p>可以将高维度数据转换为低维度的数据，同时尽可能地保留数据中的信息。</p>
-<p>PCA的基本思想是，将原始数据映射到一个新的坐标系(Coordinate system)下，使得新坐标系的第一维度上数据的方差最大，第二维度上数据的方差次大，以此类推</p>
+<h3 id="求特征值">求特征值</h3>
+<p><span class="math display">\[
+Av=\lambda v\\
+\]</span> <span class="math display">\[
+Av=\lambda I v\\
+\]</span> <span class="math display">\[
+(A-\lambda I)v=0→两个矩阵都非满秩\\
+\]</span> <span class="math display">\[
+|A-\lambda I|=0
+\]</span></p>
+<h2 id="pca">PCA</h2>
+<p>可以将高维度数据转换为低维度的数据，同时尽可能地保留数据中的信息。</p>
+<p>PCA的基本思想是，将原始数据映射到一个新的坐标系(Coordinate
+system)下，使得新坐标系的第一维度上数据的方差最大，第二维度上数据的方差次大，以此类推</p>
 <p>特征向量给了我们它被拉伸或转化的方向，而特征值是它被拉伸的数值</p>
 <p>协方差矩阵：有助于比较一只股票从其平均值的变动是如何依赖于另一只股票从其平均值的变动</p>
 <p>协方差矩阵的特征值之和大约等于我们原始矩阵的总方差之和</p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<h3 id="步骤">步骤</h3>
+<ol type="1">
 <li>标准化</li>
 <li>计算协方差矩阵的特征值特征向量</li>
 <li>对原来的矩阵乘特征向量矩阵</li>
 </ol>
-<p>假设我们有一个n个样本、m个特征的数据矩阵$X \in \mathbb{R}^{n \times m}$，其中每行表示一个样本，每列表示一个特征。PCA的目标是找到一个由k个基向量构成的新坐标系，使得在这个新坐标系下，数据的方差最大化，即找到一个线性变换$W \in \mathbb{R}^{m \times k}$，使得映射后的数据矩阵$Z \in \mathbb{R}^{n \times k}$的方差最大化。具体地，我们可以按照以下步骤进行计算：</p>
-<ol>
+<p>假设我们有一个n个样本、m个特征的数据矩阵<span class="math inline">\(X
+\in \mathbb{R}^{n \times
+m}\)</span>，其中每行表示一个样本，每列表示一个特征。PCA的目标是找到一个由k个基向量构成的新坐标系，使得在这个新坐标系下，数据的方差最大化，即找到一个线性变换<span
+class="math inline">\(W \in \mathbb{R}^{m \times
+k}\)</span>，使得映射后的数据矩阵<span class="math inline">\(Z \in
+\mathbb{R}^{n \times
+k}\)</span>的方差最大化。具体地，我们可以按照以下步骤进行计算：</p>
+<ol type="1">
 <li><p>数据预处理：对原始数据进行标准化处理，使得各个特征的均值为0，方差为1。标准化后的数据矩阵为：</p>
-<p> $$<br> \tilde{X}&#x3D;\frac{X-\mu}{\sigma}<br> $$</p>
-<p> 其中$\mu$是每个特征的均值向量，$\sigma$是每个特征的标准差向量。</p>
-</li>
+<p><span class="math display">\[
+\tilde{X}=\frac{X-\mu}{\sigma}
+\]</span></p>
+<p>其中<span
+class="math inline">\(\mu\)</span>是每个特征的均值向量，<span
+class="math inline">\(\sigma\)</span>是每个特征的标准差向量。</p></li>
 <li><p>计算协方差矩阵：将标准化后的数据按列组成一个矩阵，计算其协方差矩阵。</p>
-<p> 协方差矩阵为：<br> $$<br> \varSigma&#x3D;\frac{1}{n}\tilde{X}^\top \tilde{X}<br> $$</p>
-</li>
+<p>协方差矩阵为： <span class="math display">\[
+\varSigma=\frac{1}{n}\tilde{X}^\top \tilde{X}
+\]</span></p></li>
 <li><p>计算特征值和特征向量：对协方差矩阵进行特征值分解，得到特征值和对应的特征向量。</p>
-<p> 协方差矩阵的特征值和特征向量为：<br> $$<br> \varSigma \mathbf{v_i}&#x3D;\lambda_i\mathbf{v_i}<br> $$<br> 其中$\lambda_i$表示第i个特征向量对应的特征值，$\mathbf{v}_i$表示第i个特征向量。</p>
-</li>
+<p>协方差矩阵的特征值和特征向量为： <span class="math display">\[
+\varSigma \mathbf{v_i}=\lambda_i\mathbf{v_i}
+\]</span> 其中<span
+class="math inline">\(\lambda_i\)</span>表示第i个特征向量对应的特征值，<span
+class="math inline">\(\mathbf{v}_i\)</span>表示第i个特征向量。</p></li>
 <li><p>选取主成分：将特征值按大小排序，选取前k个特征值对应的特征向量作为新坐标系的基向量，这k个特征向量就是数据的主成分。</p>
-<p> 我们将前k个特征向量按列组成一个矩阵$W_k \in \mathbb{R}^{m \times k}$，则映射后的数据矩阵为：<br> $$<br> Z&#x3D;\tilde{X}W_k<br> $$</p>
-</li>
-<li><p>转换数据：将原始数据映射到新坐标系下，得到降维后的数据。具体地，将每个样本点投影到新坐标系上，得到它在新坐标系下的坐标。映射后的数据矩阵$Z$的第i行表示原始数据矩阵$X$</p>
-</li>
+<p>我们将前k个特征向量按列组成一个矩阵<span class="math inline">\(W_k
+\in \mathbb{R}^{m \times k}\)</span>，则映射后的数据矩阵为： <span
+class="math display">\[
+Z=\tilde{X}W_k
+\]</span></p></li>
+<li><p>转换数据：将原始数据映射到新坐标系下，得到降维后的数据。具体地，将每个样本点投影到新坐标系上，得到它在新坐标系下的坐标。映射后的数据矩阵<span
+class="math inline">\(Z\)</span>的第i行表示原始数据矩阵<span
+class="math inline">\(X\)</span></p></li>
 </ol>
-<h3 id="PCA的缺点和解决方法"><a href="#PCA的缺点和解决方法" class="headerlink" title="PCA的缺点和解决方法"></a>PCA的缺点和解决方法</h3><ol>
-<li>可能会导致信息损失，尤其是在保留的主成分数量较少的情况下，会丢失数据的一些细节信息。 解决方法：可以通过增加主成分的数量来降低信息损失，但需要考虑到维数灾难和计算复杂度的问题。同时，可以采用其他降维算法，如t-SNE等，来综合考虑数据的全局信息和局部结构。</li>
-<li>对于非线性数据，PCA的效果可能不好。 解决方法：可以采用核PCA（Kernel PCA）来处理非线性数据，该方法通过使用核函数将数据映射到高维空间，然后再进行PCA降维。【在将数据映射到高维空间后，再使用PCA来降维，从而提取数据的主要特征。在核PCA中，使用核函数（如多项式核函数、高斯核函数等）将原始数据映射到高维空间，然后在高维空间中计算数据的协方差矩阵，最后通过对协方差矩阵进行特征值分解，得到主成分。与传统PCA相比，核PCA的主成分是在高维空间中计算得到的，可以更好地捕捉数据的非线性结构。同时，核PCA的计算复杂度较高，但可以通过使用矩阵的特殊性质和随机采样等方法来加速计算。核PCA可以应用于各种数据降维和特征提取的任务中，如图像处理、模式识别、信号处理等。】</li>
-<li>对于非高斯分布的数据，PCA的效果也可能不佳。 解决方法：可以采用基于独立成分分析（Independent Component Analysis, ICA）的降维方法，该方法能够处理非高斯分布的数据，并将数据分解为独立的成分。</li>
-<li>需要对数据进行标准化处理，否则会出现主成分不一致的问题。 解决方法：可以通过对数据进行标准化处理，使得每个特征的均值为0，方差为1，从而消除主成分不一致的问题。同时，可以采用其他方法来处理非标准化数据，如SVD等。</li>
+<h3 id="pca的缺点和解决方法">PCA的缺点和解决方法</h3>
+<ol type="1">
+<li>可能会导致信息损失，尤其是在保留的主成分数量较少的情况下，会丢失数据的一些细节信息。
+解决方法：可以通过增加主成分的数量来降低信息损失，但需要考虑到维数灾难和计算复杂度的问题。同时，可以采用其他降维算法，如t-SNE等，来综合考虑数据的全局信息和局部结构。</li>
+<li>对于非线性数据，PCA的效果可能不好。 解决方法：可以采用核PCA（Kernel
+PCA）来处理非线性数据，该方法通过使用核函数将数据映射到高维空间，然后再进行PCA降维。【在将数据映射到高维空间后，再使用PCA来降维，从而提取数据的主要特征。在核PCA中，使用核函数（如多项式核函数、高斯核函数等）将原始数据映射到高维空间，然后在高维空间中计算数据的协方差矩阵，最后通过对协方差矩阵进行特征值分解，得到主成分。与传统PCA相比，核PCA的主成分是在高维空间中计算得到的，可以更好地捕捉数据的非线性结构。同时，核PCA的计算复杂度较高，但可以通过使用矩阵的特殊性质和随机采样等方法来加速计算。核PCA可以应用于各种数据降维和特征提取的任务中，如图像处理、模式识别、信号处理等。】</li>
+<li>对于非高斯分布的数据，PCA的效果也可能不佳。
+解决方法：可以采用基于独立成分分析（Independent Component Analysis,
+ICA）的降维方法，该方法能够处理非高斯分布的数据，并将数据分解为独立的成分。</li>
+<li>需要对数据进行标准化处理，否则会出现主成分不一致的问题。
+解决方法：可以通过对数据进行标准化处理，使得每个特征的均值为0，方差为1，从而消除主成分不一致的问题。同时，可以采用其他方法来处理非标准化数据，如SVD等。</li>
 <li>主成分各个特征维度的含义具有一定的模糊性，不如原始样本特征的解释性强</li>
 </ol>
-<h2 id="方差、协方差矩阵"><a href="#方差、协方差矩阵" class="headerlink" title="方差、协方差矩阵"></a>方差、协方差矩阵</h2><p>1列为1个变量，1行为1个样本：（m行n列）<br>$$<br>Cov(X)&#x3D;E[(X-E(X))^\top (X-E(X))]\<br>$$<br>$$<br>或Cov(X)&#x3D;\frac{1}{m}(X-E(X))^\top (X-E(X))\<br>$$<br>$$<br>Var(X)&#x3D;(X-E(X))^\top (X-E(X))<br>$$<br>E(X)&#x3D;0时：<br>$$<br>Cov(X)&#x3D;E[X^\top X]\<br>$$<br>$$<br>Var(X)&#x3D;X^\top X<br>$$<br>协方差矩阵是<strong>半正定</strong>矩阵：</p>
+<h2 id="方差协方差矩阵">方差、协方差矩阵</h2>
+<p>1列为1个变量，1行为1个样本：（m行n列） <span class="math display">\[
+Cov(X)=E[(X-E(X))^\top (X-E(X))]\\
+\]</span> <span class="math display">\[
+或Cov(X)=\frac{1}{m}(X-E(X))^\top (X-E(X))\\
+\]</span> <span class="math display">\[
+Var(X)=(X-E(X))^\top (X-E(X))
+\]</span> E(X)=0时： <span class="math display">\[
+Cov(X)=E[X^\top X]\\
+\]</span> <span class="math display">\[
+Var(X)=X^\top X
+\]</span> 协方差矩阵是<strong>半正定</strong>矩阵：</p>
 <ul>
-<li>任意非零向量$x$，有$x^\top \Sigma x\geqslant 0$</li>
+<li>任意非零向量<span class="math inline">\(x\)</span>，有<span
+class="math inline">\(x^\top \Sigma x\geqslant 0\)</span></li>
 </ul>
-<h2 id="cholesky分解"><a href="#cholesky分解" class="headerlink" title="cholesky分解"></a>cholesky分解</h2><p>正定矩阵<br>$$<br>A&#x3D;LL^\top，L是下三角矩阵<br>$$</p>
-<h3 id="蒙特卡洛模拟whitening（cholesky分解）"><a href="#蒙特卡洛模拟whitening（cholesky分解）" class="headerlink" title="蒙特卡洛模拟whitening（cholesky分解）"></a>蒙特卡洛模拟whitening（cholesky分解）</h3><p>行：</p>
-<p>$X$是每一行为一个随机变量的矩阵，协方差矩阵为$M$，均值为0，则<br>$$<br>M&#x3D;E[XX^\top]<br>$$<br>因为$M$是对称的半正定矩阵，有平方根$M^\frac{1}{2}$（不一定要对称），满足$M^\frac{1}{2}(M^\frac{1}{2})^\top&#x3D;M$。如果$M$是正定的，$M^\frac{1}{2}$可逆。矩阵$Y&#x3D;M^{-\frac{1}{2}}X$有协方差矩阵：</p>
-<p>$$<br>Cov(Y)&#x3D;E[YY^\top]&#x3D;M^{-\frac{1}{2}}E[XX^\top] (M^{-\frac{1}{2}})^\top&#x3D;M^{-\frac{1}{2}}M(M^{-\frac{1}{2}})^\top\<br>$$<br>$$<br>&#x3D;M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top&#x3D;(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top&#x3D;I<br>$$</p>
-<p>其中$M^\frac{1}{2}$可以通过cholesky分解得到$L$，$M&#x3D;LL^\top$。如果$M$是正定的，$L$可逆。矩阵$Y&#x3D;L^{-1}X$有协方差矩阵：<br>$$<br>Cov(Y)&#x3D;E[YY^\top]&#x3D;L^{-1}E[XX^\top] (L^{-1})^\top&#x3D;L^{-1}M(L^{-1})^\top\<br>$$<br>$$<br>&#x3D;L^{-1}(LL^\top)(L^{-1})^\top&#x3D;(L^{-1}L)(L^{-1}L)^\top&#x3D;I<br>$$</p>
+<h2 id="cholesky分解">cholesky分解</h2>
+<p>正定矩阵 <span class="math display">\[
+A=LL^\top，L是下三角矩阵
+\]</span></p>
+<h3
+id="蒙特卡洛模拟whiteningcholesky分解">蒙特卡洛模拟whitening（cholesky分解）</h3>
+<p>行：</p>
+<p><span
+class="math inline">\(X\)</span>是每一行为一个随机变量的矩阵，协方差矩阵为<span
+class="math inline">\(M\)</span>，均值为0，则 <span
+class="math display">\[
+M=E[XX^\top]
+\]</span> 因为<span
+class="math inline">\(M\)</span>是对称的半正定矩阵，有平方根<span
+class="math inline">\(M^\frac{1}{2}\)</span>（不一定要对称），满足<span
+class="math inline">\(M^\frac{1}{2}(M^\frac{1}{2})^\top=M\)</span>。如果<span
+class="math inline">\(M\)</span>是正定的，<span
+class="math inline">\(M^\frac{1}{2}\)</span>可逆。矩阵<span
+class="math inline">\(Y=M^{-\frac{1}{2}}X\)</span>有协方差矩阵：</p>
+<p><span class="math display">\[
+Cov(Y)=E[YY^\top]=M^{-\frac{1}{2}}E[XX^\top]
+(M^{-\frac{1}{2}})^\top=M^{-\frac{1}{2}}M(M^{-\frac{1}{2}})^\top\\
+\]</span> <span class="math display">\[
+=M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top=(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top=I
+\]</span></p>
+<p>其中<span
+class="math inline">\(M^\frac{1}{2}\)</span>可以通过cholesky分解得到<span
+class="math inline">\(L\)</span>，<span
+class="math inline">\(M=LL^\top\)</span>。如果<span
+class="math inline">\(M\)</span>是正定的，<span
+class="math inline">\(L\)</span>可逆。矩阵<span
+class="math inline">\(Y=L^{-1}X\)</span>有协方差矩阵： <span
+class="math display">\[
+Cov(Y)=E[YY^\top]=L^{-1}E[XX^\top] (L^{-1})^\top=L^{-1}M(L^{-1})^\top\\
+\]</span> <span class="math display">\[
+=L^{-1}(LL^\top)(L^{-1})^\top=(L^{-1}L)(L^{-1}L)^\top=I
+\]</span></p>
 <p>列：</p>
-<p>$X$是每一列为一个随机变量的矩阵，协方差矩阵为$M$，均值为0，则<br>$$<br>M&#x3D;E[X^\top X]<br>$$<br>因为$M$是对称的半正定矩阵，有平方根$M^\frac{1}{2}$（不一定要对称），满足$M^\frac{1}{2}(M^\frac{1}{2})^\top&#x3D;M$。如果$M$是正定的，$M^\frac{1}{2}$可逆。矩阵$Y&#x3D;X(M^{-\frac{1}{2}})^\top$有协方差矩阵：<br>$$<br>Cov(Y)&#x3D;E[Y^\top Y]&#x3D;M^{-\frac{1}{2}} E[X^\top X] (M^{-\frac{1}{2}})^\top&#x3D;M^{-\frac{1}{2}} M(M^{-\frac{1}{2}})^\top\<br>$$<br>$$<br>&#x3D;M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top&#x3D;(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top&#x3D;I<br>$$</p>
-<p>其中$M^\frac{1}{2}$可以通过cholesky分解得到$L$，$M&#x3D;LL^\top$。如果$M$是正定的，$L$可逆。矩阵$Y&#x3D;X(L^{-1})^\top$有协方差矩阵：</p>
-<p>$$<br>Cov(Y)&#x3D;E[Y^\top Y]&#x3D;L^{-1}E[X^\top X] (L^{-1})^\top&#x3D;L^{-1}M(L^{-1})^\top\<br>$$<br>$$<br>&#x3D;L^{-1}(LL^{\top})(L^{-1})^{\top}&#x3D;(L^{-1} L)(L^{-1} L)^{\top}&#x3D;I<br>$$</p>
+<p><span
+class="math inline">\(X\)</span>是每一列为一个随机变量的矩阵，协方差矩阵为<span
+class="math inline">\(M\)</span>，均值为0，则 <span
+class="math display">\[
+M=E[X^\top X]
+\]</span> 因为<span
+class="math inline">\(M\)</span>是对称的半正定矩阵，有平方根<span
+class="math inline">\(M^\frac{1}{2}\)</span>（不一定要对称），满足<span
+class="math inline">\(M^\frac{1}{2}(M^\frac{1}{2})^\top=M\)</span>。如果<span
+class="math inline">\(M\)</span>是正定的，<span
+class="math inline">\(M^\frac{1}{2}\)</span>可逆。矩阵<span
+class="math inline">\(Y=X(M^{-\frac{1}{2}})^\top\)</span>有协方差矩阵：
+<span class="math display">\[
+Cov(Y)=E[Y^\top Y]=M^{-\frac{1}{2}} E[X^\top X]
+(M^{-\frac{1}{2}})^\top=M^{-\frac{1}{2}} M(M^{-\frac{1}{2}})^\top\\
+\]</span> <span class="math display">\[
+=M^{-\frac{1}{2}}(M^{\frac{1}{2}}(M^{\frac{1}{2}})^\top)(M^{-\frac{1}{2}})^\top=(M^{-\frac{1}{2}}M^{\frac{1}{2}})(M^{-\frac{1}{2}}M^{\frac{1}{2}})^\top=I
+\]</span></p>
+<p>其中<span
+class="math inline">\(M^\frac{1}{2}\)</span>可以通过cholesky分解得到<span
+class="math inline">\(L\)</span>，<span
+class="math inline">\(M=LL^\top\)</span>。如果<span
+class="math inline">\(M\)</span>是正定的，<span
+class="math inline">\(L\)</span>可逆。矩阵<span
+class="math inline">\(Y=X(L^{-1})^\top\)</span>有协方差矩阵：</p>
+<p><span class="math display">\[
+Cov(Y)=E[Y^\top Y]=L^{-1}E[X^\top X]
+(L^{-1})^\top=L^{-1}M(L^{-1})^\top\\
+\]</span> <span class="math display">\[
+=L^{-1}(LL^{\top})(L^{-1})^{\top}=(L^{-1} L)(L^{-1} L)^{\top}=I
+\]</span></p>
 
                 
               </div>

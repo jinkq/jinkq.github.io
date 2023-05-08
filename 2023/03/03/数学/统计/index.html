@@ -23,15 +23,10 @@
 <meta property="og:site_name" content="冰柠果儿">
 <meta property="og:description" content="好的estimator，样本方差，P值，两类错误，极大似然估计">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113632.png">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113646.png">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113657.png">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113712.png">
 <meta property="article:published_time" content="2023-03-03T06:22:33.535Z">
 <meta property="article:modified_time" content="2023-03-03T06:36:51.434Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113632.png">
   
   
   
@@ -240,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          662 字
+          636 字
         
       </span>
     
@@ -294,34 +289,61 @@
             
               <div class="markdown-body">
                 
-                <h1 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h1><h2 id="好的estimator"><a href="#好的estimator" class="headerlink" title="好的estimator"></a>好的estimator</h2><ol>
-<li>unbiased: on average they yield an estimate that equals the real parameter</li>
+                <h1 id="统计">统计</h1>
+<h2 id="好的estimator">好的estimator</h2>
+<ol type="1">
+<li>unbiased: on average they yield an estimate that equals the real
+parameter</li>
 </ol>
-<p>$$<br>E[\mu]&#x3D;\hat{\mu}\<br>E[\sigma^2]&#x3D;\hat{\sigma}^2<br>$$</p>
-<ol start="2">
-<li>low variance: variance that is lower than any other possible estimator</li>
+<p><span class="math display">\[
+E[\mu]=\hat{\mu}\\
+E[\sigma^2]=\hat{\sigma}^2
+\]</span></p>
+<ol start="2" type="1">
+<li>low variance: variance that is lower than any other possible
+estimator</li>
 </ol>
-<p>$$<br>   Var(\mu)&#x3D;E[(\hat{\mu}-\mu)^2]\<br>   Var(\sigma^2)&#x3D;E[(\hat{\sigma}^2-\sigma^2)^2]\<br>$$</p>
-<h2 id="样本方差的分母为什么是n-1，而不是n？"><a href="#样本方差的分母为什么是n-1，而不是n？" class="headerlink" title="样本方差的分母为什么是n-1，而不是n？"></a>样本方差的分母为什么是n-1，而不是n？</h2><p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113632.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113646.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113657.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113712.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="数据有偏差时相关统计量如何改变"><a href="#数据有偏差时相关统计量如何改变" class="headerlink" title="数据有偏差时相关统计量如何改变"></a>数据有偏差时相关统计量如何改变</h2><p>[对一些非常经典的模型做出一定调整]</p>
-<h2 id="P值"><a href="#P值" class="headerlink" title="P值"></a>P值</h2><p>p值是在假定原假设为真时，得到与样本相同或者更极端的结果的概率。</p>
+<p><span class="math display">\[
+   Var(\mu)=E[(\hat{\mu}-\mu)^2]\\
+   Var(\sigma^2)=E[(\hat{\sigma}^2-\sigma^2)^2]\\
+\]</span></p>
+<h2
+id="样本方差的分母为什么是n-1而不是n">样本方差的分母为什么是n-1，而不是n？</h2>
+<p><img
+src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113632.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113646.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113657.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20220912113712.png" srcset="/img/loading.gif" lazyload /></p>
+<h2
+id="数据有偏差时相关统计量如何改变">数据有偏差时相关统计量如何改变</h2>
+<p>[对一些非常经典的模型做出一定调整]</p>
+<h2 id="p值">P值</h2>
+<p>p值是在假定原假设为真时，得到与样本相同或者更极端的结果的概率。</p>
 <p>P值很小则拒绝原假设</p>
-<h2 id="第一类错误，第二类错误"><a href="#第一类错误，第二类错误" class="headerlink" title="第一类错误，第二类错误"></a>第一类错误，第二类错误</h2><ul>
-<li>I：$P(拒绝H_0|H_0)$，弃真，原假设为真但拒绝原假设</li>
-<li>II：$P(接受H_0|H_1)$，存伪，原假设伪假但接受原假设</li>
+<h2 id="第一类错误第二类错误">第一类错误，第二类错误</h2>
+<ul>
+<li>I：<span
+class="math inline">\(P(拒绝H_0|H_0)\)</span>，弃真，原假设为真但拒绝原假设</li>
+<li>II：<span
+class="math inline">\(P(接受H_0|H_1)\)</span>，存伪，原假设伪假但接受原假设</li>
 </ul>
-<p>功效&#x3D;1-第二类错误概率<br>$$<br>功效&#x3D;1-P(接受H_0|H_1)&#x3D;P(拒绝H_0|H_1)<br>$$<br>知道第一类错误发生概率，不知道第二类错误发生概率，所以拒绝原假设比较理直气壮，接受原假设没有把握</p>
+<p>功效=1-第二类错误概率 <span class="math display">\[
+功效=1-P(接受H_0|H_1)=P(拒绝H_0|H_1)
+\]</span>
+知道第一类错误发生概率，不知道第二类错误发生概率，所以拒绝原假设比较理直气壮，接受原假设没有把握</p>
 <ul>
 <li>一、二类错误此消彼长，要都减少只能<strong>增加样本容量</strong></li>
 <li>假设检验时一般指定可接受<strong>一类错误</strong>的最大概率（<strong>显著性水平</strong>）</li>
 </ul>
-<h2 id="MLE"><a href="#MLE" class="headerlink" title="MLE"></a>MLE</h2><p>缺点：</p>
+<h2 id="mle">MLE</h2>
+<p>缺点：</p>
 <ul>
 <li>数据量小性能差</li>
-<li>$\theta$是个唯一值，没有别的参数可用，如果他错了那整个模型就错了</li>
+<li><span
+class="math inline">\(\theta\)</span>是个唯一值，没有别的参数可用，如果他错了那整个模型就错了</li>
 </ul>
 
                 

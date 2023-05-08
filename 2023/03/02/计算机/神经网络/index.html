@@ -24,28 +24,6 @@
 <meta property="og:description" content="基本原理，循环神经网络（RNN、LSTM、transformer），生成对抗网络（GAN、WGAN等），强化学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220322214549.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323150037.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151113.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151332.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151213.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151247.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151620.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324153051.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324154733.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324162626.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324164635.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329111525.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112132.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112427.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112632.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112702.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113720.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113745.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153116.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153349.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153517.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113339.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220325165554.png">
 <meta property="article:published_time" content="2023-03-02T07:58:30.769Z">
 <meta property="article:modified_time" content="2023-03-17T01:23:26.336Z">
 <meta property="article:author" content="冰柠果儿">
@@ -259,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k 字
+          4.3k 字
         
       </span>
     
@@ -313,62 +291,83 @@
             
               <div class="markdown-body">
                 
-                <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><ul>
-<li><p>神经元：函数（第一层是每一个像素点，隐层是零件一步步组装的过程）</p>
-</li>
-<li><p>权重：关注什么样的像素图案</p>
-</li>
-<li><p>bias：加权和要有多大才能使神经元的激活有意义</p>
-</li>
-</ul>
-<p>$$<br>a^{(1)}&#x3D;\sigma(Wa^{(0)}+b)<br>$$</p>
-<p>其中$a$是某一层的神经元向量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Network</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">feedforward</span>(<span class="hljs-params">self, a</span>):<br>        <span class="hljs-keyword">for</span> b, w <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(self.biases, self.weights):<br>            a = sigmoid(np.dot(w, a) + b)<br>        <span class="hljs-keyword">return</span> a<br></code></pre></td></tr></table></figure>
-
+                <h1 id="机器学习">机器学习</h1>
+<h2 id="基本原理">基本原理</h2>
 <ul>
-<li>ReLU函数$ReLU(a)&#x3D;max(0, a)$比sigmoid函数更好训练</li>
+<li><p>神经元：函数（第一层是每一个像素点，隐层是零件一步步组装的过程）</p></li>
+<li><p>权重：关注什么样的像素图案</p></li>
+<li><p>bias：加权和要有多大才能使神经元的激活有意义</p></li>
 </ul>
-<h3 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h3><p>单个样本的cost：</p>
-<img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220322214549.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
-
+<p><span class="math display">\[
+a^{(1)}=\sigma(Wa^{(0)}+b)
+\]</span></p>
+<p>其中<span class="math inline">\(a\)</span>是某一层的神经元向量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Network</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        <span class="hljs-keyword">pass</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">feedforward</span>(<span class="hljs-params">self, a</span>):<br>        <span class="hljs-keyword">for</span> b, w <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(self.biases, self.weights):<br>            a = sigmoid(np.dot(w, a) + b)<br>        <span class="hljs-keyword">return</span> a<br></code></pre></td></tr></table></figure>
+<ul>
+<li>ReLU函数<span class="math inline">\(ReLU(a)=max(0,
+a)\)</span>比sigmoid函数更好训练</li>
+</ul>
+<h3 id="梯度下降法">梯度下降法</h3>
+<p>单个样本的cost：</p>
+<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220322214549.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
 <p>损失：样本的平均cost</p>
 <p>函数的梯度指出了函数最陡的增长方向，所以沿梯度的负方向走函数值下降得最快</p>
-<h3 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h3><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323150037.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="反向传播算法">反向传播算法</h3>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323150037.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>随机梯度下降：划分minibatch（比如一个minibatch是100个样本），用minibatch的平均改变值代替负梯度（全部样本的平均改变值）</li>
 </ul>
 <p>【醉汉下山法】</p>
 <p>假设每层只有1个神经元：</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151113.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151332.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151213.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151113.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151332.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151213.png" srcset="/img/loading.gif" lazyload /></p>
 <p>负梯度：</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151247.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151247.png" srcset="/img/loading.gif" lazyload /></p>
 <p>拓展到多个神经元：</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151620.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><ul>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220323151620.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="激活函数">激活函数</h3>
+<ul>
 <li>非线性：导数不是常数，多层网络不退化成单层网络</li>
 <li>几乎处处可为：保证优化中梯度的可计算性</li>
 <li>计算简单</li>
 </ul>
-<h4 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h4><p>缺点：</p>
+<h4 id="sigmoid函数">sigmoid函数</h4>
+<p>缺点：</p>
 <ul>
 <li>计算量大，反向传播求误差梯度时，求导复杂</li>
 <li>反向传播的时候，很容易出现梯度消失的情况，从而无法完成深度神经网络的训练（导数从0开始，很快又趋近于0）</li>
 </ul>
-<h4 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h4><p>优点：梯度不会消失，计算速度很快，收敛很快</p>
+<h4 id="relu函数">ReLU函数</h4>
+<p>优点：梯度不会消失，计算速度很快，收敛很快</p>
 <p>缺点：输出不是0均值</p>
 <p>dead relu problem，某些神经元可能永远不会激活，导致参数不会更新</p>
-<h4 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h4><p>multiclassification</p>
-<h4 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h4><p>是0均值</p>
+<h4 id="softmax函数">softmax函数</h4>
+<p>multiclassification</p>
+<h4 id="tanh函数">tanh函数</h4>
+<p>是0均值</p>
 <p>梯度消失问题，但是缓解了一点</p>
-<h3 id="层"><a href="#层" class="headerlink" title="层"></a>层</h3><p>图像处理：</p>
-<p>input→（卷积层$\times$N+池化层）$\times$M→全连接层$\times$K→output</p>
-<h4 id="全连接层-Fully-Connected-Layer"><a href="#全连接层-Fully-Connected-Layer" class="headerlink" title="全连接层 Fully Connected Layer"></a>全连接层 Fully Connected Layer</h4><h4 id="卷积层-Convolutional-layer"><a href="#卷积层-Convolutional-layer" class="headerlink" title="卷积层 Convolutional layer"></a>卷积层 Convolutional layer</h4><ul>
+<h3 id="层">层</h3>
+<p>图像处理：</p>
+<p>input→（卷积层<span
+class="math inline">\(\times\)</span>N+池化层）<span
+class="math inline">\(\times\)</span>M→全连接层<span
+class="math inline">\(\times\)</span>K→output</p>
+<h4 id="全连接层-fully-connected-layer">全连接层 Fully Connected
+Layer</h4>
+<h4 id="卷积层-convolutional-layer">卷积层 Convolutional layer</h4>
+<ul>
 <li>局部感知野</li>
 <li>参数共享</li>
 </ul>
-<h4 id="池化层-pooling-layer"><a href="#池化层-pooling-layer" class="headerlink" title="池化层 pooling layer"></a>池化层 pooling layer</h4><ul>
+<h4 id="池化层-pooling-layer">池化层 pooling layer</h4>
+<ul>
 <li>使特征图变小，简化网络</li>
 <li>特征压缩，提取主要特征</li>
 </ul>
@@ -377,156 +376,223 @@
 <li>最大池化</li>
 <li>平均池化</li>
 </ul>
-<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><ul>
-<li><p>epoch：用训练集所有样本对模型进行一次完整训练</p>
-</li>
-<li><p>batch：用训练集中一小部分样本对模型权重进行一次反向传播的参数更新</p>
-</li>
-<li><p>iteration：用一个batch的数据对模型进行一次参数更新的过程</p>
-</li>
+<h3 id="迭代">迭代</h3>
+<ul>
+<li><p>epoch：用训练集所有样本对模型进行一次完整训练</p></li>
+<li><p>batch：用训练集中一小部分样本对模型权重进行一次反向传播的参数更新</p></li>
+<li><p>iteration：用一个batch的数据对模型进行一次参数更新的过程</p></li>
 </ul>
 <p>梯度下降：</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>梯度下降方式</th>
 <th>Training Set Size</th>
 <th>Batch Size</th>
 <th>Number of Batches</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>BGD</td>
 <td>N</td>
 <td>N</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>SGD</td>
 <td>N</td>
 <td>1</td>
 <td>N</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Mini-Batch</td>
 <td>N</td>
 <td>B</td>
-<td>N&#x2F;B</td>
+<td>N/B</td>
 </tr>
-</tbody></table>
-<h2 id="循环神经网络"><a href="#循环神经网络" class="headerlink" title="循环神经网络"></a>循环神经网络</h2><h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><p>$$<br>a^{(t)}&#x3D;tanh(W_{ax}x^{(t)}+W_{aa}a^{(t-1)}+b_a)<br>$$</p>
-<p>$$<br>\hat{y}^{(t)}&#x3D;softmax(W_{ya}a^{(t)}+b_y)<br>$$</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324153051.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324154733.png" srcset="/img/loading.gif" lazyload></p>
+</tbody>
+</table>
+<h2 id="循环神经网络">循环神经网络</h2>
+<h3 id="rnn">RNN</h3>
+<p><span class="math display">\[
+a^{(t)}=tanh(W_{ax}x^{(t)}+W_{aa}a^{(t-1)}+b_a)
+\]</span></p>
+<p><span class="math display">\[
+\hat{y}^{(t)}=softmax(W_{ya}a^{(t)}+b_y)
+\]</span></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324153051.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324154733.png" srcset="/img/loading.gif" lazyload /></p>
 <p>特点：</p>
 <ul>
 <li>串联结构，后面结果的生成要参考前面的信息</li>
-<li>所有特征共享同一套参数<ul>
+<li>所有特征共享同一套参数
+<ul>
 <li>面对不同的输入（两个方面），能学到不同的相应的结果</li>
 <li>极大减少了训练参数量</li>
 <li>输入和输出数据在不同例子中可以有不同长度</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>单个时间步的损失函数：<br>$$<br>L_t(\hat{y}_t,y_t)&#x3D;-y_tlog y_t-(1-y_t)log(1-y_t)<br>$$</p>
+<h4 id="损失函数">损失函数</h4>
+<p>单个时间步的损失函数： <span class="math display">\[
+L_t(\hat{y}_t,y_t)=-y_tlog y_t-(1-y_t)log(1-y_t)
+\]</span></p>
 <p>整个序列的损失函数：所有时间步的损失求和</p>
-<p>$$<br>L(\hat{y},y)&#x3D;\sum^T_{t&#x3D;1}L_t(\hat{y}_t,y_t)<br>$$</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><h5 id="梯度消失"><a href="#梯度消失" class="headerlink" title="梯度消失"></a>梯度消失</h5><p>当序列太长时，连乘过多，容易导致梯度消失，无法将信息传递过去，参数更新只能捕捉到局部依赖关系，没法再捕捉序列之间的长期关联或依赖关系。这会导致渐变在向后传播时呈指数级收缩。由于梯度极小，内部权重几乎没有调整，因此较早的层无法进行任何学习。<br>$$<br>\frac{\partial L_t}{\partial W_x}&#x3D;\sum^t_{k&#x3D;1}[\frac{\partial L_t}{\partial O_t}\frac{\partial O_t}{\partial S_t}(\prod^t_{j&#x3D;t+1-k}\frac{\partial tanh(\theta_j)}{\partial \theta_j})X_{t+1-k}W_s^{k-1}]<br>$$<br>由于$W_s^{k-1}$很小的时候连乘会趋于0，因此会梯度消失</p>
+<p><span class="math display">\[
+L(\hat{y},y)=\sum^T_{t=1}L_t(\hat{y}_t,y_t)
+\]</span></p>
+<h4 id="缺点">缺点</h4>
+<h5 id="梯度消失">梯度消失</h5>
+<p>当序列太长时，连乘过多，容易导致梯度消失，无法将信息传递过去，参数更新只能捕捉到局部依赖关系，没法再捕捉序列之间的长期关联或依赖关系。这会导致渐变在向后传播时呈指数级收缩。由于梯度极小，内部权重几乎没有调整，因此较早的层无法进行任何学习。
+<span class="math display">\[
+\frac{\partial L_t}{\partial W_x}=\sum^t_{k=1}[\frac{\partial
+L_t}{\partial O_t}\frac{\partial O_t}{\partial
+S_t}(\prod^t_{j=t+1-k}\frac{\partial tanh(\theta_j)}{\partial
+\theta_j})X_{t+1-k}W_s^{k-1}]
+\]</span> 由于<span
+class="math inline">\(W_s^{k-1}\)</span>很小的时候连乘会趋于0，因此会梯度消失</p>
 <p>梯度消失解决办法：</p>
 <ul>
-<li><p>选择relu等梯度大部分落在常数上的激活函数。relu函数的导数在正数部分是恒等于1的，因此在深层网络中使用relu激活函数就不会导致梯度消失的问题。</p>
-</li>
+<li><p>选择relu等梯度大部分落在常数上的激活函数。relu函数的导数在正数部分是恒等于1的，因此在深层网络中使用relu激活函数就不会导致梯度消失的问题。</p></li>
 <li><p>batch normalization</p>
-<p>BN就是通过对每一层的输出规范为均值和方差一致的方法，消除了权重参数放大缩小带来的影响，进而解决梯度消失的问题，或者可以理解为BN将输出从饱和区拉到了非饱和区。采用 Batch Normalization 层，对网络中计算得到中间值进行归一化，使得中 间计算结果的取值在均值为 0，方差为 1 这样的分布内。那么此时，在 sigmoid 和 tanh 中，函数取值处于中间变化较大的部分，梯度取值也相对较大</p>
-</li>
+<p>BN就是通过对每一层的输出规范为均值和方差一致的方法，消除了权重参数放大缩小带来的影响，进而解决梯度消失的问题，或者可以理解为BN将输出从饱和区拉到了非饱和区。采用
+Batch Normalization 层，对网络中计算得到中间值进行归一化，使得中
+间计算结果的取值在均值为 0，方差为 1 这样的分布内。那么此时，在 sigmoid
+和 tanh 中，函数取值处于中间变化较大的部分，梯度取值也相对较大</p></li>
 </ul>
-<h5 id="梯度爆炸"><a href="#梯度爆炸" class="headerlink" title="梯度爆炸"></a>梯度爆炸</h5><p>使网络变得不稳定。在极端情况下，权重的值变得非常大，以至于溢出，导致NaN值</p>
+<h5 id="梯度爆炸">梯度爆炸</h5>
+<p>使网络变得不稳定。在极端情况下，权重的值变得非常大，以至于溢出，导致NaN值</p>
 <p>解决办法：</p>
 <ul>
 <li>梯度修剪，观察梯度向量，如果大于某个阈值，缩放梯度向量，保证它不会太大</li>
 <li>权重正则化：检查网络权重的大小，并惩罚产生较大权重值的损失函数</li>
 <li>改变损失函数：把sigmoid改为ReLU，relu函数的导数在正数部分是恒等于1的，因此在深层网络中使用relu激活函数就不会导致梯度消失的问题</li>
 </ul>
-<h3 id="LSTM-Long-Short-Term-Memory"><a href="#LSTM-Long-Short-Term-Memory" class="headerlink" title="LSTM Long Short-Term Memory"></a>LSTM Long Short-Term Memory</h3><p>RNN：想把所有东西记住，不管有没有用</p>
+<h3 id="lstm-long-short-term-memory">LSTM Long Short-Term Memory</h3>
+<p>RNN：想把所有东西记住，不管有没有用</p>
 <p>LSTM：设计记忆细胞，具备选择性记忆的功能，记忆重要信息，过滤掉噪声信息，减轻记忆负担</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324162626.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324164635.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324162626.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220324164635.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
-<li>$C_t$，记忆细胞：在LSTM每个时间步里面都有一个以及细胞，让LSTM有能力自由选择每个时间步里记忆的内容。</li>
-<li>$h_t$，状态：【本门考试分数】</li>
-<li>$f_t$，遗忘门：[0, 1]的向量，选择性遗忘上一个时间步带来的记忆【遗忘复习高数时对线代无关的记忆】</li>
-<li>$i_t$，输入门：[0, 1]的向量，选择性保留这一个时间步新生成的记忆（来自$X_t$）【复习线代获得的记忆】</li>
+<li><span
+class="math inline">\(C_t\)</span>，记忆细胞：在LSTM每个时间步里面都有一个以及细胞，让LSTM有能力自由选择每个时间步里记忆的内容。</li>
+<li><span
+class="math inline">\(h_t\)</span>，状态：【本门考试分数】</li>
+<li><span class="math inline">\(f_t\)</span>，遗忘门：[0,
+1]的向量，选择性遗忘上一个时间步带来的记忆【遗忘复习高数时对线代无关的记忆】</li>
+<li><span class="math inline">\(i_t\)</span>，输入门：[0,
+1]的向量，选择性保留这一个时间步新生成的记忆（来自<span
+class="math inline">\(X_t\)</span>）【复习线代获得的记忆】</li>
 </ul>
-<p>$$<br>C_t&#x3D;f_tC_{t-1}+i_t\tilde{C_t}<br>$$</p>
+<p><span class="math display">\[
+C_t=f_tC_{t-1}+i_t\tilde{C_t}
+\]</span></p>
 <ul>
-<li>$o_t$，输出门：【只用到其中一部分记忆用来答题】</li>
+<li><span
+class="math inline">\(o_t\)</span>，输出门：【只用到其中一部分记忆用来答题】</li>
 <li>tanh：【记忆转化为答题能力的过程】</li>
 </ul>
-<h4 id="LSTM优点"><a href="#LSTM优点" class="headerlink" title="LSTM优点"></a>LSTM优点</h4><ul>
-<li>缓解RNN的梯度消失问题：通过调节$W_{hf},W_{hi},W_{hg}$可以灵活控制$\frac{\partial C_j}{\partial C_{j-1}}$的值，当要从n时刻长期记忆某个东西直到m时刻时，该路径上的$\prod_{t&#x3D;n}^m\limits \frac{\partial C_j}{\partial C_{j-1}}\approx 1\times1\times…\times1$</li>
+<h4 id="lstm优点">LSTM优点</h4>
+<ul>
+<li>缓解RNN的梯度消失问题：通过调节<span
+class="math inline">\(W_{hf},W_{hi},W_{hg}\)</span>可以灵活控制<span
+class="math inline">\(\frac{\partial C_j}{\partial
+C_{j-1}}\)</span>的值，当要从n时刻长期记忆某个东西直到m时刻时，该路径上的<span
+class="math inline">\(\prod_{t=n}^m\limits \frac{\partial C_j}{\partial
+C_{j-1}}\approx 1\times1\times...\times1\)</span></li>
 </ul>
-<h4 id="解决LSTM梯度消失问题"><a href="#解决LSTM梯度消失问题" class="headerlink" title="解决LSTM梯度消失问题"></a>解决LSTM梯度消失问题</h4><ol>
+<h4 id="解决lstm梯度消失问题">解决LSTM梯度消失问题</h4>
+<ol type="1">
 <li>使用门控循环单元（GRU）替代LSTM。GRU也是一种递归神经网络，可以在处理序列数据时具有与LSTM相似的记忆能力，但是GRU只有两个门控单元，因此具有更少的参数，同时也更容易训练。</li>
-<li>使用长短期记忆网络（LSTM）的变种，如Peephole LSTM，对输入门、遗忘门和输出门进行扩展，以便更好地控制信息的流动，从而减少梯度消失的问题。</li>
+<li>使用长短期记忆网络（LSTM）的变种，如Peephole
+LSTM，对输入门、遗忘门和输出门进行扩展，以便更好地控制信息的流动，从而减少梯度消失的问题。</li>
 <li>对于输入数据进行归一化处理，将其缩放到一个较小的范围内。这有助于减少梯度消失问题的影响，并使神经网络更容易训练。</li>
 <li>使用梯度裁剪技术。这种方法可以在训练过程中对梯度进行剪切，使其不会超出一个预定的范围。这有助于避免梯度爆炸问题，并减少梯度消失的问题。</li>
-<li>采用注意力机制（Attention Mechanism）。该方法能够使网络在处理序列数据时更加关注重要的部分，并将注意力集中在最相关的信息上，从而避免了长序列中梯度消失的问题。</li>
+<li>采用注意力机制（Attention
+Mechanism）。该方法能够使网络在处理序列数据时更加关注重要的部分，并将注意力集中在最相关的信息上，从而避免了长序列中梯度消失的问题。</li>
 </ol>
-<h3 id="注意力机制"><a href="#注意力机制" class="headerlink" title="注意力机制"></a>注意力机制</h3><p>序列预测任务是给定了n个词，去预测第n+1个词，把关注点放在前面n个词的哪一些。引入注意力机制可以更好地解释应该重点关注前面序列里的哪一些</p>
-<h4 id="transformer和LSTM区别"><a href="#transformer和LSTM区别" class="headerlink" title="transformer和LSTM区别"></a>transformer和LSTM区别</h4><p>RNN是串行训练，要把上一步输入全部输入进来才能做下一步训练，transformer加了注意力机制可以并行训练，没有记忆力这个东西，只是通过注意力机制去找到这个东西是要关注前面的哪一些词，但并没有记得之前一共发生过什么东西</p>
+<h3 id="注意力机制">注意力机制</h3>
+<p>序列预测任务是给定了n个词，去预测第n+1个词，把关注点放在前面n个词的哪一些。引入注意力机制可以更好地解释应该重点关注前面序列里的哪一些</p>
+<h4 id="transformer和lstm区别">transformer和LSTM区别</h4>
+<p>RNN是串行训练，要把上一步输入全部输入进来才能做下一步训练，transformer加了注意力机制可以并行训练，没有记忆力这个东西，只是通过注意力机制去找到这个东西是要关注前面的哪一些词，但并没有记得之前一共发生过什么东西</p>
 <p>Transformer和LSTM是用于处理序列数据的两种不同的神经网络架构，它们有以下几个区别：</p>
-<ol>
+<ol type="1">
 <li>结构不同：LSTM是一种递归神经网络，使用门控单元（如输入门、遗忘门、输出门）来控制序列中信息的流动。而Transformer则是一种基于自注意力机制的神经网络，使用多头注意力机制来对序列数据进行编码。</li>
 <li>并行性不同：由于LSTM的递归结构，每个时间步的计算都依赖于前一个时间步的输出。这意味着LSTM在计算时必须按照时间步序列化计算，无法进行并行化处理。相比之下，Transformer的计算是全局的，可以并行计算，从而更加高效。</li>
 <li>记忆能力不同：LSTM通过门控单元来控制信息的流动，从而具有很强的记忆能力，能够处理长序列数据。而Transformer使用自注意力机制，可以同时考虑序列中的所有位置，从而不需要像LSTM一样依赖于递归计算，因此在长序列上表现更好。</li>
 <li>可解释性不同：由于LSTM的递归结构，很难对其内部的计算过程进行解释。而Transformer的注意力机制可以将模型的注意力集中在输入序列中的不同部分，因此更容易解释模型的决策过程。</li>
 </ol>
 <p>总的来说，LSTM适合处理单向、多层次、长期的时间序列数据，例如语音识别和自然语言处理。而Transformer适合处理双向、并行化、全局的时间序列数据，例如机器翻译和自然语言生成。</p>
-<h2 id="生成对抗网络"><a href="#生成对抗网络" class="headerlink" title="生成对抗网络"></a>生成对抗网络</h2><h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329111525.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112132.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="生成对抗网络">生成对抗网络</h2>
+<h3 id="gan">GAN</h3>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329111525.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112132.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>全连接层升维</li>
-<li>把7$\times$7的数据变成28$\times$28的图像：插值（UpSampling2D）&#x2F;反卷积</li>
+<li>把7$<span
+class="math inline">\(7的数据变成28\)</span>$28的图像：插值（UpSampling2D）/反卷积</li>
 </ul>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112427.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112427.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>图像二分类：表示层（卷积池化卷积池化），应用层</li>
 </ul>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112632.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112702.png" srcset="/img/loading.gif" lazyload></p>
-<ol>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112632.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329112702.png" srcset="/img/loading.gif" lazyload /></p>
+<ol type="1">
 <li>固定G，把真实样本和generate的样本输入D，训练D</li>
 <li>固定D，训练G</li>
 <li>输入噪声给G，生成样本</li>
 </ol>
-<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113720.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113745.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="缺点-1">缺点</h4>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113720.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113745.png" srcset="/img/loading.gif" lazyload /></p>
 <p>原问题化为KL散度的问题：</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153116.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153116.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>生成器没生成真实的样本：惩罚小</li>
 <li>生成器生成不真实的样本：惩罚大</li>
 </ul>
 <p>loss偏向于生成“稳妥”的样本</p>
-<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h3><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153349.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="wgan">WGAN</h3>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153349.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>训练稳定性大幅增长</li>
 </ul>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153517.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="CGAN"><a href="#CGAN" class="headerlink" title="CGAN"></a>CGAN</h3><p>输入G的不只是噪声，还有条件（比如红头发），把概率分布改为条件概率分布</p>
-<h3 id="DCGAN"><a href="#DCGAN" class="headerlink" title="DCGAN"></a>DCGAN</h3><p>卷积神经网络+对抗神经网络</p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329153517.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="cgan">CGAN</h3>
+<p>输入G的不只是噪声，还有条件（比如红头发），把概率分布改为条件概率分布</p>
+<h3 id="dcgan">DCGAN</h3>
+<p>卷积神经网络+对抗神经网络</p>
 <ul>
 <li>在不改变GAN原理的情况下，增加增强稳定性的tricks</li>
 </ul>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113339.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="防止过拟合"><a href="#防止过拟合" class="headerlink" title="防止过拟合"></a>防止过拟合</h2><ul>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220329113339.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="防止过拟合">防止过拟合</h2>
+<ul>
 <li>池化</li>
 <li>dropout</li>
 <li>early stopping</li>
 <li>正则化</li>
 </ul>
-<h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p>强化学习有很多状态，要学习在每个状态下要采取什么动作。</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220325165554.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="强化学习">强化学习</h2>
+<p>强化学习有很多状态，要学习在每个状态下要采取什么动作。</p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20220325165554.png" srcset="/img/loading.gif" lazyload /></p>
 
                 
               </div>

@@ -23,25 +23,10 @@
 <meta property="og:site_name" content="冰柠果儿">
 <meta property="og:description" content="特征工程，损失函数，评价指标">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213155957.png">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213155840.png">
-<meta property="og:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213104352.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111163052.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111163533.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111214930.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215131.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215734.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215945.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111220305.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111221533.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222847.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222905.png">
-<meta property="og:image" content="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222938.png">
 <meta property="article:published_time" content="2023-03-02T07:49:26.555Z">
 <meta property="article:modified_time" content="2023-03-30T16:08:29.162Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213155957.png">
   
   
   
@@ -250,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.6k 字
+          5.5k 字
         
       </span>
     
@@ -304,8 +289,10 @@
             
               <div class="markdown-body">
                 
-                <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><p>以下是进行预测任务特征工程时需要考虑的关键步骤：</p>
-<ol>
+                <h1 id="机器学习">机器学习</h1>
+<h2 id="特征工程">特征工程</h2>
+<p>以下是进行预测任务特征工程时需要考虑的关键步骤：</p>
+<ol type="1">
 <li>数据探索：在开始进行特征工程之前，需要探索数据集并了解不同变量之间的关系。这可以涉及可视化数据，计算汇总统计信息，识别潜在的相关性或模式。</li>
 <li>特征选择：并非所有特征都与特定预测任务相关或有用。特征选择涉及识别最重要的特征，并删除冗余、无关或噪声较大的特征。这可以使用相关性分析、特征重要性排名或基于模型的选择等方法实现。</li>
 <li>特征提取：有时可用的特征可能不够信息丰富，或者需要转换以显示有用的模式或关系。特征提取涉及从现有特征中创建新特征，例如计算统计量、跨时间段聚合信息或将分类变量转换为数值形式。</li>
@@ -313,55 +300,83 @@
 <li>特征编码：分类变量在预测任务中可能会出现问题，因为需要将它们转换为数值形式。特征编码涉及将分类变量转换为可用于机器学习模型的形式，例如进行独热编码或使用标签编码。</li>
 <li>迭代细化：特征工程通常是一个迭代过程，在每一轮特征工程后，需要监视模型的性能。这可以帮助识别需要进一步改进和微调特征工程过程的领域。</li>
 </ol>
-<h3 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h3><ol>
-<li><p>相关性分析：计算每个特征与目标变量之间的相关系数，并排除与目标变量相关性较低的特征。</p>
-</li>
-<li><p>方差分析：计算每个特征的方差，并排除方差较小的特征，这些特征可能对结果没有显著贡献。</p>
-</li>
-<li><p>特征重要性：使用决策树等算法，计算每个特征的重要性，排除重要性较低的特征。</p>
-</li>
-<li><p>逐步回归：从所有特征开始，每次迭代去掉最不重要的特征，直到剩下较为重要的特征。</p>
-</li>
-<li><p>L1正则化：使用L1正则化方法，使得模型的权重矩阵中有许多权重为0，因此可以通过选择非零权重对应的特征来筛选特征。</p>
-</li>
-<li><p>PCA降维：使用主成分分析(PCA)等方法将特征降维，选择最重要的成分作为新的特征，从而达到特征筛选的目的。</p>
-</li>
-<li><p>Correlation analysis: Calculate the correlation coefficient between each feature and the target variable, and exclude features with low correlation.</p>
-</li>
-<li><p>Analysis of variance (ANOVA): Calculate the variance of each feature and exclude those with small variances, which may not contribute significantly to the outcome.</p>
-</li>
-<li><p>Feature importance: Use algorithms such as decision trees to calculate the importance of each feature, and exclude those with low importance.</p>
-</li>
-<li><p>Stepwise regression: Start with all features and iteratively remove the least important feature until only the most important features remain.</p>
-</li>
-<li><p>L1 regularization: Use L1 regularization to force many weights in the model’s weight matrix to be zero. This can be used to select the corresponding non-zero features.</p>
-</li>
-<li><p>PCA dimensionality reduction: Use principal component analysis (PCA) to reduce the dimensionality of the features and select the most important components as new features.</p>
-</li>
+<h3 id="特征选择">特征选择</h3>
+<ol type="1">
+<li><p>相关性分析：计算每个特征与目标变量之间的相关系数，并排除与目标变量相关性较低的特征。</p></li>
+<li><p>方差分析：计算每个特征的方差，并排除方差较小的特征，这些特征可能对结果没有显著贡献。</p></li>
+<li><p>特征重要性：使用决策树等算法，计算每个特征的重要性，排除重要性较低的特征。</p></li>
+<li><p>逐步回归：从所有特征开始，每次迭代去掉最不重要的特征，直到剩下较为重要的特征。</p></li>
+<li><p>L1正则化：使用L1正则化方法，使得模型的权重矩阵中有许多权重为0，因此可以通过选择非零权重对应的特征来筛选特征。</p></li>
+<li><p>PCA降维：使用主成分分析(PCA)等方法将特征降维，选择最重要的成分作为新的特征，从而达到特征筛选的目的。</p></li>
+<li><p>Correlation analysis: Calculate the correlation coefficient
+between each feature and the target variable, and exclude features with
+low correlation.</p></li>
+<li><p>Analysis of variance (ANOVA): Calculate the variance of each
+feature and exclude those with small variances, which may not contribute
+significantly to the outcome.</p></li>
+<li><p>Feature importance: Use algorithms such as decision trees to
+calculate the importance of each feature, and exclude those with low
+importance.</p></li>
+<li><p>Stepwise regression: Start with all features and iteratively
+remove the least important feature until only the most important
+features remain.</p></li>
+<li><p>L1 regularization: Use L1 regularization to force many weights in
+the model's weight matrix to be zero. This can be used to select the
+corresponding non-zero features.</p></li>
+<li><p>PCA dimensionality reduction: Use principal component analysis
+(PCA) to reduce the dimensionality of the features and select the most
+important components as new features.</p></li>
 </ol>
-<h4 id="ANOVA方差分析"><a href="#ANOVA方差分析" class="headerlink" title="ANOVA方差分析"></a>ANOVA方差分析</h4><p>ANOVA(Analysis of Variance，方差分析)是一种用于比较两个或多个组之间差异的统计方法。其原理基于方差分解的思想，将总方差分解为两部分，一部分是由于组间差异所导致的方差，另一部分是由于组内差异所导致的方差。如果组间方差显著大于组内方差，则说明不同组之间的差异是显著的。</p>
-<p>ANOVA (Analysis of Variance) is a statistical method used to compare differences between two or more groups. Its principle is based on the idea of variance decomposition, which decomposes the total variance into two parts: one due to differences between groups and the other due to differences within groups. If the variance between groups is significantly greater than the variance within groups, then the differences between groups are considered significant.</p>
+<h4 id="anova方差分析">ANOVA方差分析</h4>
+<p>ANOVA(Analysis of
+Variance，方差分析)是一种用于比较两个或多个组之间差异的统计方法。其原理基于方差分解的思想，将总方差分解为两部分，一部分是由于组间差异所导致的方差，另一部分是由于组内差异所导致的方差。如果组间方差显著大于组内方差，则说明不同组之间的差异是显著的。</p>
+<p>ANOVA (Analysis of Variance) is a statistical method used to compare
+differences between two or more groups. Its principle is based on the
+idea of variance decomposition, which decomposes the total variance into
+two parts: one due to differences between groups and the other due to
+differences within groups. If the variance between groups is
+significantly greater than the variance within groups, then the
+differences between groups are considered significant.</p>
 <p>ANOVA可以用来衡量不同特征对于目标变量的影响程度，因此可以用于特征选择。在进行ANOVA特征选择时，我们将特征的变量分为不同组，并计算各组的平均值和方差，然后计算F值。F值越大，表示该特征与目标变量之间的差异越大，因此越有可能是重要特征。</p>
-<p>在ANOVA中，我们通常将数据分为k个组，每个组有n个样本。设$x_{ij}$表示第i个组中第j个样本的观测值，$\overline{x}_i$表示第i个组的平均值，$\overline{x}$表示所有观测值的平均值。则总方差可以表示为：</p>
-<p>$$<br>SS_{total} &#x3D; \sum_{i&#x3D;1}^k \sum_{j&#x3D;1}^n (x_{ij} - \overline{x})^2<br>$$</p>
+<p>在ANOVA中，我们通常将数据分为k个组，每个组有n个样本。设<span
+class="math inline">\(x_{ij}\)</span>表示第i个组中第j个样本的观测值，<span
+class="math inline">\(\overline{x}_i\)</span>表示第i个组的平均值，<span
+class="math inline">\(\overline{x}\)</span>表示所有观测值的平均值。则总方差可以表示为：</p>
+<p><span class="math display">\[
+SS_{total} = \sum_{i=1}^k \sum_{j=1}^n (x_{ij} - \overline{x})^2
+\]</span></p>
 <p>组间方差可以表示为：</p>
-<p>$$<br>SS_{between} &#x3D; n \sum_{i&#x3D;1}^k (\overline{x}_i - \overline{x})^2<br>$$</p>
+<p><span class="math display">\[
+SS_{between} = n \sum_{i=1}^k (\overline{x}_i - \overline{x})^2
+\]</span></p>
 <p>组内方差可以表示为：</p>
-<p>$$<br>SS_{within} &#x3D; \sum_{i&#x3D;1}^k \sum_{j&#x3D;1}^n (x_{ij} - \overline{x}_i)^2<br>$$</p>
-<p>然后我们可以计算方差比值$F$，它是组间方差与组内方差的比值：</p>
-<p>$$<br>F &#x3D; \frac{SS_{between} &#x2F; (k-1)}{SS_{within} &#x2F; (n-k)}<br>$$</p>
-<p>其中，$k-1$和$n-k$分别为自由度，自由度表示在统计推断中独立变化的变量数量。如果$F$值越大，则说明组间方差越大，不同组之间的差异越显著。</p>
-<p>在ANOVA中，我们通常还需要进行方差分析表的构建，方差分析表展示了各种方差的计算结果、自由度和均方值，以及$F$值和$p$值，用于判断组间差异的显著性。</p>
-<h2 id="数据不服从高斯分布为什么也可以ML"><a href="#数据不服从高斯分布为什么也可以ML" class="headerlink" title="数据不服从高斯分布为什么也可以ML"></a>数据不服从高斯分布为什么也可以ML</h2><p>渐进理论，样本量足够大，用中心极限定理可以近似高斯分布</p>
+<p><span class="math display">\[
+SS_{within} = \sum_{i=1}^k \sum_{j=1}^n (x_{ij} - \overline{x}_i)^2
+\]</span></p>
+<p>然后我们可以计算方差比值<span
+class="math inline">\(F\)</span>，它是组间方差与组内方差的比值：</p>
+<p><span class="math display">\[
+F = \frac{SS_{between} / (k-1)}{SS_{within} / (n-k)}
+\]</span></p>
+<p>其中，<span class="math inline">\(k-1\)</span>和<span
+class="math inline">\(n-k\)</span>分别为自由度，自由度表示在统计推断中独立变化的变量数量。如果<span
+class="math inline">\(F\)</span>值越大，则说明组间方差越大，不同组之间的差异越显著。</p>
+<p>在ANOVA中，我们通常还需要进行方差分析表的构建，方差分析表展示了各种方差的计算结果、自由度和均方值，以及<span
+class="math inline">\(F\)</span>值和<span
+class="math inline">\(p\)</span>值，用于判断组间差异的显著性。</p>
+<h2
+id="数据不服从高斯分布为什么也可以ml">数据不服从高斯分布为什么也可以ML</h2>
+<p>渐进理论，样本量足够大，用中心极限定理可以近似高斯分布</p>
 <p>机器学习算法的理论基础通常建立在样本满足一些假设条件的基础上，例如正态分布或同方差性等。然而，在实际应用中，数据往往不满足这些假设条件，特别是在大数据集中，这种假设条件往往难以满足。因此，机器学习算法可以用于非正态分布数据。</p>
 <p>以下是一些原因：</p>
-<ol>
+<ol type="1">
 <li>机器学习算法的鲁棒性：许多机器学习算法具有一定的鲁棒性，即它们不会受到数据分布的轻微偏差的影响，而且能够在许多实际应用中表现出良好的性能。例如，决策树、随机森林和支持向量机等算法经常被用于非正态分布数据。</li>
 <li>数据预处理：数据预处理是数据科学中的重要步骤。在处理非正态分布数据时，可以通过一些预处理技术来使数据更适合机器学习算法。例如，可以进行对数变换、幂变换或归一化等处理，以使数据更符合算法假设条件。这些技术通常可以在保持数据质量的同时提高算法的性能。</li>
 <li>非参数方法：非参数方法是指不需要假设数据分布的一类机器学习算法。这些算法可以对非正态分布的数据建模，并能够在一些领域中取得良好的性能。例如，K近邻、神经网络和决策树等算法不需要数据分布假设，因此可以用于非正态分布数据。</li>
 </ol>
 <p>综上所述，尽管机器学习算法的理论基础建立在一些假设条件的基础上，但在实际应用中，这些假设条件经常难以满足。在处理非正态分布数据时，可以使用一些机器学习算法和数据预处理技术来提高模型性能，并在许多实际应用中获得良好的结果。</p>
-<h2 id="bias-variance-tradeoff"><a href="#bias-variance-tradeoff" class="headerlink" title="bias variance tradeoff"></a>bias variance tradeoff</h2><ul>
+<h2 id="bias-variance-tradeoff">bias variance tradeoff</h2>
+<ul>
 <li>bias：预测值的期望和实际值的差</li>
 <li>variance：预测值的方差</li>
 </ul>
@@ -370,10 +385,16 @@
 <li>模型复杂度越大，偏差(Bias)越小</li>
 <li>模型复杂度越大，方差(Variance)越大</li>
 </ul>
-<p>通常一个模型Variance很高，意味着它往往很复杂，而复杂的模型往往会对某些样本点非常敏感，也就很可能Overfit。同样的，一个模型如果Bias很高，意味着他一直都很不准，所以Underfitting。而我们的目标则是在模型的复杂度之间找到一个平衡，从而使Bias 和Variance都尽可能低，从而得到一个Good Fitting的结果</p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213155957.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213155840.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><h4 id="交叉熵-cross-entropy-loss-function"><a href="#交叉熵-cross-entropy-loss-function" class="headerlink" title="交叉熵 cross entropy loss function"></a>交叉熵 cross entropy loss function</h4><p>用于衡量两个分布之间的距离</p>
+<p>通常一个模型Variance很高，意味着它往往很复杂，而复杂的模型往往会对某些样本点非常敏感，也就很可能Overfit。同样的，一个模型如果Bias很高，意味着他一直都很不准，所以Underfitting。而我们的目标则是在模型的复杂度之间找到一个平衡，从而使Bias
+和Variance都尽可能低，从而得到一个Good Fitting的结果</p>
+<p><img
+src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213155957.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213155840.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="损失函数">损失函数</h2>
+<h4 id="交叉熵-cross-entropy-loss-function">交叉熵 cross entropy loss
+function</h4>
+<p>用于衡量两个分布之间的距离</p>
 <p>逻辑回归</p>
 <p>logLoss (对数损失函数，LR)</p>
 <p>hinge loss (合页损失函数，SVM)</p>
@@ -382,63 +403,104 @@
 <p>quadratic loss (平方误差损失函数，线性回归)</p>
 <p>absolution loss (绝对值损失函数， )</p>
 <p>0-1 loss (0-1损失函数)</p>
-<h3 id="RMSE-vs-MSE"><a href="#RMSE-vs-MSE" class="headerlink" title="RMSE vs MSE"></a>RMSE vs MSE</h3><p>使用 MSE 作为损失函数时，误差的平方值被用于计算模型预测与实际值之间的差距。由于误差被平方，因此较大的误差将被放大，而这可能会导致模型过度关注那些误差较大的样本。这意味着，如果存在异常值，则模型将过度关注这些异常值而忽略其他样本。而使用 RMSE 作为损失函数时，可以避免这个问题，因为 RMSE 是对误差的平方根进行计算，这使得大误差的影响被降低，而小误差的影响则被放大。因此，RMSE 对于训练一个更健壮（robust）的回归模型来说是更好的选择。</p>
-<h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><h3 id="ROC-AUC-Sensitivity-Specificity"><a href="#ROC-AUC-Sensitivity-Specificity" class="headerlink" title="ROC, AUC, Sensitivity, Specificity"></a>ROC, AUC, Sensitivity, Specificity</h3><ul>
-<li><strong>真阳性率（True Positive Rate，简称TPR）</strong>：TP&#x2F;(TP+FN)，代表的含义是：实际观测为<strong>阳</strong>的样本中，模型能够正确识别出来的比例。TPR又称为Sensitivity。</li>
-<li><strong>真阴性率（True Negative Rate，简称TNR）</strong>：TN&#x2F;(FP+TN)，代表的含义是：实际观测为<strong>阴</strong>的样本中，模型能够正确识别出来的比例。TNR又称为Specificity。</li>
-<li><strong>假阳性率（False Positive Rate，简称FPR）</strong>：FP&#x2F;(FP+TN)，代表的含义是：实际观测为<strong>阴</strong>的样本中，被模型错误地划分成阳性的比例。FPR&#x3D;1-Specificity。</li>
+<h3 id="rmse-vs-mse">RMSE vs MSE</h3>
+<p>使用 MSE
+作为损失函数时，误差的平方值被用于计算模型预测与实际值之间的差距。由于误差被平方，因此较大的误差将被放大，而这可能会导致模型过度关注那些误差较大的样本。这意味着，如果存在异常值，则模型将过度关注这些异常值而忽略其他样本。而使用
+RMSE 作为损失函数时，可以避免这个问题，因为 RMSE
+是对误差的平方根进行计算，这使得大误差的影响被降低，而小误差的影响则被放大。因此，RMSE
+对于训练一个更健壮（robust）的回归模型来说是更好的选择。</p>
+<h2 id="评价指标">评价指标</h2>
+<h3 id="roc-auc-sensitivity-specificity">ROC, AUC, Sensitivity,
+Specificity</h3>
+<ul>
+<li><strong>真阳性率（True Positive
+Rate，简称TPR）</strong>：TP/(TP+FN)，代表的含义是：实际观测为<strong>阳</strong>的样本中，模型能够正确识别出来的比例。TPR又称为Sensitivity。</li>
+<li><strong>真阴性率（True Negative
+Rate，简称TNR）</strong>：TN/(FP+TN)，代表的含义是：实际观测为<strong>阴</strong>的样本中，模型能够正确识别出来的比例。TNR又称为Specificity。</li>
+<li><strong>假阳性率（False Positive
+Rate，简称FPR）</strong>：FP/(FP+TN)，代表的含义是：实际观测为<strong>阴</strong>的样本中，被模型错误地划分成阳性的比例。FPR=1-Specificity。</li>
 </ul>
 <p><strong>TPR越高、FPR越低</strong>，说明模型的预测能力越好</p>
 <p>以FPR为横坐标、TPR为纵坐标，将每一个阈值所对应的(FPR,TPR)放入坐标系中。用红色线条将所有的点连接起来——此即为<strong>ROC曲线</strong></p>
-<p><img src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213104352.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://jkq-pic.oss-cn-shanghai.aliyuncs.com/img/20221213104352.png" srcset="/img/loading.gif" lazyload /></p>
 <p><strong>AUC</strong>：ROC曲线下的面积</p>
 <p>优点：不受正负样本比例的影响</p>
 <p>缺点：</p>
 <ul>
-<li><p>对FPR和TPR两种错误的代价同等看待</p>
-</li>
-<li><p>没有给出模型误差的空间分布信息</p>
-</li>
+<li><p>对FPR和TPR两种错误的代价同等看待</p></li>
+<li><p>没有给出模型误差的空间分布信息</p></li>
 </ul>
-<h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p>SVM（支持向量机）是一种用于分类和回归分析的监督式学习算法，其原理可以用以下公式来解释：</p>
-<p>对于一个二分类问题，假设有训练样本集D&#x3D;{（x1,y1），（x2,y2），…，（xn,yn）}，其中xi为输入变量，yi∈{+1,-1}为输出变量（类别标签）。SVM的目标是找到一个最优的超平面，将数据集D分成两个类别，使得不同类别之间的间隔最大化。该超平面由以下公式给出：</p>
-<p>w·x+b&#x3D;0</p>
-<p>其中，w是超平面的法向量（Normal vector），b是偏移量。对于输入变量x，它属于超平面上方的类别+1，否则为-1。</p>
+<h2 id="svm">SVM</h2>
+<p>SVM（支持向量机）是一种用于分类和回归分析的监督式学习算法，其原理可以用以下公式来解释：</p>
+<p>对于一个二分类问题，假设有训练样本集D={（x1,y1），（x2,y2），…，（xn,yn）}，其中xi为输入变量，yi∈{+1,-1}为输出变量（类别标签）。SVM的目标是找到一个最优的超平面，将数据集D分成两个类别，使得不同类别之间的间隔最大化。该超平面由以下公式给出：</p>
+<p>w·x+b=0</p>
+<p>其中，w是超平面的法向量（Normal
+vector），b是偏移量。对于输入变量x，它属于超平面上方的类别+1，否则为-1。</p>
 <p>SVM的训练过程是通过最大化间隔来找到最优超平面。假设超平面距离正例样本最近点和负例样本最近点的距离之和为2M，则最大化间隔问题可以转化为以下凸优化问题：</p>
 <p>max M</p>
-<p>s.t. yi(w·xi+b)≥M, i&#x3D;1,2,…,n</p>
-<p>||w||&#x3D;1</p>
+<p>s.t. yi(w·xi+b)≥M, i=1,2,...,n</p>
+<p>||w||=1</p>
 <p>其中，第一个约束条件确保每个样本都位于超平面两侧，第二个约束条件保证法向量w为单位向量。通过求解上述凸优化问题，我们可以得到最优的超平面，使得数据集D被分为两个类别并且间隔最大。</p>
 <p>在实际应用中，有时数据集可能无法用线性超平面分开，这时可以使用核函数将数据映射到高维空间中，使得数据集变得可分。SVM的核函数可以是线性核、多项式核、径向基函数（RBF）核等。</p>
-<h3 id="SVM-vs-神经网络"><a href="#SVM-vs-神经网络" class="headerlink" title="SVM vs 神经网络"></a>SVM vs 神经网络</h3><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111163052.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="SVN的”最大间隔”思想"><a href="#SVN的”最大间隔”思想" class="headerlink" title="SVN的”最大间隔”思想"></a>SVN的”最大间隔”思想</h3><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111163533.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="对偶问题及其解的稀疏性"><a href="#对偶问题及其解的稀疏性" class="headerlink" title="对偶问题及其解的稀疏性"></a>对偶问题及其解的稀疏性</h3><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111214930.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215131.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="svm-vs-神经网络">SVM vs 神经网络</h3>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111163052.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="svn的最大间隔思想">SVN的”最大间隔”思想</h3>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111163533.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="对偶问题及其解的稀疏性">对偶问题及其解的稀疏性</h3>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111214930.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215131.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
-<li>SVM解的稀疏性: 训练完成后, 大部分的训练样本都不需保留, 最终模型仅与支持向量有关</li>
+<li>SVM解的稀疏性: 训练完成后, 大部分的训练样本都不需保留,
+最终模型仅与支持向量有关</li>
 </ul>
-<h4 id="求解方法——SMO"><a href="#求解方法——SMO" class="headerlink" title="求解方法——SMO"></a>求解方法——SMO</h4><p>基本思路：不断执行如下两个步骤直至收敛</p>
-<ol>
-<li>选取一对需更新的变量$\alpha_i$和$\alpha_j$</li>
-<li>固定$\alpha_i$和$\alpha_j$以外的参数, 求解<strong>对偶问题</strong>更新$\alpha_i$和$\alpha_j$</li>
+<h4 id="求解方法smo">求解方法——SMO</h4>
+<p>基本思路：不断执行如下两个步骤直至收敛</p>
+<ol type="1">
+<li>选取一对需更新的变量<span
+class="math inline">\(\alpha_i\)</span>和<span
+class="math inline">\(\alpha_j\)</span></li>
+<li>固定<span class="math inline">\(\alpha_i\)</span>和<span
+class="math inline">\(\alpha_j\)</span>以外的参数,
+求解<strong>对偶问题</strong>更新<span
+class="math inline">\(\alpha_i\)</span>和<span
+class="math inline">\(\alpha_j\)</span></li>
 </ol>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215734.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="核函数——通过向高维空间映射解决线性不可分的问题"><a href="#核函数——通过向高维空间映射解决线性不可分的问题" class="headerlink" title="核函数——通过向高维空间映射解决线性不可分的问题"></a>核函数——通过向高维空间映射解决线性不可分的问题</h3><p>基本想法：不显式地设计核映射, 而是设计核函数</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215945.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215734.png" srcset="/img/loading.gif" lazyload /></p>
+<h3
+id="核函数通过向高维空间映射解决线性不可分的问题">核函数——通过向高维空间映射解决线性不可分的问题</h3>
+<p>基本想法：不显式地设计核映射, 而是设计核函数</p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111215945.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
-<li>Mercer定理(充分非必要)：只要一个<strong>对称函数</strong>所对应的核矩阵<strong>半正定</strong>, 则它就能作为核函数来使用</li>
+<li>Mercer定理(充分非必要)：只要一个<strong>对称函数</strong>所对应的核矩阵<strong>半正定</strong>,
+则它就能作为核函数来使用</li>
 </ul>
-<h3 id="引入”软间隔”缓解特征空间中线性不可分的问题"><a href="#引入”软间隔”缓解特征空间中线性不可分的问题" class="headerlink" title="引入”软间隔”缓解特征空间中线性不可分的问题"></a>引入”软间隔”缓解特征空间中线性不可分的问题</h3><p>基本想法：最大化间隔的同时, 让不满足约束的样本应尽可能少</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111220305.png" srcset="/img/loading.gif" lazyload></p>
+<h3
+id="引入软间隔缓解特征空间中线性不可分的问题">引入”软间隔”缓解特征空间中线性不可分的问题</h3>
+<p>基本想法：最大化间隔的同时, 让不满足约束的样本应尽可能少</p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111220305.png" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li><p>替代损失：hinge函数：max(0, 1-z)</p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111221533.png" srcset="/img/loading.gif" lazyload></p>
-</li>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111221533.png" srcset="/img/loading.gif" lazyload /></p></li>
 </ul>
-<h3 id="将支持向量的思想应用到回归问题上得到支持向量回归"><a href="#将支持向量的思想应用到回归问题上得到支持向量回归" class="headerlink" title="将支持向量的思想应用到回归问题上得到支持向量回归"></a>将支持向量的思想应用到回归问题上得到支持向量回归</h3><p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222847.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222905.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222938.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+<h3
+id="将支持向量的思想应用到回归问题上得到支持向量回归">将支持向量的思想应用到回归问题上得到支持向量回归</h3>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222847.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222905.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://finclaw.oss-cn-shenzhen.aliyuncs.com/img/20210111222938.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="section"></h3>
+
                 
               </div>
             
