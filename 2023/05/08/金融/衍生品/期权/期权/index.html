@@ -24,7 +24,7 @@
 <meta property="og:description" content="期权">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-08T02:39:22.111Z">
-<meta property="article:modified_time" content="2023-05-08T03:37:36.406Z">
+<meta property="article:modified_time" content="2023-05-08T08:24:18.539Z">
 <meta property="article:author" content="冰柠果儿">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.3k 字
+          7.4k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          78 分钟
+          63 分钟
         
       </span>
     
@@ -329,77 +329,6 @@ traditional BS option pricing model presents a phenomenon called
 skew）指的是相同到期日、相同标的资产、相同执行价格的期权，但不同行权价的隐含波动率不同的现象。</p>
 <p>通常情况下，波动率偏斜表现为，执行价格较低的看涨期权的隐含波动率高于执行价格较高的看涨期权的隐含波动率，而执行价格较高的看跌期权的隐含波动率高于执行价格较低的看跌期权的隐含波动率。这是由于投资者对市场上涨的担忧要大于对市场下跌的担忧，因此对于执行价格较低的看涨期权的需求较高，其价格也会相应地被推高，进而导致隐含波动率的上升；相反，对于执行价格较高的看涨期权的需求较低，其价格也会相应地被推低，进而导致隐含波动率的下降。</p>
 <p>波动率偏斜在金融市场中比较常见，特别是在股票市场和外汇市场中。</p>
-<h3 id="bs模型">BS模型</h3>
-<p>布朗运动是一种最简单的连续随机过程，它是描述证券价格随机性的基本模型。而对于期权或其他衍生品这些金融工具，它们的价格是相关证券资产价格的函数。因此可以说<strong>证券价格是一个随机过程，而衍生品价格是该随机过程的函数。伊藤引理提供了对随机过程的函数做微分的框架；这对于衍生品的定价意义非凡</strong>（在此之前，人们是不知道如何对随机过程的函数做微分的）。<strong>通过伊藤引理，可以写出金融衍生品价格的随机微分方程，通过对其求解便可以得到衍生品价格的模型。</strong>BS
-公式就是一个最简单的例子。（BS 模型是一个偏微分方程，而 BS
-公式是一个解析形式的表达式）</p>
-<h4 id="bs模型假设">BS模型假设</h4>
-<p>Black-Scholes 期权的价格模型是建立在严格的假设基础上的，包
-括以下几点：</p>
-<ol type="1">
-<li>期权的标的资产的价格服从几何布朗运动，因此标的资产收
-益率必须服从对数正态分布。The price of the underlying asset follows
-geometric Brownian motion, so the return of underlying asset follows the
-lognormal distribution.</li>
-<li>市场没有摩擦，没有税收和交易成本，没有卖空限制。There is no friction
-in the market, no tax and transaction costs, and no short position
-restrictions.</li>
-<li>无风险利率不变。</li>
-<li>期权不能在到期日之前行使，必须是欧式期权expiration date</li>
-</ol>
-<h4
-id="为什么black-scholes方程注意不是bs模型中一阶项前面是无风险利率r而不是风险利率或者历史回报率u">为什么black
-scholes方程（注意不是bs模型）中一阶项前面是无风险利率r，而不是风险利率（或者历史回报率）u？</h4>
-<p>风险中性定价，u经过测度变换可以得到r</p>
-<p>融资成本所对应的回报率是r，而不是u</p>
-<h4 id="布朗运动">布朗运动</h4>
-<p><strong>布朗运动是一个连续随机过程。一个随机过程是定义在时域或者空间域上的依次发生的一系列随机变量的集合。</strong>以时域为例，如果这些随机变量在整个实数时域上都有定义，那么这个随机过程为连续随机过程；反之，如果这些随机变量仅仅在时域上一些离散的点有定义，那么该随机过程为离散随机过程</p>
-<h5
-id="为什么用几何布朗运动描述股票价格">为什么用几何布朗运动描述股票价格</h5>
-<p>其实很简单，GBM（至少在一定程度上）符合人们对市场的观察。例如，直观的说，股票的价格看起来很像随机游走，再例如，股票价格不会为负，这样起码GBM比普通的布朗运动合适，因为后者是可以为负的。</p>
-<p>再稍微复杂一点，对收益率做测试（ S(t)/S(t-1) -
-1）做测试，发现，哎居然还基本是个正态分布。收益率是正态的，股价就是GBM模型</p>
-<p>总之，就是大家做了很多统计测试，发现假设成GBM还能很好的逼近真实数值，比较接近事实</p>
-<h4 id="风险中性下推导b-s公式">风险中性下推导B-S公式</h4>
-<h4 id="bs公式和bs模型的区别">BS公式和BS模型的区别</h4>
-<p>BS公式和BS模型的公式基本相同，但是BS模型比BS公式更为复杂，包括了更多的变量和参数。</p>
-<p>下面是BS公式和BS模型的公式：</p>
-<p>BS公式：</p>
-<p><span
-class="math display">\[C=S_tN(d_1)-Ke^{-r(T-t)}N(d_2)\]</span></p>
-<p>其中，<span
-class="math inline">\(C\)</span>是欧式看涨期权的价格，<span
-class="math inline">\(S_t\)</span>是标的资产的当前价格，<span
-class="math inline">\(K\)</span>是期权的行权价格，<span
-class="math inline">\(r\)</span>是无风险利率，<span
-class="math inline">\(T-t\)</span>是期权到期时间，<span
-class="math inline">\(N\)</span>是标准正态分布的累积分布函数，<span
-class="math inline">\(d_1\)</span>和<span
-class="math inline">\(d_2\)</span>分别为：</p>
-<p><span
-class="math display">\[d_1=\frac{\ln\left(\frac{S_t}{K}\right)+(r+\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}\]</span></p>
-<p><span class="math display">\[d_2=d_1-\sigma\sqrt{T-t}\]</span></p>
-<p>BS模型：</p>
-<p><span
-class="math display">\[C=S_tN(d_1)-Ke^{-r(T-t)}N(d_2)\]</span></p>
-<p>其中，<span class="math inline">\(C\)</span>、<span
-class="math inline">\(S_t\)</span>、<span
-class="math inline">\(K\)</span>、<span
-class="math inline">\(r\)</span>、<span
-class="math inline">\(T-t\)</span>、<span
-class="math inline">\(N\)</span>、<span
-class="math inline">\(d_1\)</span>和<span
-class="math inline">\(d_2\)</span>的含义与BS公式相同，但是BS模型还考虑了标的资产的随机漂移和股息率等因素，因此<span
-class="math inline">\(d_1\)</span>和<span
-class="math inline">\(d_2\)</span>的计算方式略有不同：</p>
-<p><span
-class="math display">\[d_1=\frac{\ln\left(\frac{S_t}{K}\right)+(r+\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}+
-\frac{b}{\sigma}\sqrt{T-t}\]</span></p>
-<p><span class="math display">\[d_2=d_1-\sigma\sqrt{T-t}\]</span></p>
-<p>其中，<span
-class="math inline">\(b\)</span>是标的资产的随机漂移率，也称为股息率。可以看出，BS模型在计算<span
-class="math inline">\(d_1\)</span>时多了一个<span
-class="math inline">\(\frac{b}{\sigma}\sqrt{T-t}\)</span>的项。</p>
 <h4 id="optimal-hedge-ratio">optimal hedge ratio</h4>
 <p>最优对冲比率（Optimal hedge
 ratio）是指在进行期货或期权交易时，用来确定期权头寸与期货头寸之间最佳的数量关系，以达到最小化投资组合风险的比率。</p>
